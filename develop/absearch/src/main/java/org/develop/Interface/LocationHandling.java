@@ -1,4 +1,4 @@
-package org.develop.abSearch;
+package org.develop.Interface;
 
 public interface LocationHandling {
     double calculateDistance();

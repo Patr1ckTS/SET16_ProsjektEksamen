@@ -1,8 +1,10 @@
-package org.develop.abSearch;
+package org.develop;
 
 import java.time.LocalTime;
+import org.develop.Interface.LocationHandling;
 import java.time.Duration;
-class Transport implements LocationHandling {
+
+public class Transport implements LocationHandling { // Legg til 'public' her
     String transportId;
     int capacity;
     String startLocation;
