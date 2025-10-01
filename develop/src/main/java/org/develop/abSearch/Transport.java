@@ -1,5 +1,7 @@
 package org.develop.abSearch;
 
+import java.time.LocalTime;
+import java.time.Duration;
 class Transport implements LocationHandling {
     String transportId;
     int capacity;
@@ -25,7 +27,73 @@ class Transport implements LocationHandling {
 
     @Override
     public double estimateTravelTime() {
-        // TODO: Implementer logikk
-        return 0;
+        try {
+            LocalTime departure = LocalTime.parse(departureTime);
+            LocalTime arrival = LocalTime.parse(arrivalTime);
+            
+            Duration duration = Duration.between(departure, arrival);
+            
+            // Håndter reiser som går over midnatt
+            if (duration.isNegative()) {
+                duration = duration.plusDays(1);
+            }
+            
+            // Returner tid i minutter
+            return duration.toMinutes();
+        } catch (Exception e) {
+            // Fallback hvis tidsformat er feil
+            return calculateDistance() * 2; // Antar 2 min per distanseenhet
+        }
     }
+
+    // Getters and Setters
+    public String getTransportId() {
+        return transportId;
+    }
+
+    public void setTransportId(String transportId) {
+        this.transportId = transportId;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
+    }
+
+    public String getEndLocation() {
+        return endLocation;
+    }
+
+    public void setEndLocation(String endLocation) {
+        this.endLocation = endLocation;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    
 }

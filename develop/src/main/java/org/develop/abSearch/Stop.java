@@ -4,11 +4,13 @@ public class Stop {
     private String stopId;
     private String location;
     private String name;
+    private int tidEtterAvgang; // Minutter etter avgangstid
 
-    public Stop(String stopId, String location, String name) {
+    public Stop(String stopId, String location, String name, int tidEtterAvgang) {
         this.stopId = stopId;
         this.location = location;
         this.name = name;
+        this.tidEtterAvgang = tidEtterAvgang;
     }
 
     // Getters and setters
@@ -34,5 +36,13 @@ public class Stop {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getTidEtterAvgang() {
+        return tidEtterAvgang;
+    }
+
+    public void setTidEtterAvgang(int tidEtterAvgang) {
+        this.tidEtterAvgang = tidEtterAvgang;
     }
 }

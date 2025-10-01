@@ -18,9 +18,8 @@ public class Route {
     }
     
     
-    public Route calculateRoute(Route route, Transport transport) {
-        // Metoden er foreløpig tom
-        return null;
+    public static Route calculateRoute(ArrayList<Route> availableRoutes, String startLocation, String endLocation) {
+        return null; // TODO: Implementer logikk
     }
 
 
