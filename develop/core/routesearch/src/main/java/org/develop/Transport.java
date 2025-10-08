@@ -1,8 +1,3 @@
-# SET16_ProsjektEksamen
-
-Dette er main hvor vi ikke tilegger direkte
-
-```Java
 package org.develop;
 
 import java.time.LocalTime;
@@ -27,6 +22,11 @@ public class Transport implements LocationHandling {
         this.arrivalTime = arrivalTime;
     }
 
+    public Transport(String transportId, String transportType) {
+        this.transportId = transportId;
+        this.transportType = transportType;
+    }
+
     @Override
     public double estimateTravelTime() {
         try {
@@ -47,70 +47,8 @@ public class Transport implements LocationHandling {
         return 0;
     }
 
-    // Klasse for å returnere transportinformasjon
-    public class Resultat {
-        private boolean success;
-        private String transportType;
-        private String melding;
-        private String avgangFraTerminal;
-        private String ankomstStartStopp;
-        private String ankomstSluttStopp;
-        private int reisetid;
-
-        public Resultat(boolean success, String transportType, String melding, String avgangFraTerminal,
-                        String ankomstStartStopp, String ankomstSluttStopp, int reisetid) {
-            this.success = success;
-            this.transportType = transportType;
-            this.melding = melding;
-            this.avgangFraTerminal = avgangFraTerminal;
-            this.ankomstStartStopp = ankomstStartStopp;
-            this.ankomstSluttStopp = ankomstSluttStopp;
-            this.reisetid = reisetid;
-        }
-
-        public Resultat(boolean success, String melding, String avgangFraTerminal,
-                            String ankomstStartStopp, String ankomstSluttStopp, int reisetid) {
-            this.success = success;
-            this.melding = melding;
-            this.avgangFraTerminal = avgangFraTerminal;
-            this.ankomstStartStopp = ankomstStartStopp;
-            this.ankomstSluttStopp = ankomstSluttStopp;
-            this.reisetid = reisetid;
-        }
-
-        // Getters
-        public boolean isSuccess() { return success; }
-        public String getMelding() { return melding; }
-        public String getAvgangFraTerminal() { return avgangFraTerminal; }
-        public String getAnkomstStartStopp() { return ankomstStartStopp; }
-            public String getAnkomstSluttStopp() { return ankomstSluttStopp; }
-            public int getReisetid() { return reisetid; }
-
-        @Override
-public String toString() { 
-    if (success) {
-        return String.format(
-            "\n=== Transport Informasjon ===\n" +
-            "Type: %s\n" +
-            "Rute ID: %s" + "%s\n" +
-            "Fra: %s" + " - %s\n" +
-            "Til: %s" + " - %s\n" +
-            "Reisetid: %d minutter\n" +
-            "============================\n",
-            transportType, 
-            Transport.getRuteId(buss1), 
-            Transport.getEndLocation(buss1), Transport.getStartLocation(buss1), Transport.getLocation(buss1),
-             avgangFraTerminal, Transport.getEndLocation(buss1), ankomstSluttStopp, reisetid 
-
-        );
-    } else {
-        return String.format("\n Feil: %s\n", melding);
-    }
-}
     
-    }
 
-       // Getters and Setters
     public String getTransportId() {
         return transportId;
     }
@@ -174,5 +112,7 @@ public String toString() {
     public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
+
+       // Getters and Setters
+   
 }
-```
