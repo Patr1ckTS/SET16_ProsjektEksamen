@@ -45,9 +45,9 @@ public class Stop {
         }
     }
     
-    public static Stop finnStoppMedNavn(ArrayList<Stop> stops, String navn) {
+    public static Stop finnStoppMedNavn(ArrayList<Stop> stops, String stoppNavn) {
         for (Stop stop : stops) {
-            if (stop.getName().equalsIgnoreCase(navn)) {
+            if (stop.getName().equalsIgnoreCase(stoppNavn)) {
                 return stop;
             }
         }

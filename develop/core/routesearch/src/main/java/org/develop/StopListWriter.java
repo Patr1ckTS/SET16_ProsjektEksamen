@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class StopListeSkriver {
+public class StopListWriter {
 
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final ObjectWriter prettyWriter = mapper.writer(new DefaultPrettyPrinter());

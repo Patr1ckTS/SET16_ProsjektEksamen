@@ -1,12 +1,13 @@
 package org.develop;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-public class StopListeLeser {
+public class StopListReader {
 
     //metode for å lese fra json fil.
     public static ArrayList<Stop> lesStopFraFil(String filbane) {

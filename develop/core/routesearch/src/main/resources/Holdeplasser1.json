@@ -1,0 +1,64 @@
+[ {
+  "stopId" : "FS001",
+  "location" : "Fredrikstad sentrum",
+  "name" : "Fredrikstad bussterminal",
+  "avgangstid" : null,
+  "avgangstider" : [ "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00" ],
+  "tidEtterAvgang" : 0
+}, {
+  "stopId" : "FS002",
+  "location" : "Fredrikstad øst",
+  "name" : "Cicignon skole",
+  "avgangstid" : null,
+  "avgangstider" : null,
+  "tidEtterAvgang" : 3
+}, {
+  "stopId" : "FS003",
+  "location" : "Fredrikstad øst",
+  "name" : "Kråkerøy terminal",
+  "avgangstid" : null,
+  "avgangstider" : null,
+  "tidEtterAvgang" : 7
+}, {
+  "stopId" : "FS004",
+  "location" : "Borg kommune",
+  "name" : "Borgehavn",
+  "avgangstid" : null,
+  "avgangstider" : null,
+  "tidEtterAvgang" : 12
+}, {
+  "stopId" : "FS005",
+  "location" : "Borg kommune",
+  "name" : "Tune stasjon",
+  "avgangstid" : null,
+  "avgangstider" : null,
+  "tidEtterAvgang" : 18
+}, {
+  "stopId" : "FS006",
+  "location" : "Sarpsborg vest",
+  "name" : "Grålum",
+  "avgangstid" : null,
+  "avgangstider" : null,
+  "tidEtterAvgang" : 25
+}, {
+  "stopId" : "FS007",
+  "location" : "Sarpsborg sentrum",
+  "name" : "Sarpsborg bussterminal",
+  "avgangstid" : null,
+  "avgangstider" : null,
+  "tidEtterAvgang" : 30
+}, {
+  "stopId" : "FS008",
+  "location" : "Sarpsborg øst",
+  "name" : "Sarpsborg sykehus",
+  "avgangstid" : null,
+  "avgangstider" : null,
+  "tidEtterAvgang" : 35
+}, {
+  "stopId" : "FS009",
+  "location" : "Halden",
+  "name" : "Remmen",
+  "avgangstid" : null,
+  "avgangstider" : null,
+  "tidEtterAvgang" : 90
+} ]

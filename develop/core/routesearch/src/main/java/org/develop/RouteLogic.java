@@ -3,20 +3,20 @@ package org.develop;
 import java.util.ArrayList;
 
 // Utility klasse for avanserte ruteberegninger
-public class RuteLogikk {
+public class RouteLogic {
 
     // Ny overloaded metode som tar imot Route-objektet
-    public static RuteLogikk.Resultat finnBesteTransport(String ønsketAvreisetid, Stop startStopp, Stop sluttStopp, Route rute) {
+    public static RouteLogic.Resultat finnBesteTransport(String ønsketAvreisetid, Stop startStopp, Stop sluttStopp, Route rute) {
         return finnNesteTransport(ønsketAvreisetid, startStopp, sluttStopp, rute.getStops(), rute);
     }
 
     // Gammel metode for bakoverkompatibilitet
-    public static RuteLogikk.Resultat finnBesteTransport(String ønsketAvreisetid, Stop startStopp, Stop sluttStopp, ArrayList<Stop> alleStops) {
+    public static RouteLogic.Resultat finnBesteTransport(String ønsketAvreisetid, Stop startStopp, Stop sluttStopp, ArrayList<Stop> alleStops) {
         return finnNesteTransport(ønsketAvreisetid, startStopp, sluttStopp, alleStops, null);
     }
     
     // Hovedmetode for å finne neste transport mellom to stopp - nå med optional Route parameter
-    private static RuteLogikk.Resultat finnNesteTransport(String ønsketAvreisetid, Stop startStopp, Stop sluttStopp, ArrayList<Stop> alleStops, Route rute) {
+    private static RouteLogic.Resultat finnNesteTransport(String ønsketAvreisetid, Stop startStopp, Stop sluttStopp, ArrayList<Stop> alleStops, Route rute) {
         // Finn terminal (første stopp med avgangstid)
         Stop startPunkt = null;
         for (Stop stop : alleStops) {
@@ -27,14 +27,14 @@ public class RuteLogikk {
         }
 
         if (startPunkt == null) {
-            return new RuteLogikk.Resultat(false, "Ingen terminal funnet", null, null, null, null, null, 0);
+            return new RouteLogic.Resultat(false, "Ingen terminal funnet", null, null, null, null, null, 0);
         }
         
         // Finn neste avgangstid fra startPunkt
         String nesteAvgang = startPunkt.finnNesteAvgangstid(ønsketAvreisetid);
 
         if (nesteAvgang == null) {
-            return new RuteLogikk.Resultat(false, "Ingen passende transport funnet", null, null, null, null, null, 0);
+            return new RouteLogic.Resultat(false, "Ingen passende transport funnet", null, null, null, null, null, 0);
         }
         
         // Beregn ankomsttider
@@ -52,15 +52,14 @@ public class RuteLogikk {
             ? rute.getRouteName() 
             : "Ukjent rute";
         
-        return new RuteLogikk.Resultat(true, transportType, ruteNavn, "Transport funnet", 
+        return new RouteLogic.Resultat(true, transportType, ruteNavn, "Transport funnet", 
             nesteAvgang, startStopp.getName(), sluttStopp.getName(), 
             ankomstStartStopp, ankomstSluttStopp, reisetid);
     }
     
-    // TODO: Legg til flere utility-metoder for ruteberegning
-    public static ArrayList<RuteLogikk.Resultat> finnAlleAlternativer(String ønsketAvreisetid, Stop startStopp, Stop sluttStopp, ArrayList<Stop> alleStops) {
-        // Placeholder for fremtidig implementasjon
-        ArrayList<RuteLogikk.Resultat> alternativer = new ArrayList<>();
+    // TODO: Legg til flere utility-metoder for ruteberegning om det trengs
+    public static ArrayList<RouteLogic.Resultat> finnAlleAlternativer(String ønsketAvreisetid, Stop startStopp, Stop sluttStopp, ArrayList<Stop> alleStops) {
+        ArrayList<RouteLogic.Resultat> alternativer = new ArrayList<>();
         alternativer.add(finnBesteTransport(ønsketAvreisetid, startStopp, sluttStopp, alleStops));
         return alternativer;
     }
