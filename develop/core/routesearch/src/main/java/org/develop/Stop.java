@@ -4,15 +4,21 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Stop {
     private String stopId;
     private String location;
     private String name;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String avgangstid; 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private ArrayList<String> avgangstider;
     private int tidEtterAvgang;
+    
 
     // Eksisterende konstruktør for stopp med relativ tid
     public Stop(String stopId, String location, String name, int tidEtterAvgang) {
