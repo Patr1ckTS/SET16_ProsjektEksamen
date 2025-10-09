@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class Stop {
     private String stopId;
@@ -21,6 +22,9 @@ public class Stop {
         this.tidEtterAvgang = tidEtterAvgang;
         this.avgangstider = null;
     }
+
+    //Json konstruktør
+    public Stop() {}
 
     // Ny konstruktør for stopp med liste av avgangstider
     public Stop(String stopId, String location, String name, ArrayList<String> avgangstider) {
