@@ -3,6 +3,12 @@ package org.develop;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.develop.FileHandlers.StopListWriter;
+import org.develop.Transport.Transport;
+import org.develop.TravelEnteties.Route;
+import org.develop.TravelEnteties.RouteLogic;
+import org.develop.TravelEnteties.Stop;
+
 public class Main {
     
     public static void main(String[] args) {
@@ -19,10 +25,11 @@ public class Main {
        stops.add(new Stop("FS008", "Sarpsborg øst", "Sarpsborg sykehus", 35));
        stops.add(new Stop("FS009", "Halden", "Remmen", 90));
 
-        boolean ok = StopListeSkriver.skrivStopTilFil("SET16_ProsjektEksamen\\develop\\core\\routesearch\\src\\main\\resources\\Holdeplasser1.json", stops);
+        boolean ok = StopListWriter.skrivStopTilFil("develop\\core\\routesearch\\src\\main\\resources\\Holdeplasser1.json", stops);
 
-        //ArrayList<Stop> stops = StopListeLeser.lesStopFraFil("SET16_ProsjektEksamen\\\\develop\\\\core\\\\routesearch\\\\src\\\\main\\\\resources\\\\Holdeplasser1.json");
-       
+        // Fjern kommentar for å lese fra fil og kommenter ut skrivingen og dataen over
+        //ArrayList<Stop> stops = StopListReader.lesStopFraFil("develop\\\\core\\\\routesearch\\\\src\\\\main\\\\resources\\\\Holdeplasser1.json");
+
         Route rute101 = new Route("101", "Fredrikstad-Halden", new Transport("T101", "Buss"), 100.0, stops);
 
         // Eksempel på input fra bruker

@@ -1,4 +1,4 @@
-package org.develop;
+package org.develop.TravelEnteties;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -20,6 +20,9 @@ public class Stop {
     private int tidEtterAvgang;
     
 
+    //Json konstruktør for Jackson
+    public Stop() {}
+
     // Eksisterende konstruktør for stopp med relativ tid
     public Stop(String stopId, String location, String name, int tidEtterAvgang) {
         this.stopId = stopId;
@@ -28,9 +31,6 @@ public class Stop {
         this.tidEtterAvgang = tidEtterAvgang;
         this.avgangstider = null;
     }
-
-    //Json konstruktør
-    public Stop() {}
 
     // Ny konstruktør for stopp med liste av avgangstider
     public Stop(String stopId, String location, String name, ArrayList<String> avgangstider) {

@@ -1,4 +1,4 @@
-package org.develop;
+package org.develop.FileHandlers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.develop.TravelEnteties.Stop;
 
 public class StopListReader {
 

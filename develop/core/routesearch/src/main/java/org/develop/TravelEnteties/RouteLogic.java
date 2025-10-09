@@ -1,4 +1,4 @@
-package org.develop;
+package org.develop.TravelEnteties;
 
 import java.util.ArrayList;
 
