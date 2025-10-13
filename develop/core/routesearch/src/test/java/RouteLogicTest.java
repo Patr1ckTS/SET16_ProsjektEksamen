@@ -18,7 +18,7 @@ public class RouteLogicTest {
     @BeforeEach
     void setUp() {
         stopServiceMock = Mockito.mock(StopService.class);
-        routeLogic = new RouteLogic();
+        routeLogic = new RouteLogic(stopServiceMock);
     }
 
     @Test

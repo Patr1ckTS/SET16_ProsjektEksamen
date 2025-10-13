@@ -8,6 +8,7 @@ import org.develop.TravelEnteties.Stop;
 import org.develop.TravelEnteties.Transport;
 import org.develop.Data.StopListReader;
 import org.develop.Data.StopListWriter;
+import org.develop.Interface.RouteService;
 import org.develop.Interface.StopService;
 import org.develop.Service.RouteLogic;
 import org.develop.Service.StopLogic;
@@ -35,14 +36,15 @@ public class Main {
 
         Route rute101 = new Route("101", "Fredrikstad-Halden", new Transport("T101", "Buss"), 100.0, stops);
 
-        // Dependency Injection 
+        // Manuell Dependency Injection for å demonstrere konseptet
         StopService stopService = new StopLogic();
+        RouteService routeService = new RouteLogic(stopService);
 
         // Eksempel på input fra bruker med DI
-    Stop startStop = stopService.findStopByName(rute101.getStops(), "Cicignon skole");
-    Stop endStop = stopService.findStopByName(rute101.getStops(), "Remmen");
+        Stop startStop = stopService.findStopByName(rute101.getStops(), "Cicignon skole");
+        Stop endStop = stopService.findStopByName(rute101.getStops(), "Remmen");
 
-        // Bruk RouteLogic sin statiske metode for å vise at DI også kan kombineres, men helst bør alt gå via interface
-        System.out.println(RouteLogic.findBestTransport("08:05", startStop, endStop, rute101));
+        // Bruk routeService til å finne beste transport
+    System.out.println(((RouteLogic)routeService).findBestTransport("08:05", startStop, endStop, rute101));
     }
 }

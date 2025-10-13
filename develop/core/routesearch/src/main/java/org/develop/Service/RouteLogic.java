@@ -3,12 +3,18 @@ package org.develop.Service;
 
 import java.util.ArrayList;
 import org.develop.Interface.RouteService;
+import org.develop.Interface.StopService;
 import org.develop.TravelEnteties.Route;
 import org.develop.TravelEnteties.Stop;
 
 // Utility- og serviceklasse for avanserte ruteberegninger
 public class RouteLogic implements RouteService {
+    private final StopService stopService;
 
+    // Injisering av Dependency Injection
+    public RouteLogic(StopService stopService) {
+        this.stopService = stopService;
+    }
 
     @Override
     public Route calculateRoute(ArrayList<Route> availableRoutes, String startLocation, String endLocation) {
@@ -24,17 +30,16 @@ public class RouteLogic implements RouteService {
         return null;
     }
 
-    // Ny overloaded metode som tar imot Route-objektet
-    public static RouteLogic.Result findBestTransport(String desiredDepartureTime, Stop startStop, Stop endStop, Route route) {
+    // Overloaded metode som tar imot Route-objektet
+    public Result findBestTransport(String desiredDepartureTime, Stop startStop, Stop endStop, Route route) {
         return findNextTransport(desiredDepartureTime, startStop, endStop, route.getStops(), route);
     }
 
-    public static RouteLogic.Result findBestTransport(String desiredDepartureTime, Stop startStop, Stop endStop, ArrayList<Stop> allStops) {
+    public Result findBestTransport(String desiredDepartureTime, Stop startStop, Stop endStop, ArrayList<Stop> allStops) {
         return findNextTransport(desiredDepartureTime, startStop, endStop, allStops, null);
     }
 
-    private static RouteLogic.Result findNextTransport(String desiredDepartureTime, Stop startStop, Stop endStop, ArrayList<Stop> allStops, Route route) {
-    StopLogic stopLogic = new StopLogic();
+    private Result findNextTransport(String desiredDepartureTime, Stop startStop, Stop endStop, ArrayList<Stop> allStops, Route route) {
     
     // Finn terminal
     Stop terminal = null;
@@ -51,16 +56,16 @@ public class RouteLogic implements RouteService {
     }
     
     // Finn neste avgang basert på ønsket avgangstid
-    String nextDeparture = stopLogic.findNextDepartureTime(terminal, desiredDepartureTime);
+    String nextDeparture = stopService.findNextDepartureTime(terminal, desiredDepartureTime);
     if (nextDeparture == null) {
         return new Result(false, null, null, "Ingen passende transport funnet", 
             null, null, null, null, null, 0);
     }
     
     // Beregn ankomster og reisetid
-    String arrivalAtStart = stopLogic.calculateTransportAtStop(startStop, nextDeparture);
-    String arrivalAtEnd = stopLogic.calculateTransportAtStop(endStop, nextDeparture);
-    int travelTime = stopLogic.calculateTravelTime(startStop, nextDeparture, endStop);
+    String arrivalAtStart = stopService.calculateTransportAtStop(startStop, nextDeparture);
+    String arrivalAtEnd = stopService.calculateTransportAtStop(endStop, nextDeparture);
+    int travelTime = stopService.calculateTravelTime(startStop, nextDeparture, endStop);
     
     // Hent rute-info
     String transportType = "Ukjent transport";
@@ -78,21 +83,20 @@ public class RouteLogic implements RouteService {
                      arrivalAtStart, arrivalAtEnd, travelTime);
     }
 
-    public static ArrayList<RouteLogic.Result> findAllAlternatives(String desiredDepartureTime, Stop startStop, Stop endStop, ArrayList<Stop> allStops) {
-        ArrayList<RouteLogic.Result> alternatives = new ArrayList<>();
+    public ArrayList<Result> findAllAlternatives(String desiredDepartureTime, Stop startStop, Stop endStop, ArrayList<Stop> allStops) {
+        ArrayList<Result> alternatives = new ArrayList<>();
         alternatives.add(findBestTransport(desiredDepartureTime, startStop, endStop, allStops));
         return alternatives;
     }
     
     // Metode for å beregne total reisetid for en rute
-    public static int calculateTotalTravelTime(ArrayList<Stop> route, String departureTime) {
+    public int calculateTotalTravelTime(ArrayList<Stop> route, String departureTime) {
         if (route == null || route.size() < 2) {
             return 0;
         }
-        StopLogic stopLogic = new StopLogic();
         Stop startStop = route.get(0);
         Stop endStop = route.get(route.size() - 1);
-        return stopLogic.calculateTravelTime(startStop, departureTime, endStop);
+        return stopService.calculateTravelTime(startStop, departureTime, endStop);
     }
     
     // Metode for å validere rutedata

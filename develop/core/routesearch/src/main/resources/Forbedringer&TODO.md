@@ -46,7 +46,7 @@ Dette dokumentet oppsummerer de viktigste problemene og forslag til løsninger k
 ## Sikre Løst koblet kode 
 **Dependency Injection:**
 - [X] Bruk av interfaces
-- [ ] Injiisering via konstruktør og metoder
+- [X] Injiisering via konstruktør og metoder
 - [X] Bruk av mockito for å teste løst koblet kode
 
 **DTO (Data Transfer Object):**
