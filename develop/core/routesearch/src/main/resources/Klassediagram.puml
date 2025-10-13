@@ -1,68 +1,69 @@
-@startuml KlassediagramAB
-' https://plantuml.com/class-diagram
+@startuml KlassediagramMapper
 
-package "A-B Søk innenfor en rute" {
+package "Interface" {
+    interface StopService {
+        + String calculateTransportAtStop(Stop, String)
+        + Stop findStopByName(List<Stop>, String)
+        + String findNextDepartureTime(Stop, String)
+        + int calculateTravelTime(Stop, String, Stop)
+    }
+    interface RouteService {
+        + Route calculateRoute(ArrayList<Route>, String, String)
+    }
+}
 
-class Stop {
-    - stopId: String
-    - location: String
-    - name: String
-    - departureTime: String
-    - departureTimes: ArrayList<String>
-    - timeAfterDeparture: int
-    
-    + calculateBusAtStop(String): String
-    + findNextBus(...): String
-    + calculateTravelTime(...): int
-    + {static} findStopByName(...): Stop
-    + {static} findNextBus(...): BusResult
+package "Service" {
+    class StopLogic 
+    class RouteLogic 
+}
+
+package "TravelEnteties" {
+    class Stop {
+        - String stopId
+        - String location
+        - String name
+        - String departureTime
+        - ArrayList<String> departureTimes
+        - int minutesAfterDeparture
+    }
+    class Route {
+        - String routeId
+        - String routeName
+        - Transport transport
+        - double price
+        - ArrayList<Stop> stops
+    }
+    class Transport {
+        - String transportId
+        - String routeId
+        - String routeName
+        - String transportType
+        - String startLocation
+        - String endLocation
+        - String departureTime
+        - String arrivalTime
+        + double estimateTravelTime()
+    }
 }
 
 
-class RouteLogic {
-    + {static} findBestBus(...): BusResult
-    + {static} findAllAlternatives(...): ArrayList<BusResult>
-    + {static} calculateTotalTravelTime(...): int
-    + {static} validateRoute(...): boolean
+package "Data" {
+        class RouteReader
+        class RouteWriter
 }
 
-class Route {
-    - routeId: String
-    - routeName: String
-    - transport: Transport
-    - price: double
-    - stops: ArrayList<Stop>
-    
-    + {static} calculateRoute(...): Route
-}
 
-class Transport {
-    - transportId: String
-    - capacity: int
-    - startLocation: String
-    - endLocation: String
-    - departureTime: String
-    - arrivalTime: String
-    
-    + calculateDistance(): double
-    + estimateTravelTime(): double
-}
 
-interface LocationHandling {
-    + calculateDistance(): double
-    + estimateTravelTime(): double
-}
+' Relasjoner
+Interface.StopService <|.. Service.StopLogic : implements
+Interface.RouteService <|.. Service.RouteLogic : implements
 
-' Relationships
-Transport ..|> LocationHandling : implements
+Service ..> TravelEnteties.Stop : uses
+Service.RouteLogic ..> TravelEnteties.Route
 
-' Composition/Aggregation relationships
-Route *-- Transport : contains
-Route o-- Stop : uses
+Data.RouteReader ..> TravelEnteties.Route : "reads route data (with stops and transport)"
 
-' Dependencies
-Stop ..> RouteLogic : creates
-
-}
+TravelEnteties.Route *-- TravelEnteties.Transport : contains
+TravelEnteties.Route o-- TravelEnteties.Stop : uses
 
 @enduml

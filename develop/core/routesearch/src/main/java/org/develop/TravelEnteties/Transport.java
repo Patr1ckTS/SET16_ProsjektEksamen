@@ -1,21 +1,24 @@
-package org.develop.Transport;
+package org.develop.TravelEnteties;
 
 import java.time.LocalTime;
-import org.develop.Interface.LocationHandling;
 import java.time.Duration;
 
-public class Transport implements LocationHandling { 
-    String transportId;
-    String ruteId;
-    String ruteNavn;
-    String transportType;
-    String startLocation;
-    String endLocation;
-    String departureTime;
-    String arrivalTime;
+// Denne kan gjøres abstrakt om vi skal ha flere transportmidler og da definere egne klasser for de
+    // F.eks. Buss, Tog, T-bane, Trikk, Ferge osv.
+// For MVP så holder det med en generell Transport klasse, siden fokuset ikke er på de ulike transportmidlene, men på logikken og data håndteringen
+public class Transport  { 
+    private String transportId;
+    private String routeId;
+    private String routeName;
+    private String transportType;
+    private String startLocation;
+    private String endLocation;
+    private String departureTime;
+    private String arrivalTime;
 
     public Transport(String transportId, String transportType, String startLocation, String endLocation, String departureTime, String arrivalTime) {
         this.transportId = transportId;
+        this.transportType = transportType;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.departureTime = departureTime;
@@ -27,7 +30,6 @@ public class Transport implements LocationHandling {
         this.transportType = transportType;
     }
 
-    @Override
     public double estimateTravelTime() {
         try {
             LocalTime departure = LocalTime.parse(departureTime);
@@ -48,7 +50,7 @@ public class Transport implements LocationHandling {
     }
 
     
-
+    // Getters og Setters
     public String getTransportId() {
         return transportId;
     }
@@ -57,20 +59,20 @@ public class Transport implements LocationHandling {
         this.transportId = transportId;
     }
 
-    public String getRuteId() {
-        return ruteId;
+    public String getRouteId() {
+        return routeId;
     }
 
-    public void setRuteId(String ruteId) {
-        this.ruteId = ruteId;
+    public void setRouteId(String routeId) {
+        this.routeId = routeId;
     }
 
-    public String getRuteNavn() {
-        return ruteNavn;
+    public String getRouteName() {
+        return routeName;
     }
 
-    public void setRuteNavn(String ruteNavn) {
-        this.ruteNavn = ruteNavn;
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
     }
 
     public String getTransportType() {
@@ -111,8 +113,5 @@ public class Transport implements LocationHandling {
 
     public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
-    }
-
-       // Getters and Setters
-   
+    } 
 }

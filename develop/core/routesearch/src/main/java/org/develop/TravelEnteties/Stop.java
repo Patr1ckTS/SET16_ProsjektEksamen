@@ -1,7 +1,5 @@
 package org.develop.TravelEnteties;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -14,103 +12,48 @@ public class Stop {
     private String location;
     private String name;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String avgangstid; 
+    private String departureTime;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<String> avgangstider;
-    private int tidEtterAvgang;
+    private ArrayList<String> departureTimes;
+    private int minutesAfterDeparture;
     
 
     //Json konstruktør for Jackson
     public Stop() {}
 
     // Eksisterende konstruktør for stopp med relativ tid
-    public Stop(String stopId, String location, String name, int tidEtterAvgang) {
+    public Stop(String stopId, String location, String name, int minutesAfterDeparture) {
         this.stopId = stopId;
         this.location = location;
         this.name = name;
-        this.tidEtterAvgang = tidEtterAvgang;
-        this.avgangstider = null;
+        this.minutesAfterDeparture = minutesAfterDeparture;
+        this.departureTimes = null;
     }
 
     // Ny konstruktør for stopp med liste av avgangstider
-    public Stop(String stopId, String location, String name, ArrayList<String> avgangstider) {
+    public Stop(String stopId, String location, String name, ArrayList<String> departureTimes) {
         this.stopId = stopId;
         this.location = location;
         this.name = name;
-        this.avgangstider = avgangstider;
-        this.tidEtterAvgang = 0; 
+        this.departureTimes = departureTimes;
+        this.minutesAfterDeparture = 0; 
     }
     
-    public String beregnTransportPåStopp(String avgangstidFraTerminal) {
-        try {
-            LocalTime terminal = LocalTime.parse(avgangstidFraTerminal);
-            LocalTime transportPåStopp = terminal.plusMinutes(this.tidEtterAvgang);
-            return transportPåStopp.toString();
-        } catch (DateTimeParseException e) {
-            return null;
-        }
-    }
-    
-    public static Stop finnStoppMedNavn(ArrayList<Stop> stops, String stoppNavn) {
-        for (Stop stop : stops) {
-            if (stop.getName().equalsIgnoreCase(stoppNavn)) {
-                return stop;
-            }
-        }
-        return null;
-    }
-    
-    // Hjelpemetode for å finne neste avgangstid fra dette stoppet
-    public String finnNesteAvgangstid(String ønsketAvreisetid) {
-        if (this.avgangstider == null || this.avgangstider.isEmpty()) {
-            return null;
-        }
-        
-        try {
-            for (String avgangstid : this.avgangstider) {
-                // avgangstid + tidEtterAvgang = transportPåStopp
-                String transportPåStopp = this.beregnTransportPåStopp(avgangstid);
 
-                if (transportPåStopp != null) {
-                    if (transportPåStopp.compareTo(ønsketAvreisetid) >= 0) {
-                        return avgangstid; 
-                    }
-                }
-            }
-            return null;
-            
-        } catch (Exception e) {
-            return null;
-        }
-    }
-    
-    // Hjelpemetode for å beregne reisetid mellom to stopp
-    public int beregnReisetid(String avgangstid, Stop sluttStopp) {
-        try {
-            LocalTime reiseStart = LocalTime.parse(this.beregnTransportPåStopp(avgangstid));
-            LocalTime reiseSlutt = LocalTime.parse(sluttStopp.beregnTransportPåStopp(avgangstid));
-            
-            // reiseslutt - reisestart = reisetid
-            return (int) java.time.Duration.between(reiseStart, reiseSlutt).toMinutes();
-            
-        } catch (Exception e) {
-            return -1;
-        }
-    }
 
     @Override
     public String toString() {
-        return String.format("Stop{stopId='%s', name='%s', location='%s', tidEtterAvgang=%d}", 
-                           stopId, name, location, tidEtterAvgang);
+        return String.format("Stop{stopId='%s', name='%s', location='%s', minutesAfterDeparture=%d}", 
+                           stopId, name, location, minutesAfterDeparture);
     }
     
     public String toDetailedString() {
-        if (avgangstider != null) {
-            return String.format("Terminal Stop: %s (%s) - Avgangstider: %s", 
-                               name, location, avgangstider);
+        if (departureTimes != null) {
+            return String.format("Terminal Stop: %s (%s) - Departure Times: %s", 
+                               name, location, departureTimes);
         } else {
-            return String.format("Regular Stop: %s (%s) - %d minutter etter terminal", 
-                               name, location, tidEtterAvgang);
+            return String.format("Regular Stop: %s (%s) - %d minutes after terminal", 
+                               name, location, minutesAfterDeparture);
         }
     }
 
@@ -140,28 +83,28 @@ public class Stop {
         this.name = name;
     }
 
-    public int getTidEtterAvgang() {
-        return tidEtterAvgang;
+    public int getMinutesAfterDeparture() {
+        return minutesAfterDeparture;
     }
 
-    public void setTidEtterAvgang(int tidEtterAvgang) {
-        this.tidEtterAvgang = tidEtterAvgang;
+    public void setMinutesAfterDeparture(int minutesAfterDeparture) {
+        this.minutesAfterDeparture = minutesAfterDeparture;
     }
 
-    public List<String> getAvgangstider() {
-        return avgangstider;
+    public List<String> getDepartureTimes() {
+        return departureTimes;
     }
 
-    public void setAvgangstider(ArrayList<String> avgangstider) {
-        this.avgangstider = avgangstider;
+    public void setDepartureTimes(ArrayList<String> departureTimes) {
+        this.departureTimes = departureTimes;
     }
 
-    public String getAvgangstid() {
-        return avgangstid;
+    public String getDepartureTime() {
+        return departureTime;
     }
 
-    public void setAvgangstid(String avgangstid) {
-        this.avgangstid = avgangstid;
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
     }
     
 }

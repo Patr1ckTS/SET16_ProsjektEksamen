@@ -3,11 +3,14 @@ package org.develop;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.develop.FileHandlers.StopListWriter;
-import org.develop.Transport.Transport;
 import org.develop.TravelEnteties.Route;
-import org.develop.TravelEnteties.RouteLogic;
 import org.develop.TravelEnteties.Stop;
+import org.develop.TravelEnteties.Transport;
+import org.develop.Data.StopListReader;
+import org.develop.Data.StopListWriter;
+import org.develop.Interface.StopService;
+import org.develop.Service.RouteLogic;
+import org.develop.Service.StopLogic;
 
 public class Main {
     
@@ -25,17 +28,21 @@ public class Main {
        stops.add(new Stop("FS008", "Sarpsborg øst", "Sarpsborg sykehus", 35));
        stops.add(new Stop("FS009", "Halden", "Remmen", 90));
 
-        boolean ok = StopListWriter.skrivStopTilFil("develop\\core\\routesearch\\src\\main\\resources\\Holdeplasser1.json", stops);
+        boolean ok = StopListWriter.writeStopsToFile("develop\\core\\routesearch\\src\\main\\resources\\Holdeplasser1.json", stops);
 
         // Fjern kommentar for å lese fra fil og kommenter ut skrivingen og dataen over
-        //ArrayList<Stop> stops = StopListReader.lesStopFraFil("develop\\\\core\\\\routesearch\\\\src\\\\main\\\\resources\\\\Holdeplasser1.json");
+        ArrayList<Stop> stops1 = StopListReader.readStopsFromFile("develop\\\\core\\\\routesearch\\\\src\\\\main\\\\resources\\\\Holdeplasser1.json");
 
         Route rute101 = new Route("101", "Fredrikstad-Halden", new Transport("T101", "Buss"), 100.0, stops);
 
-        // Eksempel på input fra bruker
-        System.out.println(RouteLogic.finnBesteTransport("08:05", 
-            Stop.finnStoppMedNavn(rute101.getStops(), "Cicignon skole"), 
-            Stop.finnStoppMedNavn(rute101.getStops(), "Remmen"), 
-            rute101));
+        // Dependency Injection 
+        StopService stopService = new StopLogic();
+
+        // Eksempel på input fra bruker med DI
+    Stop startStop = stopService.findStopByName(rute101.getStops(), "Cicignon skole");
+    Stop endStop = stopService.findStopByName(rute101.getStops(), "Remmen");
+
+        // Bruk RouteLogic sin statiske metode for å vise at DI også kan kombineres, men helst bør alt gå via interface
+        System.out.println(RouteLogic.findBestTransport("08:05", startStop, endStop, rute101));
     }
 }
