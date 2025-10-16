@@ -15,7 +15,7 @@ public class StopListWriter {
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final ObjectWriter prettyWriter = mapper.writer(new DefaultPrettyPrinter());
 
-    //metode for å skrive til json fil.
+    //metode for å skrive stops til json fil.
     public static boolean writeStopsToFile(String filePath, ArrayList<Stop> stops) {
         try {
             prettyWriter.writeValue(new File(filePath), stops);

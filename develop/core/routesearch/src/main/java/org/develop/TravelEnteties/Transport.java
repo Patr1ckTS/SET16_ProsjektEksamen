@@ -16,6 +16,9 @@ public class Transport  {
     private String departureTime;
     private String arrivalTime;
 
+    //Json konstruktør for Jackson
+    public Transport() {}
+
     public Transport(String transportId, String transportType, String startLocation, String endLocation, String departureTime, String arrivalTime) {
         this.transportId = transportId;
         this.transportType = transportType;

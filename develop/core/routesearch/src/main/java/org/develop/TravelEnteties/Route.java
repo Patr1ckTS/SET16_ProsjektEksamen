@@ -9,6 +9,9 @@ public class Route {
     private double price;
     private ArrayList<Stop> stops;
 
+    //Json konstruktør for Jackson
+    public Route() {}
+
     public Route(String routeId, String routeName, Transport transport, double price, ArrayList<Stop> stops) {
         this.routeId = routeId;
         this.routeName = routeName;
