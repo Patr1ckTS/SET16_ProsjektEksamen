@@ -6,9 +6,7 @@ import java.util.Arrays;
 import org.develop.TravelEnteties.Route;
 import org.develop.TravelEnteties.Stop;
 import org.develop.TravelEnteties.Transport;
-import org.develop.Data.StopListReader;
 import org.develop.Data.StopListWriter;
-import org.develop.Data.RouteReader;
 import org.develop.Data.RouteWriter;
 import org.develop.Interface.RouteService;
 import org.develop.Interface.StopService;
@@ -34,10 +32,10 @@ public class Main {
         boolean ok = StopListWriter.writeStopsToFile("SET16_ProsjektEksamen/develop/core/routesearch/src/main/resources/Holdeplasser1.json", stops);
 
         // Fjern kommentar for å lese fra fil og kommenter ut skrivingen og dataen over
-        //ArrayList<Stop> stops1 = StopListReader.readStopsFromFile("SET16_ProsjektEksamen/develop/core/routesearch/src/main/resources/Holdeplasser1.json");
+        //ArrayList<Stop> stops1 = StopListReader.readStopsFromFile("develop\\\\core\\\\routesearch\\\\src\\\\main\\\\resources\\\\Holdeplasser1.json");
 
         
-         Route rute101 = new Route("101", "Fredrikstad-Halden", new Transport("T101", "Buss"), 100.0, stops1);
+         Route rute101 = new Route("101", "Fredrikstad-Halden", new Transport("T101", "Buss"), 100.0, stops);
         
         //for å teste routewriter
         boolean ok1 = RouteWriter.writeRouteToFile("SET16_ProsjektEksamen/develop/core/routesearch/src/main/resources/rutetest.json", rute101);

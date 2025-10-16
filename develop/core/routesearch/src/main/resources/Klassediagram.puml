@@ -13,8 +13,23 @@ package "Interface" {
 }
 
 package "Service" {
-    class StopLogic 
-    class RouteLogic 
+    class StopLogic {}
+    class RouteLogic {}
+    class "RouteLogic.Result" as Result {
+        - boolean success
+        - String transportType
+        - String routeName
+        - String message
+        - String departureFromTerminal
+        - String startLocation
+        - String endLocation
+        - String arrivalAtStartStop
+        - String arrivalAtEndStop
+        - int travelTime
+    }
+
+    RouteLogic +-- Result : Inner Class
+
 }
 
 package "TravelEnteties" {
@@ -44,26 +59,75 @@ package "TravelEnteties" {
         - String arrivalTime
         + double estimateTravelTime()
     }
+
+    package InternalDTO {
+        class RouteDTO {
+            Result {
+                - boolean success
+                - String transportType
+                - String routeName
+                - String message
+                - String departureFromTerminal
+                - String startLocation
+                - String endLocation
+                - String arrivalAtStartStop
+                - String arrivalAtEndStop
+                - int travelTime
+            }
+        class ResultDTO {
+            - String startLocation
+            - String endLocation
+            - String transportType
+            - double price
+            - int travelTime
+            - ArrayList<RouteDTO> routes
+        }
+    }
 }
 
+package "Controller" {
+    class RouteController {
+        Get
+        Post
+        Put
+        Delete 
+    }
+
+    class ResultController {
+        Get
+        Post
+        Put
+        Delete
+    }
+
+}
+    note top of Controller
+        Controller will be integrated with Frontend later
+    end note
 
 package "Data" {
-        class RouteReader
-        class RouteWriter
+    class RouteReader
 }
 
+package "APIHandler" {
+    class APIRouteDTO
+}
 
-
-' Relasjoner
 Interface.StopService <|.. Service.StopLogic : implements
 Interface.RouteService <|.. Service.RouteLogic : implements
 
-Service ..> TravelEnteties.Stop : uses
-Service.RouteLogic ..> TravelEnteties.Route
+Service.RouteLogic ..> TravelEnteties.Stop : uses
+Service.RouteLogic ..> TravelEnteties.Route : uses
+Service.StopLogic ..> TravelEnteties.Stop : uses
 
-Data.RouteReader ..> TravelEnteties.Route : "reads route data (with stops and transport)"
+APIHandler.APIRouteDTO ..> Data.RouteReader : deserializes DTO-data 
+Data.RouteReader ..> TravelEnteties.Route : creates/maps Route
 
 TravelEnteties.Route *-- TravelEnteties.Transport : contains
 TravelEnteties.Route o-- TravelEnteties.Stop : uses
+
+Controller.RouteController ..> TravelEnteties.InternalDTO.RouteDTO : serializes
+
+Controller.ResultController ..> TravelEnteties.InternalDTO.ResultDTO : serializes
 
 @enduml

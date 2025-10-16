@@ -31,17 +31,16 @@ Dette dokumentet oppsummerer de viktigste problemene og forslag til løsninger k
 - Enklere å forstå og navigere i koden 
 - Bedre muligheter for gjenbruk av komponenter
 
-
 # TODO
 ## Formål
 - [ ] Ferdigstille koden for søk A-B på ruter.
   - [X] Bruk av Dependency Injection
-  - [ ] Bruk av DTO
-  - [ ] Enhetstesting av logikken
+  - [x] Bruk av DTO
+  - [x] Enhetstesting av logikken
   - [X] Refaktorer om nødvendig
   - [X] Sikre løst koblet kode
   - [X] Dokumentasjon av koden (Diagrammer)
-  - [ ] Dokumentasjon av prosessen (Rapporten)
+  - [x] Dokumentasjon av prosessen (Rapporten)
 
 ## Sikre Løst koblet kode 
 **Dependency Injection:**
@@ -50,18 +49,18 @@ Dette dokumentet oppsummerer de viktigste problemene og forslag til løsninger k
 - [X] Bruk av mockito for å teste løst koblet kode
 
 **DTO (Data Transfer Object):**
-- [ ] Bruk av DTO for å overføre data mellom lag
-- [ ] Unngå å eksponere interne modeller direkte
+- [X] Bruk av DTO for å overføre data mellom lag (RouteDTO og ResultDTO)
+- [X] Unngå å eksponere interne modeller direkte
 
 ## Enhetstesting 
-- [ ] Lesing 
-- [ ] Skriving
+- [x] Lesing (RouteReader)
+- [x] Skriving (RouteWriter(RouteDTO)) - Dropper ResultDTO skriving da det blir det samme som RouteWriter(RouteDTO)
 
 **Rutelogikk:**
-- [ ] findBestTransport()
-- [X] calculateTravelTime() -> RouteLogicTest
-- [ ] Opprettelse av Resultat objektet
+- [x] findBestTransport()
+- [x] Opprettelse av Resultat objektet
+- [x] NoAvailableTransportReturnsFailure()
 
 **StoppLogikk:**
-- [ ] calculateTravelTime()
-- [ ] calculateTransportAtStop()
+- [x] calculateTravelTime()
+- [x] calculateTransportAtStop()

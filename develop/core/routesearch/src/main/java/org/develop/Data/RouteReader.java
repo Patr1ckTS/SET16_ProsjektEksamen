@@ -1,6 +1,5 @@
 package org.develop.Data;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -19,6 +18,5 @@ public class RouteReader {
             e.printStackTrace();
             return null;
         }
-    }
-    
+    } 
 }
