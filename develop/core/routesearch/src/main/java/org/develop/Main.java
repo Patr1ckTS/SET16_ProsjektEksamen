@@ -6,8 +6,11 @@ import java.util.Arrays;
 import org.develop.TravelEnteties.Route;
 import org.develop.TravelEnteties.Stop;
 import org.develop.TravelEnteties.Transport;
+import org.develop.TravelEnteties.dto.RouteDTO;
+import org.develop.Data.StopListReader;
 import org.develop.Data.StopListWriter;
 import org.develop.Data.RouteWriter;
+import org.develop.Data.RouteReader;
 import org.develop.Interface.RouteService;
 import org.develop.Interface.StopService;
 import org.develop.Service.RouteLogic;
@@ -35,13 +38,15 @@ public class Main {
         //ArrayList<Stop> stops1 = StopListReader.readStopsFromFile("develop\\\\core\\\\routesearch\\\\src\\\\main\\\\resources\\\\Holdeplasser1.json");
 
         
-         Route rute101 = new Route("101", "Fredrikstad-Halden", new Transport("T101", "Buss"), 100.0, stops);
+        // Route rute101 = new Route("101", "Fredrikstad-Halden", new Transport("T101", "Buss"), 100.0, stops);
+        
+        RouteDTO ruteDTO101 = new RouteDTO("101", "Fredrikstad-Halden", new Transport("T101", "Buss"), 100.0, stops);
         
         //for å teste routewriter
-        boolean ok1 = RouteWriter.writeRouteToFile("SET16_ProsjektEksamen/develop/core/routesearch/src/main/resources/rutetest.json", rute101);
+        boolean ok1 = RouteWriter.writeRouteToFile("SET16_ProsjektEksamen/develop/core/routesearch/src/main/resources/rutetest.json", ruteDTO101);
 
         // for å teste routereader, kommunter ut denne hvis du ikke har kjørt routewriter.
-        //Route rute101 = RouteReader.readRouteFromFile("SET16_ProsjektEksamen/develop/core/routesearch/src/main/resources/rutetest.json");
+        Route rute101 = RouteReader.readRouteFromFile("SET16_ProsjektEksamen/develop/core/routesearch/src/main/resources/rutetest.json");
 
         // Manuell Dependency Injection for å demonstrere konseptet
         StopService stopService = new StopLogic();
