@@ -9,9 +9,9 @@ import com.ruteplanlegger.webRelated.UserListFormatter;
 public class DatabaseUserConnection {
     
     public static DatabaseUserOperations createDatabaseUserOperations() {
-        String dbUrl = com.ruteplanlegger.DatabaseConfig.getDbUrl();
-        String dbUser = com.ruteplanlegger.DatabaseConfig.getDbUsername();
-        String dbPassword = com.ruteplanlegger.DatabaseConfig.getDbPassword();
+        String dbUrl = com.ruteplanlegger.inactive.DatabaseConfig.getDbUrl();
+        String dbUser = com.ruteplanlegger.inactive.DatabaseConfig.getDbUsername();
+        String dbPassword = com.ruteplanlegger.inactive.DatabaseConfig.getDbPassword();
         
         DatabaseConnection databaseConnection = new DatabaseConnection(dbUrl, dbUser, dbPassword);
         

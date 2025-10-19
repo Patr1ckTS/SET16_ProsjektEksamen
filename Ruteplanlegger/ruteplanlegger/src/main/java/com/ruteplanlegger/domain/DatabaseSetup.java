@@ -1,5 +1,9 @@
 package com.ruteplanlegger.domain;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 // Klasse for databasekonfigurasjon
 
 public class DatabaseSetup {
@@ -54,6 +58,18 @@ public class DatabaseSetup {
                Username: %s
                =========================""".formatted(DB_HOST, DB_PORT, DB_NAME, DB_USERNAME);
     }
+    
+    // ===== Test Connection ===== //
+    public boolean testConnection() {
+        try (Connection conn = DriverManager.getConnection(getDbUrl(), getDbUsername(), getDbPassword())) {
+            System.out.println("Database fungerer!");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Database feil: " + e.getMessage());
+            return false;
+        }
+    }
+    
     //  Ville vi trenge settere her?
 }
 

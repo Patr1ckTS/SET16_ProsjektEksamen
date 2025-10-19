@@ -1,4 +1,4 @@
-package com.ruteplanlegger;
+package com.ruteplanlegger.inactive;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

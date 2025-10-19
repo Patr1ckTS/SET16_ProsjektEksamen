@@ -22,7 +22,7 @@ public class Main {
         
         // ===== Server Oppstart ===== //
         System.out.println("Starter Server...");
-        System.out.println(DatabaseConfig.showDatabaseInfo());
+        System.out.println(dbSetup.showDatabaseInfo());
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/static"); 
         }).start(7000);
@@ -95,7 +95,7 @@ public class Main {
         
         // ===== Database Test ===== //
         System.out.println("Tester database tilkobling...");
-        if (DatabaseConfig.testConnection()) {
+        if (dbSetup.testConnection()) {
             System.out.println("Database tilkoblet!");
         } else {
             System.out.println("Database tilkobling feilet!");
