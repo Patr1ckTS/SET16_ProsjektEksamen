@@ -5,14 +5,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ruteplanlegger.inactive.DatabaseConfig;
+import com.ruteplanlegger.domain.DatabaseSetup;
 
 public class UserService {
+    private static DatabaseSetup databaseSetup;
+    private static DatabaseConnection databaseConnection;
+    
+    // Initialize the database setup - call this method first
+    public static void initialize(DatabaseSetup dbSetup) {
+        databaseSetup = dbSetup;
+        databaseConnection = new DatabaseConnection(
+            dbSetup.getDbUrl(), 
+            dbSetup.getDbUsername(), 
+            dbSetup.getDbPassword()
+        );
+    }
 
     public static String getUserFullname() {
+        if (databaseConnection == null) {
+            return "Error: UserService not initialized. Call UserService.initialize(DatabaseSetup) first.";
+        }
+        
         String result = "";
         
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = databaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement("SELECT firstname, lastname, email, phonenumber, user_type, created_at FROM users ORDER BY created_at DESC")) {
             
             ResultSet rs = stmt.executeQuery();
@@ -36,9 +52,14 @@ public class UserService {
 
 
     public static boolean addUser(String firstname, String lastname, String email, String phonenumber, String password) {
+        if (databaseConnection == null) {
+            System.err.println("Error: UserService not initialized. Call UserService.initialize(DatabaseSetup) first.");
+            return false;
+        }
+        
         String sql = "INSERT INTO users (firstname, lastname, email, phonenumber, password, user_type, created_at) VALUES (?, ?, ?, ?, ?, 1, NOW())";
         
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = databaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
              
             pstmt.setString(1, firstname);

@@ -20,6 +20,9 @@ public class Main {
             "Summer35"
         );
         
+        // ===== Initialize UserService with DatabaseSetup ===== //
+        UserService.initialize(dbSetup);
+        
         // ===== Server Oppstart ===== //
         System.out.println("Starter Server...");
         System.out.println(dbSetup.showDatabaseInfo());
