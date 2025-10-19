@@ -8,10 +8,9 @@ import io.javalin.Javalin;
 
 
 public class Main {
-
-    
     
     public static void main(String[] args) {
+        
         DatabaseSetup dbSetup = new DatabaseSetup(
             "se25_G16",
             "itstud.hiof.no",  

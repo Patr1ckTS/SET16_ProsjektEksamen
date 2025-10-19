@@ -1,24 +1,25 @@
 package com.ruteplanlegger.service;
 
 import com.ruteplanlegger.adapters.DatabaseUserRepository;
+import com.ruteplanlegger.domain.DatabaseSetup;
 import com.ruteplanlegger.domain.ports.UserRepository;
 import com.ruteplanlegger.useCases.NewUserUseCases;
 import com.ruteplanlegger.useCases.UserUseCases;
 import com.ruteplanlegger.webRelated.UserListFormatter;
 
 public class DatabaseUserConnection {
-    
-    public static DatabaseUserOperations createDatabaseUserOperations() {
-        String dbUrl = com.ruteplanlegger.inactive.DatabaseConfig.getDbUrl();
-        String dbUser = com.ruteplanlegger.inactive.DatabaseConfig.getDbUsername();
-        String dbPassword = com.ruteplanlegger.inactive.DatabaseConfig.getDbPassword();
-        
-        DatabaseConnection databaseConnection = new DatabaseConnection(dbUrl, dbUser, dbPassword);
+
+    public static DatabaseUserOperations createDatabaseUserOperations(DatabaseSetup dbSetup) {
+        DatabaseConnection databaseConnection = new DatabaseConnection(
+            dbSetup.getDbUrl(), 
+            dbSetup.getDbUsername(), 
+            dbSetup.getDbPassword()
+        );
         
         UserRepository userRepository = new DatabaseUserRepository(databaseConnection);
         
         UserUseCases userUseCases = new UserUseCases(userRepository);
-        NewUserUseCases createUserUseCase = new NewUserUseCases(userRepository);  // ADD this missing variable
+        NewUserUseCases createUserUseCase = new NewUserUseCases(userRepository);  
         UserListFormatter formatter = new UserListFormatter();
      
         return new DatabaseUserOperations(userUseCases, createUserUseCase, formatter);

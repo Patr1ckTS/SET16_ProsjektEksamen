@@ -11,6 +11,10 @@ import com.ruteplanlegger.domain.model.User;
 import com.ruteplanlegger.domain.ports.UserRepository;
 import com.ruteplanlegger.service.DatabaseConnection;
 
+/*
+    -Database-logikk for uthenting og lagring av brukere-
+    Her er det satt opp metoder for å hente og lagre brukere i databasen
+*/
 
 public class DatabaseUserRepository implements UserRepository {
     private final DatabaseConnection databaseConnection;

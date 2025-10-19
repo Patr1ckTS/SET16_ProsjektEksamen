@@ -1,12 +1,12 @@
 package com.ruteplanlegger.domain.model;
 
 public class CreateUserCommand {
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
-    private String password;
-    private String userType;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final String phoneNumber;
+    private final String password;
+    private final String userType;
 
     public CreateUserCommand(String firstName, String lastName, String email, String phoneNumber, String password, String userType) {
         this.firstName = firstName;

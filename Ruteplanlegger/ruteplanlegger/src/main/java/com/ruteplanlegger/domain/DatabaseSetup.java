@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-// Klasse for databasekonfigurasjon
+/*
+    -Klasse for databasekonfigurasjon-
+    Her er det satt opp en struktur for å knytte opp en database
+    ved innleggelse av databaseparametere
+*/
 
 public class DatabaseSetup {
     private final String DB_NAME;

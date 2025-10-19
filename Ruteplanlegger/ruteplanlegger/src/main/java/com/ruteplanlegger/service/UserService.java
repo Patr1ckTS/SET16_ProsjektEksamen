@@ -1,79 +1,71 @@
 package com.ruteplanlegger.service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
+import com.ruteplanlegger.adapters.DatabaseUserRepository;
 import com.ruteplanlegger.domain.DatabaseSetup;
+import com.ruteplanlegger.domain.model.CreateUserCommand;
+import com.ruteplanlegger.domain.model.User;
+import com.ruteplanlegger.domain.ports.UserRepository;
+import com.ruteplanlegger.useCases.NewUserUseCases;
+import com.ruteplanlegger.useCases.UserUseCases;
 
 public class UserService {
-    private static DatabaseSetup databaseSetup;
-    private static DatabaseConnection databaseConnection;
+    private static UserRepository userRepository;
+    private static UserUseCases userUseCases;
+    private static NewUserUseCases newUserUseCases;
     
-    // Initialize the database setup - call this method first
     public static void initialize(DatabaseSetup dbSetup) {
-        databaseSetup = dbSetup;
-        databaseConnection = new DatabaseConnection(
-            dbSetup.getDbUrl(), 
-            dbSetup.getDbUsername(), 
-            dbSetup.getDbPassword()
+        
+        DatabaseConnection databaseConnection = new DatabaseConnection(
+            dbSetup.getDbUrl(), dbSetup.getDbUsername(), dbSetup.getDbPassword()
         );
+        userRepository = new DatabaseUserRepository(databaseConnection);
+        userUseCases = new UserUseCases(userRepository);
+        newUserUseCases = new NewUserUseCases(userRepository);
     }
-
+    
+    // Clean application service methods - no SQL!
     public static String getUserFullname() {
-        if (databaseConnection == null) {
-            return "Error: UserService not initialized. Call UserService.initialize(DatabaseSetup) first.";
+        if (userUseCases == null) {
+            return "Error: UserService not initialized.";
         }
         
-        String result = "";
-        
-        try (Connection conn = databaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT firstname, lastname, email, phonenumber, user_type, created_at FROM users ORDER BY created_at DESC")) {
-            
-            ResultSet rs = stmt.executeQuery();
-            
-            while (rs.next()) {
-                String firstname = rs.getString("firstname");
-                String lastname = rs.getString("lastname");
-                String email = rs.getString("email");
-                String phonenumber = rs.getString("phonenumber");
-                int userType = rs.getInt("user_type");
-                String createdAt = rs.getString("created_at");
-                result += "<li>" + firstname + " " + lastname + " | " + email + " | " + phonenumber + " | Type: " + userType + " | Opprettet: " + createdAt + "</li>\n";
-            }
-            
-        } catch (SQLException e) {
-            result = "Feil: " + e.getMessage();
+        try {
+            ArrayList<User> users = userUseCases.execute();
+            return formatUsersAsHtml(users);
+        } catch (Exception e) {
+            return "Error loading users: " + e.getMessage();
         }
-        
-        return result;
     }
-
-
+    
     public static boolean addUser(String firstname, String lastname, String email, String phonenumber, String password) {
-        if (databaseConnection == null) {
-            System.err.println("Error: UserService not initialized. Call UserService.initialize(DatabaseSetup) first.");
+        if (newUserUseCases == null) {
             return false;
         }
         
-        String sql = "INSERT INTO users (firstname, lastname, email, phonenumber, password, user_type, created_at) VALUES (?, ?, ?, ?, ?, 1, NOW())";
-        
-        try (Connection conn = databaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-             
-            pstmt.setString(1, firstname);
-            pstmt.setString(2, lastname);
-            pstmt.setString(3, email);
-            pstmt.setString(4, phonenumber);
-            pstmt.setString(5, password);
-            pstmt.executeUpdate();
-            return true;
-            
-        } catch (SQLException e) {
-            System.err.println("Feil ved lagring av bruker: " + e.getMessage());
+        try {
+            CreateUserCommand command = new CreateUserCommand(firstname, lastname, email, phonenumber, password, "1");
+            return newUserUseCases.execute(command);
+        } catch (Exception e) {
+            System.err.println("Failed to create user: " + e.getMessage());
             return false;
         }
     }
-
+    
+    private static String formatUsersAsHtml(ArrayList<User> users) {
+        if (users.isEmpty()) {
+            return "<li>Ingen brukere funnet</li>";
+        }
+        
+        StringBuilder result = new StringBuilder();
+        for (User user : users) {
+            result.append("<li>")
+                .append(user.getFullName())
+                .append(" | ").append(user.getEmail())
+                .append(" | ").append(user.getPhoneNumber())
+                .append("</li>");
+        }
+        return result.toString();
+    }
 }
