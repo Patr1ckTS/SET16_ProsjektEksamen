@@ -8,6 +8,11 @@ import java.sql.Statement;
  
 import com.ruteplanlegger.domain.ports.DatabasePort;
 
+/*
+   -Klasse for database-tilkobling-
+    Her er det satt opp metoder for å koble til, teste og lukke databaseforbindelser
+ */
+
 public class DatabaseConnection implements DatabasePort {
     private final String DB_URL;
     private final String DB_USERNAME;
