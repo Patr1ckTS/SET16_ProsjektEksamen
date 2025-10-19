@@ -5,8 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DatabaseConfig {
 
+public class DatabaseConfig {
+    
     // ===== Database properties ===== //   
     private static final String DB_NAME = "se25_G16";
     private static final String DB_HOST = "itstud.hiof.no";

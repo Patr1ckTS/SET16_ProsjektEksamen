@@ -1,51 +1,30 @@
 package com.ruteplanlegger;
+
+import com.ruteplanlegger.domain.DatabaseSetup;
+import com.ruteplanlegger.service.UserService;
+import com.ruteplanlegger.webRelated.TemplateLoaders;
+
 import io.javalin.Javalin;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+
 
 public class Main {
 
-    // =============================================== //
-    //      Template Loaders
-    // =============================================== //
     
-    // ===== Hjelpefunksjon for å laste HTML templates ===== //
-    private static String loadTemplate(String templateName) {
-        try {
-            InputStream is = Main.class.getResourceAsStream("/templates/" + templateName);
-            return new String(is.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            return "<html><body><h1>Feil ved lasting av template: " + e.getMessage() + "</h1></body></html>";
-        }
-    }
-
-    // ===== Header Template Loader ===== //
-    private static String loadHeaderHTML() {
-        try {
-            InputStream is = Main.class.getResourceAsStream("/templates/components/header.html");
-            return new String(is.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            return "<header><!-- Header kunne ikke lastes: " + e.getMessage() + " --></header>";
-        }
-    }
-
-    // ===== Footer Template Loader ===== //
-    private static String loadFooterHTML() {
-        try {
-            InputStream is = Main.class.getResourceAsStream("/templates/components/footer.html");
-            return new String(is.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            return "<footer><!-- Footer kunne ikke lastes --></footer>";
-        }
-    }
-
+    
     public static void main(String[] args) {
-
+        DatabaseSetup dbSetup = new DatabaseSetup(
+            "se25_G16",
+            "itstud.hiof.no",  
+            "3306",
+            "gruppe16",
+            "Summer35"
+        );
+        
         // ===== Server Oppstart ===== //
         System.out.println("Starter Server...");
         System.out.println(DatabaseConfig.showDatabaseInfo());
         Javalin app = Javalin.create(config -> {
-            config.staticFiles.add("/static"); //Rooter til CSS/JS fra resources/static
+            config.staticFiles.add("/static"); 
         }).start(7000);
         
 
@@ -55,26 +34,15 @@ public class Main {
 
         // ===== Hovedside ===== //
         app.get("/", ctx -> {
-            String template = loadTemplate("index.html");
-            String headerHTML = loadHeaderHTML();
-            String footerHTML = loadFooterHTML();
-            String customHeader = headerHTML.replace("{{PAGE_TITLE}}", "Ruter - Hjem");
-
-            String html = template
-                // Generiske templates
-                .replace("{{HEADER}}", customHeader)
-                .replace("{{FOOTER}}", footerHTML);
-
-                // Spesifikke templates
-                
+            String html = TemplateLoaders.groupedLoader("index.html", "Ruter - Hjem");
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
         // ===== Brukere ===== //
         app.get("/users", ctx -> {
-            String template = loadTemplate("users.html");
-            String headerHTML = loadHeaderHTML();
-            String footerHTML = loadFooterHTML();
+            String template = TemplateLoaders.loadTemplate("users.html");
+            String headerHTML = TemplateLoaders.loadHeaderHTML();
+            String footerHTML = TemplateLoaders.loadFooterHTML();
             String customHeader = headerHTML.replace("{{PAGE_TITLE}}", "Ruter - brukere");
             WeatherController weatherController = new WeatherController();
 
@@ -88,13 +56,10 @@ public class Main {
                 .replace("{{WEATHER_INFO}}", weatherController.checkWeather());
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
-
         
-
         // ===== add-users ===== //
         app.get("/add-user", ctx -> {
-            String template = loadTemplate("add-user.html");
-            String html = template;
+            String html = TemplateLoaders.groupedLoader("add-user.html", "Ruter - Lägg till användare");
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
@@ -120,17 +85,7 @@ public class Main {
 
         // ===== Favoritter ===== //
         app.get("/favoritter", ctx -> {
-            String template = loadTemplate("favorite-route.html");
-            String headerHTML = loadHeaderHTML();
-            String footerHTML = loadFooterHTML();
-            String customHeader = headerHTML.replace("{{PAGE_TITLE}}", "Ruter - favoritter");
-
-            String html = template
-                // Generiske templates
-                .replace("{{HEADER}}", customHeader)
-                .replace("{{FOOTER}}", footerHTML);
-                
-                // Spesifikke templates
+            String html = TemplateLoaders.groupedLoader("favorite-route.html", "Ruter - Favoritter");
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
@@ -145,10 +100,5 @@ public class Main {
         } else {
             System.out.println("Database tilkobling feilet!");
         }
-
-
     }
-
 }
-
-

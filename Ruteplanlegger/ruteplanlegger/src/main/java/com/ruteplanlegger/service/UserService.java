@@ -1,8 +1,11 @@
-package com.ruteplanlegger;
+package com.ruteplanlegger.service;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+ 
+import com.ruteplanlegger.DatabaseConfig;
 
 public class UserService {
 
