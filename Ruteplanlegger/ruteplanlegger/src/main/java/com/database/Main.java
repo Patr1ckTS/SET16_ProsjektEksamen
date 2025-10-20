@@ -2,10 +2,9 @@ package com.database;
 
 import com.database.domain.DatabaseSetup;
 import com.database.service.UserService;
-import com.web.TemplateLoaders;
+import com.web.Routes;
 
 import io.javalin.Javalin;
-
 
 public class Main {
     
@@ -28,23 +27,26 @@ public class Main {
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/static"); 
         }).start(7000);
-        
 
+        Routes.configureRoutes(app);
+
+        
+/*
         // =============================================== //
         //      Page routers
         // =============================================== //
 
         // ===== Hovedside ===== //
         app.get("/", ctx -> {
-            String html = TemplateLoaders.groupedLoader("index.html", "Ruter - Hjem");
+            String html = TemplateLoader.groupedLoader("index.html", "Ruter - Hjem");
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
         // ===== Brukere ===== //
         app.get("/users", ctx -> {
-            String template = TemplateLoaders.loadTemplate("users.html");
-            String headerHTML = TemplateLoaders.loadHeaderHTML();
-            String footerHTML = TemplateLoaders.loadFooterHTML();
+            String template = TemplateLoader.loadTemplate("users.html");
+            String headerHTML = TemplateLoader.loadHeaderHTML();
+            String footerHTML = TemplateLoader.loadFooterHTML();
             String customHeader = headerHTML.replace("{{PAGE_TITLE}}", "Ruter - brukere");
             WeatherController weatherController = new WeatherController();
 
@@ -61,7 +63,7 @@ public class Main {
         
         // ===== add-users ===== //
         app.get("/add-user", ctx -> {
-            String html = TemplateLoaders.groupedLoader("add-user.html", "Ruter - Lägg till användare");
+            String html = TemplateLoader.groupedLoader("add-user.html", "Ruter - Lägg till användare");
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
@@ -87,10 +89,10 @@ public class Main {
 
         // ===== Favoritter ===== //
         app.get("/favoritter", ctx -> {
-            String html = TemplateLoaders.groupedLoader("favorite-route.html", "Ruter - Favoritter");
+            String html = TemplateLoader.groupedLoader("favorite-route.html", "Ruter - Favoritter");
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
-
+*/
         // =============================================== //
         //      Tests
         // =============================================== //

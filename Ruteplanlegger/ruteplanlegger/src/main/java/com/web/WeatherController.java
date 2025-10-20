@@ -1,4 +1,4 @@
-package com.database;
+package com.web;
 
 public class WeatherController {
 
@@ -11,5 +11,4 @@ public class WeatherController {
             return "Været er dårlig, vær forsiktig!";
         }
     }
-
 }

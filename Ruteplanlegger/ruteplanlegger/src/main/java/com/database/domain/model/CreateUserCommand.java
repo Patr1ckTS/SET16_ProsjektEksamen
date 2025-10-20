@@ -1,5 +1,9 @@
 package com.database.domain.model;
 
+/*
+    -Klassee for opprettelse av brukere-
+*/
+
 public class CreateUserCommand {
     private final String firstName;
     private final String lastName;

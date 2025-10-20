@@ -1,5 +1,7 @@
 package com.database.domain.model;
 
+//    -Klasse for håndtering av eksisterende brukere-
+
 public class User {
     private String firstname;
     private String lastname;

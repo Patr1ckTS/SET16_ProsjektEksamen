@@ -1,0 +1,27 @@
+
+{{HEADER}}
+    
+
+    <main>
+        <div id="main_wrapper">
+            <h1>Registrering</h1>
+            <p>Vennligst fyll ut skjemaet nedenfor for å registrere en ny bruker.</p>
+            <form action="/registrer" method="post">
+                <label for="firstname">Fornavn:</label>
+                <input type="text" id="firstname" name="firstname" required>
+                <label for="lastname">Etternavn:</label>
+                <input type="text" id="lastname" name="lastname" required>
+                <label for="email">E-post:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Passord:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="repeatPassword">Gjenta passord:</label>
+                <input type="password" id="repeatPassword" name="repeatPassword" required>
+                <label for="phonenumber">Telefonnummer:</label>
+                <input type="text" id="phonenumber" name="phonenumber">
+                <button type="submit">Registrer</button>
+            </form>
+        </div>
+    </main>
+
+{{FOOTER}}

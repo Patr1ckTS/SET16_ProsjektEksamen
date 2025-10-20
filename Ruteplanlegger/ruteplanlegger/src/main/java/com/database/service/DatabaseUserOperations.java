@@ -10,6 +10,7 @@ import com.database.useCases.NewUserUseCases;
 import com.database.useCases.UserUseCases;
 import com.web.UserListFormatter;
 
+//  -Wrapper klasse for bruker operasjoner mot databasen-
 public class DatabaseUserOperations{
     private final UserUseCases usersUseCase;
     private final NewUserUseCases createUserUseCase;

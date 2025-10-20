@@ -7,6 +7,8 @@ import com.database.useCases.NewUserUseCases;
 import com.database.useCases.UserUseCases;
 import com.web.UserListFormatter;
 
+//  -Klasse for opprettelse av DatabaseUserOperations-objekter-
+
 public class DatabaseUserConnection {
 
     public static DatabaseUserOperations createDatabaseUserOperations(DatabaseSetup dbSetup) {
