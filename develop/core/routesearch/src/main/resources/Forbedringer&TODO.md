@@ -33,7 +33,7 @@ Dette dokumentet oppsummerer de viktigste problemene og forslag til løsninger k
 
 # TODO
 ## Formål
-- [x] Ferdigstille koden for søk A-B på ruter.
+- [ ] Ferdigstille koden for søk A-B på ruter.
   - [X] Bruk av Dependency Injection
   - [x] Bruk av DTO
   - [x] Enhetstesting av logikken
