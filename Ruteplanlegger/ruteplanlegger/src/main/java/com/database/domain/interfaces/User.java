@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:Ruteplanlegger/ruteplanlegger/src/main/java/com/database/domain/interfaces/User.java
 package com.database.domain.interfaces;
+========
+package org.develop.domain.model;
+>>>>>>>> b34d500a5946829d7308cf50f2a57fef7f63a1f2:develop/core/database/src/main/java/org/develop/domain/model/User.java
 
 //    -Klasse for håndtering av eksisterende brukere-
 

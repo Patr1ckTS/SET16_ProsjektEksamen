@@ -15,7 +15,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>routesearch</module>
-        <module>routesearch</module>
+        <module>database</module>
+        <module>web</module>
     </modules>
 
     <properties>

@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:Ruteplanlegger/ruteplanlegger/src/main/java/com/database/domain/interfaces/CreateUser.java
 package com.database.domain.interfaces;
+========
+package org.develop.domain.model;
+>>>>>>>> b34d500a5946829d7308cf50f2a57fef7f63a1f2:develop/core/database/src/main/java/org/develop/domain/model/CreateUserCommand.java
 
 //    -Klasse for opprettelse av brukere-
 
