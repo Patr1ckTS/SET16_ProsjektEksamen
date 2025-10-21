@@ -1,4 +1,4 @@
-package com.database.domain.model;
+package com.database.domain.interfaces;
 
 //    -Klasse for håndtering av eksisterende brukere-
 

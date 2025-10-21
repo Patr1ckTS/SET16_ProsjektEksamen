@@ -1,8 +1,8 @@
-package com.web;
+package com.database.service;
 
 import java.util.ArrayList;
 
-import com.database.domain.model.User;
+import com.database.domain.interfaces.User;
 
 public class UserListFormatter {
     public String formatUserList(ArrayList<User> users){

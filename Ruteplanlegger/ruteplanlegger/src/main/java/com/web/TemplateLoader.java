@@ -3,7 +3,7 @@ package com.web;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-public class TemplateLoader {
+public class TemplateLoader { 
 
     // ================================= //
     //      Generic Template Loader
@@ -11,16 +11,12 @@ public class TemplateLoader {
     public static String loadTemplate(String templateName) {
         try {
             String path = "/templates/" + templateName;
-            System.out.println("DEBUG: Attempting to load template: " + path);
             InputStream is = TemplateLoader.class.getResourceAsStream(path);
             if (is == null) {
-                System.out.println("DEBUG: InputStream is null for template: " + path);
                 return "<html><body><h1>Template ikke funnet: " + path + "</h1></body></html>";
             }
-            System.out.println("DEBUG: Successfully loaded template: " + path);
             return new String(is.readAllBytes(), StandardCharsets.UTF_8);
         } catch (Exception e) {
-            System.out.println("DEBUG: Exception loading template " + templateName + ": " + e.getMessage());
             e.printStackTrace();
             return "<html><body><h1>Feil ved lasting av template: " + e.getMessage() + "</h1></body></html>";
         }

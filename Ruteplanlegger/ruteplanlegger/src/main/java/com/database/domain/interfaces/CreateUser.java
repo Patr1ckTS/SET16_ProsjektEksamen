@@ -1,10 +1,8 @@
-package com.database.domain.model;
+package com.database.domain.interfaces;
 
-/*
-    -Klassee for opprettelse av brukere-
-*/
+//    -Klasse for opprettelse av brukere-
 
-public class CreateUserCommand {
+public class CreateUser {
     private final String firstName;
     private final String lastName;
     private final String email;
@@ -12,7 +10,7 @@ public class CreateUserCommand {
     private final String password;
     private final String userType;
 
-    public CreateUserCommand(String firstName, String lastName, String email, String phoneNumber, String password, String userType) {
+    public CreateUser(String firstName, String lastName, String email, String phoneNumber, String password, String userType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.database.domain.model.CreateUserCommand;
-import com.database.domain.model.User;
+import com.database.domain.interfaces.CreateUser;
+import com.database.domain.interfaces.User;
 import com.database.domain.ports.UserRepository;
 import com.database.service.DatabaseConnection;
 
@@ -48,17 +48,17 @@ public class DatabaseUserRepository implements UserRepository {
         return users;
     }
 
-    public boolean save(CreateUserCommand command) {
+    public boolean save(CreateUser newUser) {
         String insertSQL = "INSERT INTO users (firstname, lastname, email, phonenumber, password, user_type, created_at) VALUES (?, ?, ?, ?, ?, 1, NOW())";
 
         try (Connection conn = databaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
 
-            pstmt.setString(1, command.getFirstName());
-            pstmt.setString(2, command.getLastName());
-            pstmt.setString(3, command.getEmail());
-            pstmt.setString(4, command.getPhoneNumber());
-            pstmt.setString(5, command.getPassword());
+            pstmt.setString(1, newUser.getFirstName());
+            pstmt.setString(2, newUser.getLastName());
+            pstmt.setString(3, newUser.getEmail());
+            pstmt.setString(4, newUser.getPhoneNumber());
+            pstmt.setString(5, newUser.getPassword());
 
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
@@ -74,10 +74,7 @@ public class DatabaseUserRepository implements UserRepository {
     }
 
     @Override
-    public boolean saveUser(Object command) {
-        if (command instanceof CreateUserCommand createUserCommand) {
-            return save(createUserCommand);
-        }
-        throw new IllegalArgumentException("Invalid command type");
+    public boolean saveUser(CreateUser newUser) {
+        return save(newUser);
     }
 }

@@ -1,12 +1,12 @@
 package com.database.service;
 
+import com.database.domain.ports.DatabasePort;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
  
-import com.database.domain.ports.DatabasePort;
 
 /*
    -Klasse for database-tilkobling-

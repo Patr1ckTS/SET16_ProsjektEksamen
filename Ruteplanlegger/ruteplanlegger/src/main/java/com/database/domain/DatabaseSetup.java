@@ -73,7 +73,4 @@ public class DatabaseSetup {
             return false;
         }
     }
-    
-    //  Ville vi trenge settere her?
 }
-

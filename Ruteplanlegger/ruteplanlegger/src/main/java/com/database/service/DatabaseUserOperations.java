@@ -3,14 +3,14 @@ package com.database.service;
 import java.util.ArrayList;
 
 import com.database.adapters.DatabaseUserRepository;
-import com.database.domain.model.CreateUserCommand;
-import com.database.domain.model.User;
+import com.database.domain.interfaces.CreateUser;
+import com.database.domain.interfaces.User;
 import com.database.domain.ports.UserRepository;
 import com.database.useCases.NewUserUseCases;
 import com.database.useCases.UserUseCases;
-import com.web.UserListFormatter;
 
-//  -Wrapper klasse for bruker operasjoner mot databasen-
+//  -Klasse for bruker operasjoner mot databasen-
+
 public class DatabaseUserOperations{
     private final UserUseCases usersUseCase;
     private final NewUserUseCases createUserUseCase;
@@ -44,13 +44,12 @@ public class DatabaseUserOperations{
     }
     public boolean addUser(String firstname, String lastname, String email, String phonenumber, String password){
         try {
-            String fullName = firstname + " " + lastname;
-            CreateUserCommand command = new CreateUserCommand(firstname, lastname, email, phonenumber, password, "1"           ); 
-            return createUserUseCase.execute(command);
+            CreateUser newUser = new CreateUser(firstname, lastname, email, phonenumber, password, "1"); 
+            return createUserUseCase.execute(newUser);
         } catch (Exception e) {
             System.err.println("Failed to add user: " + e.getMessage());
             return false;
-        }    }
-    
+        }
+    }
 }
 

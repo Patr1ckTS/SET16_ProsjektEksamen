@@ -1,6 +1,6 @@
 package com.database.useCases;
 
-import com.database.domain.model.CreateUserCommand;
+import com.database.domain.interfaces.CreateUser;
 import com.database.domain.ports.UserRepository;
 
 public class NewUserUseCases {
@@ -10,23 +10,23 @@ public class NewUserUseCases {
         this.userRepository = userRepository;
     }
 
-    public boolean execute(CreateUserCommand command){
-        if (command.getFirstName() == null || command.getFirstName().isEmpty()) {
+    public boolean execute(CreateUser newUser){
+        if (newUser.getFirstName() == null || newUser.getFirstName().isEmpty()) {
             throw new IllegalArgumentException("Firstname cannot be null or empty");
         }
-        if (command.getLastName() == null || command.getLastName().isEmpty()) {
+        if (newUser.getLastName() == null || newUser.getLastName().isEmpty()) {
             throw new IllegalArgumentException("Lastname cannot be null or empty");
         }
-        if (command.getEmail() == null || command.getEmail().isEmpty()) {
+        if (newUser.getEmail() == null || newUser.getEmail().isEmpty()) {
             throw new IllegalArgumentException("Email cannot be null or empty");
         }
-        if (command.getPhoneNumber() == null || command.getPhoneNumber().isEmpty()) {
+        if (newUser.getPhoneNumber() == null || newUser.getPhoneNumber().isEmpty()) {
             throw new IllegalArgumentException("Phone number cannot be null or empty");
         }
-        if (command.getPassword() == null || command.getPassword().isEmpty()) {
+        if (newUser.getPassword() == null || newUser.getPassword().isEmpty()) {
             throw new IllegalArgumentException("Password cannot be null or empty");
         }
-        return userRepository.saveUser(command);
+        return userRepository.saveUser(newUser);
     }
 }
  

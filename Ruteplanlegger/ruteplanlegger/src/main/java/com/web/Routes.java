@@ -5,7 +5,7 @@ import io.javalin.Javalin;
 
 public class Routes {
 
-    // ================================= //
+    // ================================= // 
     //      Render header HTML med login status
     // ================================= //
     private static String getHeaderHTML(io.javalin.http.Context ctx, String pageTitle) {
@@ -49,10 +49,6 @@ public class Routes {
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
-
-
-
-
         // ================================= //
         //      Brukere
         // ================================= //
@@ -70,9 +66,6 @@ public class Routes {
                 .replace("{{USERS_INFO}}", UserService.getUserFullname());
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
-
-
-
 
 
         // =============================================== //
@@ -115,7 +108,7 @@ public class Routes {
                 ctx.status(401).result("<p style='color:red;'>Feil e-post eller passord</p>");
             }
         });
-
+ 
         // =============================================== //
         //      Logout
         // =============================================== //
@@ -164,7 +157,7 @@ public class Routes {
                     return;
                 }
 
-                String errors = UserService.registrerUser(firstname.trim(), lastname.trim(), email.trim(), phoneNumber.trim(), password.trim());
+                String errors = UserService.registerUser(firstname.trim(), lastname.trim(), email.trim(), phoneNumber.trim(), password.trim());
                 if (errors == null) {
                     System.out.println("Bruker lagret: " + firstname + " " + lastname);
                     ctx.redirect("/");
@@ -182,12 +175,15 @@ public class Routes {
         //      Favoritter
         // =============================================== //
         app.get("/favoritter", ctx -> {
-
+            
+// Utkommentert på grunn a kjøre problemer
+/*
             String loggedInEmail = ctx.sessionAttribute("userEmail");
             if (loggedInEmail == null) {
                 ctx.redirect("/login");
                 return;
             }
+*/
 
             String template = TemplateLoader.loadTemplate("favoritter.html");
             String customHeader = getHeaderHTML(ctx, "Ruter - favoritter");

@@ -1,19 +1,16 @@
 package com.database.service;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import com.database.adapters.DatabaseUserRepository;
 import com.database.domain.DatabaseSetup;
-import com.database.domain.model.CreateUserCommand;
-import com.database.domain.model.User;
+import com.database.domain.interfaces.CreateUser;
+import com.database.domain.interfaces.User;
 import com.database.domain.ports.UserRepository;
 import com.database.useCases.NewUserUseCases;
 import com.database.useCases.UserUseCases;
-import org.mindrot.jbcrypt.BCrypt;
-
 
 public class UserService {
     private static UserRepository userRepository;
@@ -29,25 +26,17 @@ public class UserService {
         userUseCases = new UserUseCases(userRepository);
         newUserUseCases = new NewUserUseCases(userRepository);
     }
-    
+
     public static String getUserFullname() {
-        System.out.println("DEBUG: getUserFullname() called");
         if (userUseCases == null) {
-            System.out.println("DEBUG: userUseCases is null - UserService not initialized");
-            return "Error: UserService not initialized.";
+            return "<li>Service ikke initialisert</li>";
         }
         
         try {
-            System.out.println("DEBUG: Attempting to execute userUseCases");
             ArrayList<User> users = userUseCases.execute();
-            System.out.println("DEBUG: Retrieved " + users.size() + " users from database");
-            String result = formatUsersAsHtml(users);
-            System.out.println("DEBUG: Formatted HTML result: " + result);
-            return result;
+            return formatUsersAsHtml(users);
         } catch (Exception e) {
-            System.out.println("DEBUG: Exception in getUserFullname: " + e.getMessage());
-            e.printStackTrace();
-            return "Error loading users: " + e.getMessage();
+            return "<li>Feil ved henting av brukere: " + e.getMessage() + "</li>";
         }
     }
 
@@ -79,7 +68,7 @@ public class UserService {
     // ================================= //
     //      Registrere bruker
     // ================================= //
-    public static String registrerUser(String firstname, String lastname, String email, String phonenumber, String password) {
+    public static String registerUser(String firstname, String lastname, String email, String phonenumber, String password) {
         if (newUserUseCases == null) {
             return "Service ikke initialisert";
         }
@@ -91,8 +80,8 @@ public class UserService {
 
         // Opprett ny bruker med eksisterende use case
         try {
-            CreateUserCommand command = new CreateUserCommand(firstname, lastname, email, phonenumber, password, "1");
-            boolean success = newUserUseCases.execute(command);
+            CreateUser newUser = new CreateUser(firstname, lastname, email, phonenumber, password, "1");
+            boolean success = newUserUseCases.execute(newUser);
             return success ? null : "Feil ved opprettelse av bruker";
         } catch (Exception e) {
             return "Feil ved registrering: " + e.getMessage();
@@ -100,7 +89,7 @@ public class UserService {
     }
 
     // Sjekk om e-post allerede finnes
-    public static boolean emailExists(String email) {
+    private static boolean emailExists(String email) {
         if (userUseCases == null) {
             return false;
         }

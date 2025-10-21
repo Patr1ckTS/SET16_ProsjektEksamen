@@ -2,7 +2,7 @@ package com.database.useCases;
 
 import java.util.ArrayList;
 
-import com.database.domain.model.User;
+import com.database.domain.interfaces.User;
 import com.database.domain.ports.UserRepository;
 
 /*
@@ -18,7 +18,7 @@ public class UserUseCases {
     }
 
     public ArrayList<User> execute(){
-        return userRepository.findAllUsers();
+        return new ArrayList<>(userRepository.findAllUsers());
     }
 }
  
