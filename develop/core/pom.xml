@@ -3,19 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+          <groupId>org.develop</groupId>
+          <artifactId>develop</artifactId>
+          <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>org.develop</groupId>
-    <artifactId>develop</artifactId>
+    <artifactId>core</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>absearch</module>
-        <module>core</module>
+        <module>routesearch</module>
+        <module>routesearch</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
 </project>
