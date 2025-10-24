@@ -22,7 +22,7 @@ public class RoutReaderTest {
     //Test for å sjekke at innhold er skrevet riktig og har riktig indeksering.
     @Test
     void ReadRoutFromFile(@TempDir Path tempDir) throws IOException {
-        //arrange
+        //Arrange
         ArrayList<Stop> stops = new ArrayList<>();
         stops.add(new Stop("FS001", "Fredrikstad sentrum", "Fredrikstad bussterminal", 
             new ArrayList<>(Arrays.asList("08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"))));
@@ -78,7 +78,7 @@ public class RoutReaderTest {
     @Test
     void readRouteFromFile_returnsNullOnMissingFile(){
         //Arrange
-        //Nothing to do since we are testing when there is no file.
+        // Ingen arrangement nødvendig da filen ikke eksisterer.
 
         //Act
         Route resultat = RouteReader.readRouteFromFile("Ingen_fil_her.json");

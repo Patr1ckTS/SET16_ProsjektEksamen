@@ -1,3 +1,6 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.import.maven.enabled": true,
+  "maven.pomfile.autoUpdateEffectivePOM": true,
+  "java.dependency.packagePresentation": "hierarchical"
 }

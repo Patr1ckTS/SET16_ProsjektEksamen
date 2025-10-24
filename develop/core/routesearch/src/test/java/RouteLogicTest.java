@@ -35,7 +35,7 @@ public class RouteLogicTest {
 
         ArrayList<Stop> allStops = new ArrayList<>(Arrays.asList(terminal, startStop, endStop));
 
-        // Mock StopService behavior
+        // Mock StopService atferd
         when(mockStopService.findNextDepartureTime(terminal, "08:05")).thenReturn("09:00");
         when(mockStopService.calculateTransportAtStop(startStop, "09:00")).thenReturn("09:05");
         when(mockStopService.calculateTransportAtStop(endStop, "09:00")).thenReturn("09:30");
@@ -49,7 +49,6 @@ public class RouteLogicTest {
         assertEquals("09:00", result.getDepartureFromTerminal());
         assertEquals(25, result.getTravelTime());
 
-        // Verify that mocked methods were called
         verify(mockStopService).findNextDepartureTime(terminal, "08:05");
         verify(mockStopService).calculateTransportAtStop(startStop, "09:00");
         verify(mockStopService).calculateTransportAtStop(endStop, "09:00");

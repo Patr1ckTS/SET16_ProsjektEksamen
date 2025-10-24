@@ -9,7 +9,7 @@ import org.develop.TravelEnteties.Route;
 
 public class RouteReader {
 
-    //metode for å lese fra .json fil
+    //metode for å lese en enkelt rute fra .json fil
     public static Route readRouteFromFile(String filepath) {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -18,5 +18,5 @@ public class RouteReader {
             e.printStackTrace();
             return null;
         }
-    } 
+    }
 }

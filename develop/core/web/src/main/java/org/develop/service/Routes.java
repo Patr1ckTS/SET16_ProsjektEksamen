@@ -60,8 +60,21 @@ public class Routes {
                 // Generiske templates
                 .replace("{{HEADER}}", customHeader)
                 .replace("{{FOOTER}}", footerHTML)
-                
+
                 // Spesifikke templates
+                .replace("{{USERS_INFO}}", UserService.getUserFullname());
+            ctx.contentType("text/html; charset=utf-8").result(html);
+        });
+
+        // Engelsk alias for /brukere
+        app.get("/users", ctx -> {
+            String template = TemplateLoader.loadTemplate("brukere.html");
+            String customHeader = getHeaderHTML(ctx, "Ruter - Brukere");
+            String footerHTML = TemplateLoader.loadFooterHTML();
+
+            String html = template
+                .replace("{{HEADER}}", customHeader)
+                .replace("{{FOOTER}}", footerHTML)
                 .replace("{{USERS_INFO}}", UserService.getUserFullname());
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
