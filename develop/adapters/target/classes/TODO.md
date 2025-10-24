@@ -18,11 +18,6 @@ Formålet her er først og fremst å utfylle en heksagonal arkitektur med adapte
 
 - [ ] **Om vi får tiden**: Utføre integrasjonstester for å verifisere at adapterne fungerer korrekt (`end-to-end` tester). (Holder nok med mocking og enhetstester i første omgang).
 
-##  Oppgaver for systemet som helhet
-Disse oppgavene er mer generelle og gjelder hele systemet, inkludert alle modulene da tanken er å sikre at alt fungerer som forventet når det hele settes sammen.
-
-- [ ] Klare å kjøre systemet på tvers av moduler (Riktig bruk av porter og DTOer mellom modulene).
-  - [ ] Adaptere og porter kan ventes med her for å sikre at kjernen fungerer først.
 
 
 ### Kalenderintegrasjon
