@@ -6,15 +6,14 @@ public class CreateUser {
     private final String email;
     private final String phoneNumber;
     private final String password;
-    private final String userType;
+    private final String userType = "user";
 
-    public CreateUser(String firstName, String lastName, String email, String phoneNumber, String password, String userType) {
+    public CreateUser(String firstName, String lastName, String email, String phoneNumber, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.userType = userType;
     }
 
     public String getFirstName() {

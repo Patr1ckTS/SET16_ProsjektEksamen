@@ -1,12 +1,11 @@
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\domain\CreateUser.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\domain\User.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\domain\DatabaseSetup.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\Port\UserRepository.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\Main.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\service\UserListFormatter.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\useCases\UserUseCases.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\service\DatabaseConnection.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\service\UserService.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\Port\DatabasePort.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\service\DatabaseUserOperations.java
-F:\Github\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\useCases\NewUserUseCases.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\domain\CreateUser.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\domain\DatabaseSetup.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\domain\User.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\Main.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\Port\SQLDatabasePort.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\Port\UserRepository.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\service\DatabaseUserOperations.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\service\UserListFormatter.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\service\UserService.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\useCases\NewUserUseCases.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\src\main\java\org\develop\useCases\UserUseCases.java

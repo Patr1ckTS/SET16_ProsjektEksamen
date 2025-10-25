@@ -2,13 +2,12 @@ package org.develop.service;
 
 import java.util.ArrayList;
 
-import org.mindrot.jbcrypt.BCrypt;
-
+import org.develop.Port.UserRepository;
 import org.develop.domain.CreateUser;
 import org.develop.domain.User;
-import org.develop.Port.UserRepository;
 import org.develop.useCases.NewUserUseCases;
 import org.develop.useCases.UserUseCases;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UserService {
     private static UserRepository userRepository;
@@ -64,7 +63,7 @@ public class UserService {
         }
 
         try {
-            CreateUser newUser = new CreateUser(firstname, lastname, email, phonenumber, password, "1");
+            CreateUser newUser = new CreateUser(firstname, lastname, email, phonenumber, password, "user");
             boolean success = newUserUseCases.execute(newUser);
             return success ? null : "Feil ved opprettelse av bruker";
         } catch (Exception e) {

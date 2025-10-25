@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.develop.domain.DatabaseSetupTest" time="0.545" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="23"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\target\test-classes;C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\target\classes;C:\Users\pa-te\.m2\repository\com\mysql\mysql-connector-j\8.1.0\mysql-connector-j-8.1.0.jar;C:\Users\pa-te\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\pa-te\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.9.20\kotlin-stdlib-1.9.20.jar;C:\Users\pa-te\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\pa-te\.m2\repository\org\mindrot\jbcrypt\0.4\jbcrypt-0.4.jar;C:\Users\pa-te\.m2\repository\org\junit\jupiter\junit-jupiter\5.12.2\junit-jupiter-5.12.2.jar;C:\Users\pa-te\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.12.2\junit-jupiter-api-5.12.2.jar;C:\Users\pa-te\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\pa-te\.m2\repository\org\junit\platform\junit-platform-commons\1.12.2\junit-platform-commons-1.12.2.jar;C:\Users\pa-te\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\pa-te\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.12.2\junit-jupiter-params-5.12.2.jar;C:\Users\pa-te\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.12.2\junit-jupiter-engine-5.12.2.jar;C:\Users\pa-te\.m2\repository\org\junit\platform\junit-platform-engine\1.12.2\junit-platform-engine-1.12.2.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Oslo"/>
+    <property name="user.country.format" value="NO"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="23"/>
+    <property name="user.country" value="GB"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
+    <property name="sun.java.command" value="C:\Users\pa-te\AppData\Local\Temp\surefire17106748907996315066\surefirebooter-20251025185305208_3.jar C:\Users\pa-te\AppData\Local\Temp\surefire17106748907996315066 2025-10-25T18-53-05_100-jvmRun1 surefire-20251025185305208_1tmp surefire_0-20251025185305208_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="test" value="org.develop.domain.DatabaseSetupTest"/>
+    <property name="surefire.test.class.path" value="C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\target\test-classes;C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database\target\classes;C:\Users\pa-te\.m2\repository\com\mysql\mysql-connector-j\8.1.0\mysql-connector-j-8.1.0.jar;C:\Users\pa-te\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\pa-te\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.9.20\kotlin-stdlib-1.9.20.jar;C:\Users\pa-te\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\pa-te\.m2\repository\org\mindrot\jbcrypt\0.4\jbcrypt-0.4.jar;C:\Users\pa-te\.m2\repository\org\junit\jupiter\junit-jupiter\5.12.2\junit-jupiter-5.12.2.jar;C:\Users\pa-te\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.12.2\junit-jupiter-api-5.12.2.jar;C:\Users\pa-te\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\pa-te\.m2\repository\org\junit\platform\junit-platform-commons\1.12.2\junit-platform-commons-1.12.2.jar;C:\Users\pa-te\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\pa-te\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.12.2\junit-jupiter-params-5.12.2.jar;C:\Users\pa-te\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.12.2\junit-jupiter-engine-5.12.2.jar;C:\Users\pa-te\.m2\repository\org\junit\platform\junit-platform-engine\1.12.2\junit-platform-engine-1.12.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\pa-te"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-10-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-23"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\pa-te\AppData\Local\Temp\surefire17106748907996315066\surefirebooter-20251025185305208_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="23.0.1+11-39"/>
+    <property name="user.name" value="pa-te"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="maven.ext.class.path" value="C:\Users\pa-te\.vscode\extensions\oracle.oracle-java-24.1.2\nbcode\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="localRepository" value="C:\Users\pa-te\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\pa-te\AppData\Local\Temp\"/>
+    <property name="java.version" value="23.0.1"/>
+    <property name="user.dir" value="C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\database"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.language.format" value="no"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-23\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\PowerShell\7\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\pa-te\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\pa-te\AppData\Local\pnpm;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\pa-te\AppData\Local\Programs\Python\Launcher\;C:\Users\pa-te\AppData\Local\Microsoft\WindowsApps;C:\Users\pa-te\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pa-te\AppData\Local\GitHubDesktop\bin;C:\Users\pa-te\AppData\Local\Programs\Python\Python312\python.exe;C:\Users\pa-te\AppData\Roaming\npm;C:\Users\pa-te\AppData\Local\nvm;C:\nvm4w\nodejs;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="23.0.1+11-39"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="67.0"/>
+  </properties>
+  <testcase name="databaseSetup_checkIfConnectionCanBeEstablished" classname="org.develop.domain.DatabaseSetupTest" time="0.521">
+    <system-out><![CDATA[Database feil: Access denied for user 'invalid_user'@'localhost' (using password: YES)
+]]></system-out>
+  </testcase>
+  <testcase name="databaseSetup_urlStringIsCorrectlyGenerated" classname="org.develop.domain.DatabaseSetupTest" time="0.001"/>
+  <testcase name="databaseSetup_checkThatDatabaseSetupAreCreatedWithAllValuesStored" classname="org.develop.domain.DatabaseSetupTest" time="0.001"/>
+</testsuite>
