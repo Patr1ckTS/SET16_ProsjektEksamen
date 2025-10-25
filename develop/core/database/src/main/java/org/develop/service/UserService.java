@@ -53,7 +53,7 @@ public class UserService {
         return false;
     }
     
-    public static String registerUser(String firstname, String lastname, String email, String phonenumber, String password) {
+    public static String registerUser(String firstName, String lastName, String email, String phonenumber, String password) {
         if (newUserUseCases == null) {
             return "Service ikke initialisert";
         }
@@ -63,7 +63,7 @@ public class UserService {
         }
 
         try {
-            CreateUser newUser = new CreateUser(firstname, lastname, email, phonenumber, password, "user");
+            CreateUser newUser = new CreateUser(firstName, lastName, email, phonenumber, password);
             boolean success = newUserUseCases.execute(newUser);
             return success ? null : "Feil ved opprettelse av bruker";
         } catch (Exception e) {

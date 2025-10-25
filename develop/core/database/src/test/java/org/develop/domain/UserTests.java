@@ -20,7 +20,7 @@ public class UserTests {
         User eLalande = new User(firstName, lastName, email, phoneNumber, password);
 
 // Assert
-        Assertions.assertEquals(firstName, eLalande.getFirstname());
+        Assertions.assertEquals(firstName, eLalande.getFirstName());
         Assertions.assertEquals(password, eLalande.getPassword());
         Assertions.assertEquals(phoneNumber, eLalande.getPhoneNumber());
     } 
