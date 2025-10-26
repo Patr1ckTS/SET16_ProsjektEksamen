@@ -9,10 +9,15 @@ import org.develop.useCases.NewUserUseCases;
 import org.develop.useCases.UserUseCases;
 import org.mindrot.jbcrypt.BCrypt;
 
+// -Service for instansiering av klasser mot bruk av data-
+// Håndterer kall til UseCases og formatering av data for 
+// presentasjon i samhandling
+
 public class UserService {
     private static UserRepository userRepository;
     private static UserUseCases userUseCases;
     private static NewUserUseCases newUserUseCases;
+    private static final UserListFormatter formatter = new UserListFormatter();
     
     public static void initialize(UserRepository repo) {
         userRepository = repo;
@@ -22,12 +27,12 @@ public class UserService {
 
     public static String getUserFullname() {
         if (userUseCases == null) {
-            return "<li>Service ikke initialisert</li>";
+            return "<li>Service ikke initialiseret</li>";
         }
         
         try {
             ArrayList<User> users = userUseCases.execute();
-            return formatUsersAsHtml(users);
+            return formatter.formatUserList(users);
         } catch (Exception e) {
             return "<li>Feil ved henting av brukere: " + e.getMessage() + "</li>";
         }
@@ -90,22 +95,6 @@ public class UserService {
         return false;
     }
     
-    private static String formatUsersAsHtml(ArrayList<User> users) {
-        if (users.isEmpty()) {
-            return "<li>Ingen brukere funnet</li>";
-        }
-        
-        StringBuilder result = new StringBuilder();
-        for (User user : users) {
-            result.append("<li>")
-                .append(user.getFullName())
-                .append(" | ").append(user.getEmail())
-                .append(" | ").append(user.getPhoneNumber())
-                .append("</li>");
-        }
-        return result.toString();
-    }
-
     public static String getNameByEmail(String email) {
         if (userUseCases == null) {
             return null;

@@ -1,7 +1,11 @@
 package org.develop.useCases;
 
-import org.develop.domain.CreateUser;
 import org.develop.Port.UserRepository;
+import org.develop.domain.CreateUser;
+
+// -useCases knyttet til samling og opprettelse av nye brukere i systemet-
+// Validerer innlagte verdier før lagring i en ArrayList her må det gjøres 
+// endringer til database lagring på sikt
 
 public class NewUserUseCases {
     private final UserRepository userRepository;
@@ -10,7 +14,8 @@ public class NewUserUseCases {
         this.userRepository = userRepository;
     }
 
-    public boolean execute(CreateUser newUser){
+// Sjekker at innlagte verdier ikke er tomme før lagring
+    public boolean newUserValueCheck(CreateUser newUser){
         if (newUser.getFirstName() == null || newUser.getFirstName().isEmpty()) {
             throw new IllegalArgumentException("Firstname cannot be null or empty");
         }
