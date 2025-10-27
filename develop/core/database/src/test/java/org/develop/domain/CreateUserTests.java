@@ -41,17 +41,4 @@ public class CreateUserTests {
 // Act & Assert
         Assertions.assertEquals("user", aSimpson.getUserType());
     }
-
-
-    @Test
-    @DisplayName("Check if values are immutable when set")
-    public void createUser_checkIfValuesAreImmutable(){
-// Arrange
-        CreateUser defaultUser = new CreateUser(
-            "Adolphus",
-            "Simpson",
-            "a.simpson@coldmail.mock",
-            "+98 765 432 1098",
-            "defaultPass");
-    }
 }
