@@ -14,16 +14,83 @@ public class EnturRouteDTO {
     private String routeName;
     private double price;
 
-    // Transport data (flat struktur i stedet for Transport-objekt)
-    private String transportId;
-    private String transportType;
-    private String startLocation;
-    private String endLocation;
-    private String departureTime;
-    private String arrivalTime;
+    // Transport data (nested objekt som matcher JSON-strukturen)
+    private TransportData transport;
 
     // Stop data (liste med inner class)
     private ArrayList<StopData> stops;
+
+    // Inner class for transport-informasjon
+    public static class TransportData {
+        private String transportId;
+        private String transportType;
+        private String startLocation;
+        private String endLocation;
+        private String departureTime;
+        private String arrivalTime;
+
+        // Json konstruktør for Jackson
+        public TransportData() {}
+
+        public TransportData(String transportId, String transportType, String startLocation,
+                            String endLocation, String departureTime, String arrivalTime) {
+            this.transportId = transportId;
+            this.transportType = transportType;
+            this.startLocation = startLocation;
+            this.endLocation = endLocation;
+            this.departureTime = departureTime;
+            this.arrivalTime = arrivalTime;
+        }
+
+        // Getters and Setters
+        public String getTransportId() {
+            return transportId;
+        }
+
+        public void setTransportId(String transportId) {
+            this.transportId = transportId;
+        }
+
+        public String getTransportType() {
+            return transportType;
+        }
+
+        public void setTransportType(String transportType) {
+            this.transportType = transportType;
+        }
+
+        public String getStartLocation() {
+            return startLocation;
+        }
+
+        public void setStartLocation(String startLocation) {
+            this.startLocation = startLocation;
+        }
+
+        public String getEndLocation() {
+            return endLocation;
+        }
+
+        public void setEndLocation(String endLocation) {
+            this.endLocation = endLocation;
+        }
+
+        public String getDepartureTime() {
+            return departureTime;
+        }
+
+        public void setDepartureTime(String departureTime) {
+            this.departureTime = departureTime;
+        }
+
+        public String getArrivalTime() {
+            return arrivalTime;
+        }
+
+        public void setArrivalTime(String arrivalTime) {
+            this.arrivalTime = arrivalTime;
+        }
+    }
 
     // Inner class for stop-informasjon
     public static class StopData {
@@ -105,19 +172,11 @@ public class EnturRouteDTO {
     public EnturRouteDTO() {}
 
     public EnturRouteDTO(String routeId, String routeName, double price,
-                        String transportId, String transportType,
-                        String startLocation, String endLocation,
-                        String departureTime, String arrivalTime,
-                        ArrayList<StopData> stops) {
+                        TransportData transport, ArrayList<StopData> stops) {
         this.routeId = routeId;
         this.routeName = routeName;
         this.price = price;
-        this.transportId = transportId;
-        this.transportType = transportType;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
+        this.transport = transport;
         this.stops = stops;
     }
 
@@ -146,52 +205,12 @@ public class EnturRouteDTO {
         this.price = price;
     }
 
-    public String getTransportId() {
-        return transportId;
+    public TransportData getTransport() {
+        return transport;
     }
 
-    public void setTransportId(String transportId) {
-        this.transportId = transportId;
-    }
-
-    public String getTransportType() {
-        return transportType;
-    }
-
-    public void setTransportType(String transportType) {
-        this.transportType = transportType;
-    }
-
-    public String getStartLocation() {
-        return startLocation;
-    }
-
-    public void setStartLocation(String startLocation) {
-        this.startLocation = startLocation;
-    }
-
-    public String getEndLocation() {
-        return endLocation;
-    }
-
-    public void setEndLocation(String endLocation) {
-        this.endLocation = endLocation;
-    }
-
-    public String getDepartureTime() {
-        return departureTime;
-    }
-
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    public String getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setTransport(TransportData transport) {
+        this.transport = transport;
     }
 
     public ArrayList<StopData> getStops() {
