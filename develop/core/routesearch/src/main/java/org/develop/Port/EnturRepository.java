@@ -6,16 +6,9 @@ import org.develop.TravelEnteties.Route;
 
 public interface EnturRepository {
 
-    /**
-     * Henter standard rute (R20)
-     * @return Standard ruten med alle stopp
-     */
-    Route getRoute();
+    // Definerer metode for å hente en spesifikk rute basert på rutenavnet (bruker reader og mapper internt)
+    Route getRoute(String routeName);
 
-    /**
-     * Henter alle tilgjengelige ruter
-     * @return Liste av alle ruter
-     */
     ArrayList<Route> getAllRoutes();
 
 }

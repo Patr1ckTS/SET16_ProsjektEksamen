@@ -10,85 +10,101 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("EnturRepositoryAdapter - Les og mappe data via port")
+@DisplayName("EnturRepositoryAdapter - Read and map data via port")
 public class EnturRepositoryAdapterTest {
 
     @Test
-    @DisplayName("Adapter skal implementere EnturRepository port")
-    void adapterSkalImplementerePort() {
+    @DisplayName("Adapter should implement EnturRepository port")
+        void enturRepositoryAdapter_ImplementsEnturRepositoryInterface() {
+        // Arrange
         var adapter = new EnturRepositoryAdapter();
-        assertInstanceOf(EnturRepository.class, adapter);
+        
+        // Act
+        EnturRepository port = adapter;
+        
+        // Assert
+        assertInstanceOf(EnturRepository.class, port);
     }
 
     @Test
-    @DisplayName("Adapter skal lese og mappe JSON til Route objekter")
-    void adapterSkalLeseOgMappeData() {
+    @DisplayName("Adapter should read and map JSON to Route objects")
+    void getAllRoutes_ReturnsMappedRouteObjectsFromJson() {
+        // Arrange
         var adapter = new EnturRepositoryAdapter();
-        ArrayList<Route> ruter = adapter.getAllRoutes();
-
-        assertNotNull(ruter);
-        assertFalse(ruter.isEmpty());
-        assertTrue(ruter.get(0) instanceof Route);
+        // Act
+        ArrayList<Route> routes = adapter.getAllRoutes();
+        // Assert
+        assertNotNull(routes);
+        assertFalse(routes.isEmpty());
+        assertTrue(routes.get(0) instanceof Route);
     }
 
     @Test
-    @DisplayName("Ruter skal ha gyldig data etter mapping")
-    void ruterSkalHaGyldigData() {
+    @DisplayName("Routes should have valid data after mapping")
+    void mappedRoute_HasValidRouteNameAndRouteId() {
+        // Arrange
         var adapter = new EnturRepositoryAdapter();
-        var ruter = adapter.getAllRoutes();
-
-        Route rute = ruter.get(0);
-
-        assertNotNull(rute.getRouteName());
-        assertNotNull(rute.getRouteId());
-        assertFalse(rute.getRouteName().isEmpty());
-        assertFalse(rute.getRouteId().isEmpty());
+        // Act
+        var routes = adapter.getAllRoutes();
+        Route route = routes.get(0);
+        // Assert
+        assertNotNull(route.getRouteName());
+        assertNotNull(route.getRouteId());
+        assertFalse(route.getRouteName().isEmpty());
+        assertFalse(route.getRouteId().isEmpty());
     }
 
     @Test
-    @DisplayName("Ruter skal ha stopp fra JSON dataen")
-    void ruterSkalHaStopp() {
+    @DisplayName("Routes should have stops from JSON data")
+    void mappedRoute_HasNonEmptyStopsList() {
+        // Arrange
         var adapter = new EnturRepositoryAdapter();
-        var ruter = adapter.getAllRoutes();
-
-        Route rute = ruter.get(0);
-
-        assertNotNull(rute.getStops());
-        assertFalse(rute.getStops().isEmpty());
+        // Act
+        var routes = adapter.getAllRoutes();
+        Route route = routes.get(0);
+        // Assert
+        assertNotNull(route.getStops());
+        assertFalse(route.getStops().isEmpty());
     }
 
     @Test
-    @DisplayName("getRoute skal returnere en enkelt Route")
-    void getRouteSkalReturnereRoute() {
+    @DisplayName("getRoute should return a single Route")
+    void getRoute_WithValidId_ReturnsSingleRouteObject() {
+        // Arrange
         var adapter = new EnturRepositoryAdapter();
-        Route rute = adapter.getRoute();
-
-        assertNotNull(rute);
-        assertInstanceOf(Route.class, rute);
-        assertNotNull(rute.getRouteName());
+        // Act
+        Route route = adapter.getRoute("R101");
+        // Assert
+        assertNotNull(route);
+        assertInstanceOf(Route.class, route);
+        assertNotNull(route.getRouteName());
     }
 
     @Test
-    @DisplayName("Data skal passere gjennom port interface uten tap")
-    void dataSkalPassereGjennemPort() {
+    @DisplayName("Data should pass through port interface without loss")
+    void enturRepositoryPortInterface_PassesRouteDataWithoutLoss() {
+        // Arrange
         EnturRepository port = new EnturRepositoryAdapter();
-        var ruter = port.getAllRoutes();
-
-        assertNotNull(ruter);
-        for (Route rute : ruter) {
-            assertNotNull(rute);
-            assertNotNull(rute.getRouteId());
-            assertNotNull(rute.getRouteName());
-            assertNotNull(rute.getStops());
+        // Act
+        var routes = port.getAllRoutes();
+        // Assert
+        assertNotNull(routes);
+        for (Route route : routes) {
+            assertNotNull(route);
+            assertNotNull(route.getRouteId());
+            assertNotNull(route.getRouteName());
+            assertNotNull(route.getStops());
         }
     }
 
     @Test
-    @DisplayName("Adapter skal mappe alle tilgjengelige ruter")
-    void adapterSkalMappAlleTilgjengeligeRuter() {
+    @DisplayName("Adapter should map all available routes")
+    void getAllRoutes_ReturnsAllAvailableRoutes() {
+        // Arrange
         var adapter = new EnturRepositoryAdapter();
-        var ruter = adapter.getAllRoutes();
-
-        assertTrue(ruter.size() >= 1);
+        // Act
+        var routes = adapter.getAllRoutes();
+        // Assert
+        assertTrue(routes.size() >= 1);
     }
 }

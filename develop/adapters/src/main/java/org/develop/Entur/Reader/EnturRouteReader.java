@@ -17,16 +17,16 @@ public class EnturRouteReader {
         try {
             InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("Entur/" + fileName);
             if (resourceStream == null) {
-                System.err.println(" Feil: Kunne ikke finne ressurs Entur/" + fileName);
+                System.err.println("Feil: Kunne ikke finne ressurs Entur/" + fileName);
                 return null;
             }
             EnturRouteDTO dto = objectMapper.readValue(resourceStream, EnturRouteDTO.class);
-            System.out.println(" Leste rute: " + dto.getRouteName() +
+            System.out.println("Leste rute: " + dto.getRouteName() +
                              " (ID: " + dto.getRouteId() + ") med " +
                              dto.getStops().size() + " stopp");
             return dto;
         } catch (IOException e) {
-            System.err.println(" Feil ved lesing av " + fileName + ": " + e.getMessage());
+            System.err.println("Feil ved lesing av " + fileName + ": " + e.getMessage());
             e.printStackTrace();
             return null;
         }

@@ -1,0 +1,46 @@
+{
+  "routeId" : "201",
+  "routeName" : "Sarpsborg-Fredrikstad",
+  "transport" : {
+    "transportId" : "T201",
+    "transportType" : "Buss"
+  },
+  "price" : 65.0,
+  "stops" : [ {
+    "stopId" : "FS007",
+    "location" : "Sarpsborg sentrum",
+    "name" : "Sarpsborg bussterminal",
+    "departureTimes" : [ "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00" ],
+    "minutesAfterDeparture" : 0
+  }, {
+    "stopId" : "FS006",
+    "location" : "Sarpsborg vest",
+    "name" : "Grålum",
+    "minutesAfterDeparture" : 5
+  }, {
+    "stopId" : "FS005",
+    "location" : "Borg kommune",
+    "name" : "Tune stasjon",
+    "minutesAfterDeparture" : 12
+  }, {
+    "stopId" : "FS004",
+    "location" : "Borg kommune",
+    "name" : "Borgehavn",
+    "minutesAfterDeparture" : 18
+  }, {
+    "stopId" : "FS003",
+    "location" : "Fredrikstad øst",
+    "name" : "Kråkerøy terminal",
+    "minutesAfterDeparture" : 23
+  }, {
+    "stopId" : "FS002",
+    "location" : "Fredrikstad øst",
+    "name" : "Cicignon skole",
+    "minutesAfterDeparture" : 27
+  }, {
+    "stopId" : "FS001",
+    "location" : "Fredrikstad sentrum",
+    "name" : "Fredrikstad bussterminal",
+    "minutesAfterDeparture" : 30
+  } ]
+}

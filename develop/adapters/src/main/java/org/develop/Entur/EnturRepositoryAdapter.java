@@ -16,14 +16,21 @@ public class EnturRepositoryAdapter implements EnturRepository {
         this.routeMapper = new EnturRouteMapper();
     }
 
-    @Override
-    public Route getRoute() {
-        EnturRouteDTO dto = routeReader.getRuteR20();
-        if (dto != null) {
-            return routeMapper.mapToRoute(dto);
-        } else {
-            return null;
-        }
+    private Route mapRoute(EnturRouteDTO dto) {
+        return dto != null ? routeMapper.mapToRoute(dto) : null;
+    }
+
+    public Route getRoute(String routeName) {
+        EnturRouteDTO dto = switch(routeName) {
+            case "R101" -> routeReader.getRute101();
+            case "R103" -> routeReader.getRute103();
+            case "R201" -> routeReader.getRute201();
+            case "R203" -> routeReader.getRute203();
+            case "R20" -> routeReader.getRuteR20();
+            case "R40" -> routeReader.getRuteR40();
+            default -> null;
+        };
+        return mapRoute(dto);
     }
 
     @Override
@@ -48,12 +55,4 @@ public class EnturRepositoryAdapter implements EnturRepository {
         return routes;
     }
 
-    public Route getRute101() {
-        EnturRouteDTO dto = routeReader.getRute101();
-        if (dto != null) {
-            return routeMapper.mapToRoute(dto);
-        } else {
-            return null;
-        }
-    }
 }
