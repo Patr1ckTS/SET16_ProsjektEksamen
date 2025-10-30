@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 import org.develop.domain.User;
 import org.develop.domain.CreateUser;
-import org.develop.Port.UserRepository;
+import org.develop.Port.UserPort;
 
-public class DatabaseUserRepository implements UserRepository {
+public class DatabaseUserAdapter implements UserPort {
     private final SQLDatabaseConnection databaseConnection;
 
-    public DatabaseUserRepository(SQLDatabaseConnection databaseConnection) {
+    public DatabaseUserAdapter(SQLDatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
     }
 

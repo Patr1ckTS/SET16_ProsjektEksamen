@@ -2,7 +2,7 @@ package org.develop.service;
 
 import java.util.ArrayList;
 
-import org.develop.Port.UserRepository;
+import org.develop.Port.UserPort;
 import org.develop.domain.CreateUser;
 import org.develop.domain.User;
 import org.develop.useCases.NewUserUseCases;
@@ -10,7 +10,7 @@ import org.develop.useCases.UserUseCases;
 import org.mindrot.jbcrypt.BCrypt;
 
 // Service for håndtering av brukeroperasjoner
-// Bruker Dependency Injection via constructor for UserRepository
+// Bruker Dependency Injection via constructor for UserPort
 // Håndterer kall til UseCases og formatering av data for presentasjon
 
 public class UserService {
@@ -19,7 +19,7 @@ public class UserService {
     private final UserListFormatter formatter;
 
     // Constructor Injection - følger Dependency Injection pattern
-    public UserService(UserRepository userRepository) {
+    public UserService(UserPort userRepository) {
         this.userUseCases = new UserUseCases(userRepository);
         this.newUserUseCases = new NewUserUseCases(userRepository);
         this.formatter = new UserListFormatter();

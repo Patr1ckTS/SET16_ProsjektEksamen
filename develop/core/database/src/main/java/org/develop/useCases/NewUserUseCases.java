@@ -1,16 +1,16 @@
 package org.develop.useCases;
 
-import org.develop.Port.UserRepository;
+import org.develop.Port.UserPort;
 import org.develop.domain.CreateUser;
 
 // -useCases knyttet til samling og opprettelse av nye brukere i systemet-
-// Validerer innlagte verdier før lagring i en ArrayList her må det gjøres 
+// Validerer innlagte verdier før lagring i en ArrayList her må det gjøres
 // endringer til database lagring på sikt
 
 public class NewUserUseCases {
-    private final UserRepository userRepository;
+    private final UserPort userRepository;
 
-    public NewUserUseCases(UserRepository userRepository) {
+    public NewUserUseCases(UserPort userRepository) {
         this.userRepository = userRepository;
     }
 

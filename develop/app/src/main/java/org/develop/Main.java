@@ -2,8 +2,8 @@ package org.develop;
 
 import java.util.ArrayList;
 
-import org.develop.Entur.EnturRepositoryAdapter;
-import org.develop.Port.EnturRepository;
+import org.develop.Entur.EnturAdapter;
+import org.develop.Port.EnturPort;
 import org.develop.Service.RouteLogic;
 import org.develop.Service.StopLogic;
 import org.develop.TravelEnteties.Route;
@@ -12,7 +12,7 @@ import org.develop.TravelEnteties.Stop;
 public class Main {
 
     public static void main(String[] args) {
-        EnturRepository adapter = new EnturRepositoryAdapter();
+        EnturPort adapter = new EnturAdapter();
         ArrayList<Route> routes = adapter.getAllRoutes();
 
         if (routes == null || routes.isEmpty()) {

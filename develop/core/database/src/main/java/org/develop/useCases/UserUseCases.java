@@ -2,13 +2,13 @@ package org.develop.useCases;
 
 import java.util.ArrayList;
 
-import org.develop.Port.UserRepository;
+import org.develop.Port.UserPort;
 import org.develop.domain.User;
 
 public class UserUseCases {
-    private final UserRepository userRepository;
+    private final UserPort userRepository;
 
-    public UserUseCases(UserRepository userRepository) {
+    public UserUseCases(UserPort userRepository) {
         this.userRepository = userRepository;
     }
 

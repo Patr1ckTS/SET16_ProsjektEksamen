@@ -1,4 +1,4 @@
-@startuml Komponentdiagram
+@startuml Kode-Komponentdiagram
 skinparam componentStyle rectangle
 top to bottom direction
 skinparam nodesep 80
@@ -13,23 +13,23 @@ package "app\n(Presentasjonslag)" #LightBlue {
 package "core\n(Domenelogikk)" #LightGreen {
     together {
         [RouteSearch] as RouteSearch
-        [Database] as Database
+        [UserService] as UserService
     }
 }
 
-package "ports\n(Grensesnitt)" #LightYellow {
+package "PORTS\n(Grensesnitt)" #LightYellow {
     together {
-        [EnturRepository\nPort] as EnturPort
-        [CalendarRepository\nPort] as CalendarPort
-        [UserRepository\nPort] as UserPort
+        [EnturPort] as EnturPort
+        [CalendarPort] as CalendarPort
+        [UserPort] as UserPort
     }
 }
 
-package "adapters\n(Implementasjoner)" #LightCoral {
+package "ADAPTERS\n(Implementasjoner)" #LightCoral {
     together {
-        [Entur Adapter] as EnturAdapter
-        [Calendar Adapter] as CalendarAdapter
-        [Database Adapter] as DatabaseAdapter
+        [EnturAdapter] as EnturAdapter
+        [GoogleCalendar\nAdapter] as CalendarAdapter
+        [DatabaseUser\nAdapter] as DatabaseAdapter
     }
 }
 
@@ -46,18 +46,18 @@ RouteSearch -[hidden]down-> EnturPort
 EnturPort -[hidden]down-> EnturAdapter
 EnturAdapter -[hidden]down-> EnturAPI
 
-Database -[hidden]down-> UserPort
+UserService -[hidden]down-> UserPort
 CalendarPort -[hidden]down-> CalendarAdapter
 CalendarAdapter -[hidden]down-> GoogleCal
 
 ' App til Core
 App --> RouteSearch : bruker
-App --> Database : bruker
+App --> UserService : bruker
 
 ' Core til Ports
 RouteSearch ..> EnturPort : avhenger av
 RouteSearch ..> CalendarPort : avhenger av
-Database ..> UserPort : avhenger av
+UserService ..> UserPort : avhenger av
 
 ' Adapters implementerer Ports
 EnturAdapter .up.|> EnturPort : implementerer
@@ -71,7 +71,7 @@ DatabaseAdapter --> MySQL : Leser/skriver til
 
 
 note right of DatabaseAdapter
-    **NB: DatabaseAdapter**
+    **NB: DatabaseUserAdapter**
 
     Ikke en fullstendig heksagonal
     arkitektur-implementasjon, men
@@ -81,7 +81,7 @@ note right of DatabaseAdapter
     De heksagonale prinsippene er
     korrekt implementert i:
     • EnturAdapter
-    • CalendarAdapter
+    • GoogleCalendarAdapter
 end note
 
 @enduml

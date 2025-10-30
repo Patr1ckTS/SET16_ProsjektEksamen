@@ -1,17 +1,17 @@
 package org.develop.Calendar;
 
-import org.develop.Port.CalendarRepository;
+import org.develop.Port.CalendarPort;
 import org.develop.Calendar.Reader.CalendarReader;
 import org.develop.Calendar.Mapper.CalendarMapper;
 import org.develop.Calendar.DTO.CalendarDTO;
 import java.util.ArrayList;
 
-public class CalendarRepositoryAdapter implements CalendarRepository {
+public class GoogleCalendarAdapter implements CalendarPort {
 
     private final CalendarReader reader;
     private final CalendarMapper mapper;
 
-    public CalendarRepositoryAdapter() {
+    public GoogleCalendarAdapter() {
         this.reader = new CalendarReader();
         this.mapper = new CalendarMapper();
     }

@@ -4,14 +4,14 @@ import org.develop.domain.DatabaseSetup;
 import org.develop.web.service.Routes;
 import org.develop.service.UserService;
 import org.develop.Database.SQLDatabaseConnection;
-import org.develop.Database.DatabaseUserRepository;
+import org.develop.Database.DatabaseUserAdapter;
 
 import io.javalin.Javalin;
 
 public class Main {
 
     public static void main(String[] args) {
-        // Initialiser Database 
+        // Initialiser Database
         DatabaseSetup dbSetup = new DatabaseSetup(
             "se25_G16",
             "itstud.hiof.no",
@@ -22,17 +22,17 @@ public class Main {
 
         System.out.println("Konfigurerer database...");
         System.out.println(dbSetup.showDatabaseInfo());
-        
+
         // Koble til Database (Krever skolenettverk / VPN)
         SQLDatabaseConnection dbConnection = new SQLDatabaseConnection(
             dbSetup.getDbUrl(),
             dbSetup.getDbUsername(),
             dbSetup.getDbPassword()
         );
-        
-        // Opprett UserService instans med repository
-        DatabaseUserRepository userRepository = new DatabaseUserRepository(dbConnection);
-        UserService userService = new UserService(userRepository);
+
+        // Opprett UserService instans med adapter
+        DatabaseUserAdapter userAdapter = new DatabaseUserAdapter(dbConnection);
+        UserService userService = new UserService(userAdapter);
 
         // Starter Javalin Web Server
         System.out.println("Starter web server på port 7000...");

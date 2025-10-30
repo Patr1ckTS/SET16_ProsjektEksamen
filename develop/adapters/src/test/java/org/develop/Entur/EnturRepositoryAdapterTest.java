@@ -3,7 +3,7 @@ package org.develop.Entur;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import org.develop.Port.EnturRepository;
+import org.develop.Port.EnturPort;
 import org.develop.TravelEnteties.Route;
 
 import java.util.ArrayList;
@@ -17,20 +17,20 @@ public class EnturRepositoryAdapterTest {
     @DisplayName("Adapter should implement EnturRepository port")
         void enturRepositoryAdapter_ImplementsEnturRepositoryInterface() {
         // Arrange
-        var adapter = new EnturRepositoryAdapter();
+        var adapter = new EnturAdapter();
         
         // Act
-        EnturRepository port = adapter;
+        EnturPort port = adapter;
         
         // Assert
-        assertInstanceOf(EnturRepository.class, port);
+        assertInstanceOf(EnturPort.class, port);
     }
 
     @Test
     @DisplayName("Adapter should read and map JSON to Route objects")
     void getAllRoutes_ReturnsMappedRouteObjectsFromJson() {
         // Arrange
-        var adapter = new EnturRepositoryAdapter();
+        var adapter = new EnturAdapter();
         // Act
         ArrayList<Route> routes = adapter.getAllRoutes();
         // Assert
@@ -43,7 +43,7 @@ public class EnturRepositoryAdapterTest {
     @DisplayName("Routes should have valid data after mapping")
     void mappedRoute_HasValidRouteNameAndRouteId() {
         // Arrange
-        var adapter = new EnturRepositoryAdapter();
+        var adapter = new EnturAdapter();
         // Act
         var routes = adapter.getAllRoutes();
         Route route = routes.get(0);
@@ -58,7 +58,7 @@ public class EnturRepositoryAdapterTest {
     @DisplayName("Routes should have stops from JSON data")
     void mappedRoute_HasNonEmptyStopsList() {
         // Arrange
-        var adapter = new EnturRepositoryAdapter();
+        var adapter = new EnturAdapter();
         // Act
         var routes = adapter.getAllRoutes();
         Route route = routes.get(0);
@@ -71,7 +71,7 @@ public class EnturRepositoryAdapterTest {
     @DisplayName("getRoute should return a single Route")
     void getRoute_WithValidId_ReturnsSingleRouteObject() {
         // Arrange
-        var adapter = new EnturRepositoryAdapter();
+        var adapter = new EnturAdapter();
         // Act
         Route route = adapter.getRoute("R101");
         // Assert
@@ -84,7 +84,7 @@ public class EnturRepositoryAdapterTest {
     @DisplayName("Data should pass through port interface without loss")
     void enturRepositoryPortInterface_PassesRouteDataWithoutLoss() {
         // Arrange
-        EnturRepository port = new EnturRepositoryAdapter();
+        EnturPort port = new EnturAdapter();
         // Act
         var routes = port.getAllRoutes();
         // Assert
@@ -101,7 +101,7 @@ public class EnturRepositoryAdapterTest {
     @DisplayName("Adapter should map all available routes")
     void getAllRoutes_ReturnsAllAvailableRoutes() {
         // Arrange
-        var adapter = new EnturRepositoryAdapter();
+        var adapter = new EnturAdapter();
         // Act
         var routes = adapter.getAllRoutes();
         // Assert
