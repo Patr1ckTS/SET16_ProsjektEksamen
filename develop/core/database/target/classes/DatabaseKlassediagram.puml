@@ -1,0 +1,94 @@
+"@startuml DatabaseKlassediagram" 
+'https://plantuml.com/class-diagram
+package database {
+    package domain {
+        class User {
+            - firstName: String
+            - lastName: String
+            - email: String
+            - phoneNumber: String
+            - password: String
+
+            + getFullName()
+        }
+
+        class CreateUser {
+            - firstName: String
+            - lastName: String
+            - email: String
+            - phoneNumber: String
+            - password: String
+            - userType: String
+
+            + getFullName()
+        }
+
+        class DataBaseSetup {
+            - DB_NAME: String
+            - DB_HOST: String
+            - DB_PORT: String
+            - DB_USERNAME: String
+            - DB_PASSWORD: String
+            - DB_URL: String
+
+            + showDatabaseInfo()
+            + testConnection()
+        }
+    }
+
+    package useCases {
+        class UserUseCases {
+            - userRepository: UserRepository
+
+            + arrayListOfRequestedUsers(): ArrayList<User>
+        }
+
+        class NewUserUseCases {
+            - userRepository: UserRepository
+
+            + newUserValueCheck(createUser : CreateUser): boolean
+        }
+    }
+    User --> UserUseCases
+    CreateUser --> NewUserUseCases
+
+    package service {
+        class UserService {
+            - userRepository: UserRepository
+            - userUseCases: UserUseCases
+            - newUserUseCases: NewUserUseCases
+            - userListFormatter: UserListFormatter
+
+            + getUserFullName()
+            + logInUser()
+            + registerUser()
+            + emailExists()
+            + getNameByEmail()
+        }
+
+        class UserListFormatter {
+            + formatUserList(ArrayList<User>) : String
+        }
+        UserService -up-> UserListFormatter
+    }
+    UserService --> useCases
+    UserListFormatter o-- User
+
+    package ports {
+        interface UserRepository {
+            + findAllUsers(): ArrayList<User>
+            + saveUser(user: CreateUser): void
+        }
+
+        interface SQLDatabasePort {
+            + getConnection(): Connection
+            + testConnection(): boolean
+            + closeResources(): void
+        }
+    }
+    UserUseCases --> UserRepository
+    NewUserUseCases --> UserRepository
+    UserService --> UserRepository
+}
+
+@enduml
