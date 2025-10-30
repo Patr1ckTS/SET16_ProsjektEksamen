@@ -1,0 +1,36 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto&display=swap');
+
+// Farger
+$color_primary: #0077ff;
+$color_secondary: #ffb400;
+$color_bg: #f9f9f9;
+$color_text: #222;
+$color_white: #fff;
+$color_black: #000;
+
+// Typografi
+$font_primary: 'Open-sans';
+$font_size_base: 14px;
+$font_weight_normal: 400;
+$font_weight_bold: 700;
+
+// Spacing (brukes til margin/padding)
+$spaceing_xs: 0.5rem;
+$spacing_sm: 1rem;
+$spacing_md: 1.5rem;
+$spacing_lg: 2rem;
+$spacing_xl: 3rem;
+
+// Breakpoints for media queries
+$breakpoint_sm: 576px;
+$breakpoint_md: 768px;
+$breakpoint_lg: 992px;
+$breakpoint_xl: 1200px;
+
+// Border radius og skygger
+$radius_sm: 4px;
+$radius_md: 8px;
+$radius_lg: 16px;
+$shadow_light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow_medium: 0 4px 8px rgba(0, 0, 0, 0.15);

@@ -14,7 +14,7 @@ public class DatabaseSetupTests {
         String dbPort = "3306";
         String dbUsername = "testuser";
         String dbPassword = "testpass";
-          
+
 //Assert
         DatabaseSetup dbSetup = new DatabaseSetup(dbName, dbHost, dbPort, dbUsername, dbPassword);
 
@@ -25,7 +25,7 @@ public class DatabaseSetupTests {
         Assertions.assertEquals(dbPort, dbSetup.getDbPort());
         Assertions.assertEquals(dbUsername, dbSetup.getDbUsername());
         Assertions.assertEquals(dbPassword, dbSetup.getDbPassword());
-    }   
+    }
 
     @Test
     @DisplayName("Database info string format check")
@@ -37,7 +37,7 @@ public class DatabaseSetupTests {
             "3306", 
             "testuser",
             "testpass");
-        
+
 //Act
         String dbInfo = dbSetup.getDbUrl();
 
@@ -55,6 +55,7 @@ public class DatabaseSetupTests {
             "3306", 
             "testuser",
             "password123");
+            
 //Act
         boolean canConnect = dbSetup.testConnection();
 
