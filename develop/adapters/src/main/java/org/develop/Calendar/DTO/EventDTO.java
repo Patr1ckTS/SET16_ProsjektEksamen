@@ -2,7 +2,7 @@ package org.develop.Calendar.DTO;
 
 import java.util.Date;
 
-public class CalendarEventDTO {
+public class EventDTO {
     private int eventId;
     private String eventName;
     private String startLocation;
@@ -12,9 +12,9 @@ public class CalendarEventDTO {
     private String eventStartTime;
 
     // Tom konstruktør for Jackson deserialisering
-    public CalendarEventDTO() {}
+    public EventDTO() {}
 
-    public CalendarEventDTO(int eventId, String eventName, String startLocation, String endLocation, Date eventDate, String desiredDepartureTime, String eventStartTime) {
+    public EventDTO(int eventId, String eventName, String startLocation, String endLocation, Date eventDate, String desiredDepartureTime, String eventStartTime) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.startLocation = startLocation;

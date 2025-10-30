@@ -22,7 +22,7 @@ public class CalendarReader {
     }
 
     //leser inn fra json filer
-    public ArrayList<PersonCalendarDTO> readPersonCalendar(String fileName) {  
+    public ArrayList<CalendarDTO> readPersonCalendar(String fileName) {  
         try {
             InputStream stream = getClass().getClassLoader().getResourceAsStream("Calendar/" + fileName);
             if (stream == null) {
@@ -31,7 +31,7 @@ public class CalendarReader {
             }
             
             //deserialiserer json filen og mapper den.
-            ArrayList<PersonCalendarDTO> person = objectMapper.readValue(stream,objectMapper.getTypeFactory().constructCollectionType(List.class, PersonCalendarDTO.class));
+            ArrayList<CalendarDTO> person = objectMapper.readValue(stream,objectMapper.getTypeFactory().constructCollectionType(List.class, CalendarDTO.class));
 
             //Hvis json filen er tom eller ikke inneholder person.
             if(person.isEmpty()){
@@ -40,7 +40,7 @@ public class CalendarReader {
             }
             
             //Printer ut hvilken persons kalender er lastet.
-            PersonCalendarDTO owner = person.get(0);
+            CalendarDTO owner = person.get(0);
             System.out.println("Leste kalender for: " + owner.getName() + " fra " + fileName);;
             
             return person;
@@ -52,12 +52,11 @@ public class CalendarReader {
         }
     }
 
-    //Henter inn kalendere
-    public ArrayList<PersonCalendarDTO> getIda(){
+    public ArrayList<CalendarDTO> getIda(){
         return readPersonCalendar("Ida_Calendar.json");
     }
 
-    public ArrayList<PersonCalendarDTO> getOle(){
+    public ArrayList<CalendarDTO> getOle(){
         return readPersonCalendar("Ole_Calendar.json");
     }
 

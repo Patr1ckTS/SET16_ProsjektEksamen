@@ -1,40 +1,54 @@
 package org.develop.Calendar.Mapper;
 
-import org.develop.Calendar.DTO.CalendarEventDTO;
-import org.develop.Port.CalendarRepository.CalendarEvent;
+import org.develop.Calendar.DTO.EventDTO;
+import org.develop.Calendar.DTO.CalendarDTO;
+import org.develop.Calendar.Event;
+import org.develop.Calendar.Calendar;
 import java.util.ArrayList;
 
 public class CalendarMapper {
-    
-    // Konverterer fra DTO til domene-objekt
-    public CalendarEvent toDomain(CalendarEventDTO dto) {
-        return new CalendarEvent(
+
+    // Konverterer fra EventDTO til Event (domene-objekt)
+    public Event toDomainEvent(EventDTO dto) {
+        return new Event(
             dto.getEventName(),
             dto.getStartLocation(),
             dto.getEndLocation(),
             dto.getEventDate(),
-            dto.getDesiredDepartureTime()
+            dto.getDesiredDepartureTime(),
+            dto.getEventStartTime()
         );
     }
-    
-    // Konverterer liste av DTOer til domene-objekter
-    public ArrayList<CalendarEvent> toDomainEvents(ArrayList<CalendarEventDTO> dtos) {
-        ArrayList<CalendarEvent> events = new ArrayList<>();
-        for (CalendarEventDTO dto : dtos) {
-            events.add(toDomain(dto));
+
+    // Konverterer liste av EventDTOer til Event-objekter
+    public ArrayList<Event> toDomainEvents(ArrayList<EventDTO> dtos) {
+        ArrayList<Event> events = new ArrayList<>();
+        for (EventDTO dto : dtos) {
+            events.add(toDomainEvent(dto));
         }
         return events;
     }
-    
-    // Konverterer fra domene-objekt til DTO
-    public CalendarEventDTO toDTO(CalendarEvent event) {
-        return new CalendarEventDTO(
+
+    // Konverterer fra CalendarDTO til Calendar (domene-objekt)
+    public Calendar toDomainCalendar(CalendarDTO dto) {
+        ArrayList<Event> events = toDomainEvents(dto.getEvents());
+        return new Calendar(
+            dto.getName(),
+            dto.getId(),
+            events
+        );
+    }
+
+    // Konverterer fra Event til EventDTO
+    public EventDTO toDTO(Event event) {
+        return new EventDTO(
             0, // eventId kan genereres av Reader
             event.getEventName(),
             event.getStartLocation(),
             event.getEndLocation(),
             event.getEventDate(),
-            event.getDesiredDepartureTime()
+            event.getDesiredDepartureTime(),
+            event.getEventStartTime()
         );
     }
 }

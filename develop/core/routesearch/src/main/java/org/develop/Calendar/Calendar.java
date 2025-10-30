@@ -1,16 +1,16 @@
-package org.develop.entity;
+package org.develop.Calendar;
 
 import java.util.ArrayList;
 
-public class PersonCalendar {
+public class Calendar {
     private String name;
     private int id;
     private ArrayList<Event> events;
 
     //Json konstruktør for Jackson
-    public PersonCalendar() {}
+    public Calendar() {}
 
-    public PersonCalendar(String name, int id, ArrayList<Event> events) {
+    public Calendar(String name, int id, ArrayList<Event> events) {
         this.name = name;
         this.id = id;
         this.events = events;

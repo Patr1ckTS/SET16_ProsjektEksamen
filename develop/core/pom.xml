@@ -16,8 +16,6 @@
     <modules>
         <module>routesearch</module>
         <module>database</module>
-        <module>web</module>
-        <module>calendar</module>
     </modules>
 
     <properties>

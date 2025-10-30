@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PersonCalendarDTO {
+public class CalendarDTO {
     private String name;
     private int id;
-    private ArrayList<CalendarEventDTO> events;
+    private ArrayList<EventDTO> events;
 
-    public PersonCalendarDTO() {}
+    public CalendarDTO() {}
 
     public String getName() {
         return name;
@@ -28,11 +28,11 @@ public class PersonCalendarDTO {
         this.id = id;
     }
 
-    public ArrayList<CalendarEventDTO> getEvents() {
+    public ArrayList<EventDTO> getEvents() {
         return events;
     }
 
-    public void setEvents(ArrayList<CalendarEventDTO> events) {
+    public void setEvents(ArrayList<EventDTO> events) {
         this.events = events;
     }
 
