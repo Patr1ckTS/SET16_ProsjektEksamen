@@ -53,6 +53,29 @@ public class RouteLogic implements RouteService {
         return alternatives;
     }
 
+    public Result searchRouteByName(String departureTime, String startLocation, String endLocation, Route route) {
+        Stop startStop = stopService.findStopByName(route.getStops(), startLocation);
+        Stop endStop = stopService.findStopByName(route.getStops(), endLocation);
+
+        if (startStop == null || endStop == null) {
+            return new Result(false, null, null,
+                "Stoppested ikke funnet", null, null, null, null, null, 0);
+        }
+
+        return findBestTransport(departureTime, startStop, endStop, route);
+    }
+
+    public int calculateTravelTime(ArrayList<Stop> route, String startLocationName, String endLocationName, String departureTime) {
+        Stop startStop = stopService.findStopByName(route, startLocationName);
+        Stop endStop = stopService.findStopByName(route, endLocationName);
+
+        if (startStop == null || endStop == null) {
+            return -1;
+        }
+
+        return stopService.calculateTravelTime(startStop, departureTime, endStop);
+    }
+
     // Metode for å beregne total reisetid for en rute
     public int calculateTotalTravelTime(ArrayList<Stop> route, String departureTime) {
         if (route == null || route.size() < 2) {

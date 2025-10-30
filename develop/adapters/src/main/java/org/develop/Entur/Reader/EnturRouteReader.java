@@ -1,73 +1,59 @@
 package org.develop.Entur.Reader;
 
 import org.develop.Entur.DTO.EnturRouteDTO;
-import org.develop.Entur.DTO.EnturRouteDTO.StopData;
-import java.util.ArrayList;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.InputStream;
+import java.io.IOException;
 
-/**
- * Reader for Entur API
- * Henter route-data fra Entur API og bygger EnturRouteDTO
- * Håndterer HTTP-kall, JSON parsing, etc.
- */
 public class EnturRouteReader {
 
-    private static final String ENTUR_API_URL = "https://api.entur.io/journey-planner/v3/graphql";
+    private final ObjectMapper objectMapper;
 
-    /**
-     * Leser route-data fra Entur API
-     * @return EnturRouteDTO med all route, transport og stop data
-     */
-    public EnturRouteDTO readRouteData() {
-        // 1. Send HTTP request til Entur API (GraphQL eller REST)
-        // 2. Parse JSON response
-        // 3. Bygg EnturRouteDTO med alle felter
-        // 4. Bygg StopData-objekter for hvert stop
-        // 5. Returner komplett DTO
-
-        return null;
+    public EnturRouteReader() {
+        this.objectMapper = new ObjectMapper();
     }
 
-    /**
-     * Søker etter ruter mellom to lokasjoner med avgangstid
-     * @param fromLocation Start-lokasjon
-     * @param toLocation Slutt-lokasjon
-     * @param departureTime Ønsket avgangstid
-     * @return EnturRouteDTO med rutedata
-     */
-    public EnturRouteDTO searchRoute(String fromLocation, String toLocation, String departureTime) {
-        // 1. Bygg GraphQL query for ruteplanlegging
-        // 2. Send request med parametere
-        // 3. Parse response og bygg EnturRouteDTO
-
-        return null;
+    public EnturRouteDTO readRouteFromFile(String fileName) {
+        try {
+            InputStream resourceStream = getClass().getClassLoader().getResourceAsStream("Entur/" + fileName);
+            if (resourceStream == null) {
+                System.err.println("Feil: Kunne ikke finne ressurs Entur/" + fileName);
+                return null;
+            }
+            EnturRouteDTO dto = objectMapper.readValue(resourceStream, EnturRouteDTO.class);
+            System.out.println("Leste rute: " + dto.getRouteName() +
+                             " (ID: " + dto.getRouteId() + ") med " +
+                             dto.getStops().size() + " stopp");
+            return dto;
+        } catch (IOException e) {
+            System.err.println("Feil ved lesing av " + fileName + ": " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    /**
-     * Henter sanntids-data for et stoppested
-     * @param stopId ID for stoppested
-     * @return EnturRouteDTO med oppdaterte avgangstider
-     */
-    public EnturRouteDTO getRealTimeData(String stopId) {
-        // 1. Send request for sanntidsdata
-        // 2. Parse response
-        // 3. Oppdater StopData med sanntids avgangstider
-
-        return null;
+    public EnturRouteDTO getRute101() {
+        return readRouteFromFile("Rute101_Stops_Fredrikstad_Sarpsborg.json");
     }
 
-    /**
-     * Privat hjelpemetode for å bygge HTTP request
-     */
-    private String buildGraphQLQuery(String fromLocation, String toLocation, String departureTime) {
-        // Bygg GraphQL query string
-        return null;
+    public EnturRouteDTO getRute103() {
+        return readRouteFromFile("Rute103_Stops_Halden_Fredrikstad.json");
     }
 
-    /**
-     * Privat hjelpemetode for å parse JSON response
-     */
-    private EnturRouteDTO parseJsonResponse(String jsonResponse) {
-        // Bruk Jackson ObjectMapper til å parse JSON til EnturRouteDTO
-        return null;
+    public EnturRouteDTO getRute201() {
+        return readRouteFromFile("Rute201_Stops_Sarpsborg_Fredrikstad.json");
     }
+
+    public EnturRouteDTO getRute203() {
+        return readRouteFromFile("Rute203_Stops_Fredrikstad_Halden.json");
+    }
+
+    public EnturRouteDTO getRuteR20() {
+        return readRouteFromFile("RuteR20_Stops_Moss_Halden.json");
+    }
+
+    public EnturRouteDTO getRuteR40() {
+        return readRouteFromFile("RuteR40_stops_Halden_Moss.json");
+    }
+
 }
