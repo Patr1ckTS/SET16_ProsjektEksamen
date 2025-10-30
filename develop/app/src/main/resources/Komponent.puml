@@ -1,0 +1,61 @@
+@startuml Komponentdiagram
+skinparam componentStyle rectangle
+
+title Ruter System - Komponentoversikt
+
+' ==================== APP MODULE ====================
+package "APP" #LightBlue {
+    [Web Application] as App
+    note right of App
+        - Oppstart (Main.java)
+        - Web UI (Javalin)
+        - HTTP Routes
+        - Templates
+    end note
+}
+
+' ==================== CORE MODULES ====================
+package "CORE" #LightGreen {
+    [RouteSearch] as RouteSearch
+    [Database] as Database
+    [Calendar] as Calendar
+
+    note right of RouteSearch
+        Rutesøk og filtrering
+    end note
+
+    note right of Database
+        Brukerdata og autentisering
+    end note
+
+    note right of Calendar
+        Kalenderfunksjonalitet
+    end note
+}
+
+' ==================== ADAPTERS ====================
+package "ADAPTERS" #LightCoral {
+    [Entur Adapter] as EnturAdapter
+    [Calendar Adapter] as CalendarAdapter
+    [Database Adapter] as DatabaseAdapter
+}
+
+' ==================== EKSTERNE SYSTEMER ====================
+cloud "Eksterne Systemer" {
+    [Entur API] as EnturAPI
+    [Google Calendar] as GoogleCal
+}
+
+' ==================== AVHENGIGHETER ====================
+App --> RouteSearch
+App --> Database
+App --> Calendar
+
+RouteSearch --> EnturAdapter
+RouteSearch --> CalendarAdapter
+Database --> DatabaseAdapter
+
+EnturAdapter --> EnturAPI : Read/Map
+CalendarAdapter --> GoogleCal : Read/Map
+
+@enduml
