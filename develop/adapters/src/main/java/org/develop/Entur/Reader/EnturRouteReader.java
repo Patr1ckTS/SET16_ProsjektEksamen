@@ -21,6 +21,7 @@ public class EnturRouteReader {
                 return null;
             }
             EnturRouteDTO dto = objectMapper.readValue(resourceStream, EnturRouteDTO.class);
+            
             System.out.println("Leste rute: " + dto.getRouteName() +
                              " (ID: " + dto.getRouteId() + ") med " +
                              dto.getStops().size() + " stopp");

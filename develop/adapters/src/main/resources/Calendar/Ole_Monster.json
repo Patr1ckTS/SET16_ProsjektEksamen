@@ -1,0 +1,13 @@
+[
+   {
+  "name": "Ole",
+  "id": 1,
+  "events": [
+    {
+      "eventName": "Monster med venner",
+      "startLocation": "Halden bussterminal",
+      "endLocation": "Fredrikstad bussterminal",
+      "eventDate": "2025-10-30",
+      "desiredDepartureTime": "12:30"
+    }
+]

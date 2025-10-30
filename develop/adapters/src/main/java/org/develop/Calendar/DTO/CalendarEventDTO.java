@@ -9,23 +9,34 @@ public class CalendarEventDTO {
     private String endLocation;
     private Date eventDate;
     private String desiredDepartureTime;
+    private String eventStartTime;
 
     // Tom konstruktør for Jackson deserialisering
     public CalendarEventDTO() {}
 
-    public CalendarEventDTO(int eventId, String eventName, String startLocation, String endLocation, Date eventDate, String desiredDepartureTime) {
+    public CalendarEventDTO(int eventId, String eventName, String startLocation, String endLocation, Date eventDate, String desiredDepartureTime, String eventStartTime) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.eventDate = eventDate;
         this.desiredDepartureTime = desiredDepartureTime;
+        this.eventStartTime = eventStartTime;
+
         }
         
         public int getEventId() {
             return eventId;
         }
         
+        public String getEventStartTime() {
+            return eventStartTime;
+        }
+
+        public void setEventStartTime(String eventStartTime) {
+            this.eventStartTime = eventStartTime;
+        }
+
         public void setEventId(int eventId) {
             this.eventId = eventId;
         }

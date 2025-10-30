@@ -2,21 +2,34 @@ package org.develop.entity;
 
 import java.util.Date;
 
-public class CalendarEvent {
+public class Event {
         private String eventName;
         private String startLocation;
         private String endLocation;
         private Date eventDate;
         private String desiredDepartureTime;
+        private String eventStartTime;
         
-        public CalendarEvent(String eventName, String startLocation, String endLocation, Date eventDate, String desiredDepartureTime) {
+        //Json konstruktør for Jackson
+        public Event() {}
+
+        public Event(String eventName, String startLocation, String endLocation, Date eventDate, String desiredDepartureTime,String eventStartTime) {
             this.eventName = eventName;
             this.startLocation = startLocation;
             this.endLocation = endLocation;
             this.eventDate = eventDate;
             this.desiredDepartureTime = desiredDepartureTime;
+            this.eventStartTime = eventStartTime;
         }
         
+        public String getEventStartTime() {
+            return eventStartTime;
+        }
+
+        public void setEventStartTime(String eventStartTime) {
+            this.eventStartTime = eventStartTime;
+        }
+
         public String getEventName() {
             return eventName;
         }
