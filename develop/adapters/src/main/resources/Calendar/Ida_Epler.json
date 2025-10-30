@@ -1,0 +1,12 @@
+[
+   {
+  "name": "Ida",
+  "id": 3,
+  "events": [
+    {
+      "eventName": "Plukke Epler",
+      "startLocation": "Sarpsborg bussterminal",
+      "endLocation": "Kråkerøy terminal",
+      "eventDate": "2025-11-5",
+      "desiredDepartureTime": "14:00"
+    }
