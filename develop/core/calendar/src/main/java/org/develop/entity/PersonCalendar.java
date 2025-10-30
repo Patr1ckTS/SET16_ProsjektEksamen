@@ -2,15 +2,15 @@ package org.develop.entity;
 
 import java.util.ArrayList;
 
-public class Calendar {
+public class PersonCalendar {
     private String name;
     private int id;
     private ArrayList<Event> events;
 
     //Json konstruktør for Jackson
-    public Calendar() {}
+    public PersonCalendar() {}
 
-    public Calendar(String name, int id, ArrayList<Event> events) {
+    public PersonCalendar(String name, int id, ArrayList<Event> events) {
         this.name = name;
         this.id = id;
         this.events = events;
