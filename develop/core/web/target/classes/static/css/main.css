@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto&display=swap");
+#main_wrapper {
+  display: relative;
+  width: 90%;
+  margin: 0 auto;
+}
+
+#header_wrapper {
+  display: relative;
+  width: 90%;
+  margin: 0 auto;
+}
+
+#footer_wrapper {
+  display: relative;
+  width: 90%;
+  margin: 0 auto;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open-sans";
+  color: #222;
+}/*# sourceMappingURL=main.css.map */
