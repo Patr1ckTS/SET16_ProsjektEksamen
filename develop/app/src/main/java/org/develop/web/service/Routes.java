@@ -5,15 +5,13 @@ import org.develop.service.UserService;
 
 public class Routes {
 
-    // ================================= // 
     //      Render header HTML med login status
-    // ================================= //
-    private static String getHeaderHTML(io.javalin.http.Context ctx, String pageTitle) {
+    private static String getHeaderHTML(io.javalin.http.Context ctx, String pageTitle, UserService userService) {
         String loggedInEmail = ctx.sessionAttribute("userEmail");
         String headerHTML = TemplateLoader.loadHeaderHTML();
         String headerAuth;
         if (loggedInEmail != null) {
-            String fullName = UserService.getNameByEmail(loggedInEmail);
+            String fullName = userService.getNameByEmail(loggedInEmail);
             headerAuth =
                 "<li><a href='/logout'>Logg ut</a></li>" +
                 "<li><a href='/favoritter'>Favoritter</a></li>" +
@@ -28,15 +26,13 @@ public class Routes {
         return headerHTML;
     }
 
-    public static void configureRoutes(Javalin app) {
+    public static void configureRoutes(Javalin app, UserService userService) {
         
 
-        // ================================= //
-        //      Hovedsside (index.html)
-        // ================================= //
+        // Hovedsside (index.html)
         app.get("/", ctx -> {
             String template = TemplateLoader.loadTemplate("index.html");
-            String customHeader = getHeaderHTML(ctx, "Ruter - Hjem");
+            String customHeader = getHeaderHTML(ctx, "Ruter - Hjem", userService);
             String footerHTML = TemplateLoader.loadFooterHTML();
 
             String html = template
@@ -49,12 +45,10 @@ public class Routes {
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
-        // ================================= //
         //      Brukere
-        // ================================= //
         app.get("/brukere", ctx -> {
             String template = TemplateLoader.loadTemplate("brukere.html");
-            String customHeader = getHeaderHTML(ctx, "Ruter - Brukere");
+            String customHeader = getHeaderHTML(ctx, "Ruter - Brukere", userService);
             String footerHTML = TemplateLoader.loadFooterHTML();
 
             String html = template
@@ -63,27 +57,25 @@ public class Routes {
                 .replace("{{FOOTER}}", footerHTML)
 
                 // Spesifikke templates
-                .replace("{{USERS_INFO}}", UserService.getUserFullname());
+                .replace("{{USERS_INFO}}", userService.getUserFullname());
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
         // Engelsk alias for /brukere
         app.get("/users", ctx -> {
             String template = TemplateLoader.loadTemplate("brukere.html");
-            String customHeader = getHeaderHTML(ctx, "Ruter - Brukere");
+            String customHeader = getHeaderHTML(ctx, "Ruter - Brukere", userService);
             String footerHTML = TemplateLoader.loadFooterHTML();
 
             String html = template
                 .replace("{{HEADER}}", customHeader)
                 .replace("{{FOOTER}}", footerHTML)
-                .replace("{{USERS_INFO}}", UserService.getUserFullname());
+                .replace("{{USERS_INFO}}", userService.getUserFullname());
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
 
-        // =============================================== //
         //      Login
-        // =============================================== // 
         app.get("/login", ctx -> {
 
             String loggedInEmail = ctx.sessionAttribute("userEmail");
@@ -94,7 +86,7 @@ public class Routes {
 
             String template = TemplateLoader.loadTemplate("login.html");
             String footerHTML = TemplateLoader.loadFooterHTML();
-            String customHeader = getHeaderHTML(ctx, "Ruter - Hjem");
+            String customHeader = getHeaderHTML(ctx, "Ruter - Hjem", userService);
 
             String html = template
                 // Generiske templates
@@ -114,7 +106,7 @@ public class Routes {
                 return;
             }
 
-            if (UserService.loginUser(email.trim(), password)) {
+            if (userService.loginUser(email.trim(), password)) {
                 ctx.sessionAttribute("userEmail", email.trim());
                 ctx.redirect("/");
             } else {
@@ -122,18 +114,14 @@ public class Routes {
             }
         });
  
-        // =============================================== //
         //      Logout
-        // =============================================== //
         app.get("/logout", ctx -> {
             ctx.sessionAttribute("userEmail", null);
             ctx.redirect("/");
         });
 
 
-        // =============================================== //
         //      Registrering
-        // =============================================== //
         app.get("/registrer", ctx -> {
 
             String loggedInEmail = ctx.sessionAttribute("userEmail");
@@ -143,7 +131,7 @@ public class Routes {
             }
 
             String template = TemplateLoader.loadTemplate("registrer.html");
-            String customHeader = getHeaderHTML(ctx, "Ruter - registrer");
+            String customHeader = getHeaderHTML(ctx, "Ruter - registrer", userService);
             String footerHTML = TemplateLoader.loadFooterHTML();
 
             String html = template
@@ -170,7 +158,7 @@ public class Routes {
                     return;
                 }
 
-                String errors = UserService.registerUser(firstname.trim(), lastname.trim(), email.trim(), phoneNumber.trim(), password.trim());
+                String errors = userService.registerUser(firstname.trim(), lastname.trim(), email.trim(), phoneNumber.trim(), password.trim());
                 if (errors == null) {
                     System.out.println("Bruker lagret: " + firstname + " " + lastname);
                     ctx.redirect("/");
@@ -184,9 +172,7 @@ public class Routes {
 
 
 
-        // =============================================== //
         //      Favoritter
-        // =============================================== //
         app.get("/favoritter", ctx -> {
             
 // Utkommentert på grunn a kjøre problemer
@@ -199,7 +185,7 @@ public class Routes {
 */
 
             String template = TemplateLoader.loadTemplate("favoritter.html");
-            String customHeader = getHeaderHTML(ctx, "Ruter - favoritter");
+            String customHeader = getHeaderHTML(ctx, "Ruter - favoritter", userService);
             String footerHTML = TemplateLoader.loadFooterHTML();
 
             String html = template

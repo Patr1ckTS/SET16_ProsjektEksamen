@@ -122,6 +122,7 @@ public class EnturAPIIntergration {
         String arrivalAtCurrentStop = stopLogic.calculateTransportAtStop(currentStop, nextDeparture);
         String arrivalAtDestination = stopLogic.calculateTransportAtStop(destination, nextDeparture);
         int travelTimeBetweenStops = stopLogic.calculateTravelTime(currentStop, nextDeparture, destination);
+        
 
         // Act
         RouteLogic.Result result = routeLogic.searchRouteByName(

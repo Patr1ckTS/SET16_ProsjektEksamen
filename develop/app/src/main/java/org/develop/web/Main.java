@@ -30,18 +30,18 @@ public class Main {
             dbSetup.getDbPassword()
         );
         
-        // Initialiser UserService med repository 
+        // Opprett UserService instans med repository
         DatabaseUserRepository userRepository = new DatabaseUserRepository(dbConnection);
-        UserService.initialize(userRepository);
-        
-        // Starter Javalin Web Server 
+        UserService userService = new UserService(userRepository);
+
+        // Starter Javalin Web Server
         System.out.println("Starter web server på port 7000...");
         Javalin app = Javalin.create(config -> {
-            config.staticFiles.add("/static"); 
+            config.staticFiles.add("/static");
         }).start(7000);
 
-        // Konfigurer alle routes 
-        Routes.configureRoutes(app);
+        // Konfigurer alle routes med UserService
+        Routes.configureRoutes(app, userService);
         
         System.out.println("Web server kjører på http://localhost:7000");
     }

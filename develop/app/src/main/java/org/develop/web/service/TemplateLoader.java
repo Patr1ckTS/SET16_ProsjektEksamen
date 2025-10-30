@@ -5,9 +5,7 @@ import java.nio.charset.StandardCharsets;
 
 public class TemplateLoader { 
 
-    // ================================= //
     //      Generic Template Loader
-    // ================================= //
     public static String loadTemplate(String templateName) {
         try {
             String path = "/templates/" + templateName;
@@ -23,9 +21,7 @@ public class TemplateLoader {
     }
     
 
-    // ================================= //
     //      Header Template Loader
-    // ================================= //
     public static String loadHeaderHTML() {
         try {
             InputStream is = TemplateLoader.class.getResourceAsStream("/templates/components/header.html");
@@ -35,9 +31,7 @@ public class TemplateLoader {
         }
     }
 
-    // ================================= //
     //      Footer Template Loader
-    // ================================= //
     public static String loadFooterHTML() {
         try {
             InputStream is = TemplateLoader.class.getResourceAsStream("/templates/components/footer.html");

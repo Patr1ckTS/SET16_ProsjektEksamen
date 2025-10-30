@@ -1,61 +1,87 @@
 @startuml Komponentdiagram
 skinparam componentStyle rectangle
+top to bottom direction
+skinparam nodesep 80
+skinparam ranksep 80
 
-title Ruter System - Komponentoversikt
+title Reiseplanleggeren - Heksagonal Arkitektur
 
-' ==================== APP MODULE ====================
-package "APP" #LightBlue {
+package "app\n(Presentasjonslag)" #LightBlue {
     [Web Application] as App
-    note right of App
-        - Oppstart (Main.java)
-        - Web UI (Javalin)
-        - HTTP Routes
-        - Templates
-    end note
 }
 
-' ==================== CORE MODULES ====================
-package "CORE" #LightGreen {
-    [RouteSearch] as RouteSearch
-    [Database] as Database
-    [Calendar] as Calendar
-
-    note right of RouteSearch
-        Rutesøk og filtrering
-    end note
-
-    note right of Database
-        Brukerdata og autentisering
-    end note
-
-    note right of Calendar
-        Kalenderfunksjonalitet
-    end note
+package "core\n(Domenelogikk)" #LightGreen {
+    together {
+        [RouteSearch] as RouteSearch
+        [Database] as Database
+    }
 }
 
-' ==================== ADAPTERS ====================
-package "ADAPTERS" #LightCoral {
-    [Entur Adapter] as EnturAdapter
-    [Calendar Adapter] as CalendarAdapter
-    [Database Adapter] as DatabaseAdapter
+package "ports\n(Grensesnitt)" #LightYellow {
+    together {
+        [EnturRepository\nPort] as EnturPort
+        [CalendarRepository\nPort] as CalendarPort
+        [UserRepository\nPort] as UserPort
+    }
 }
 
-' ==================== EKSTERNE SYSTEMER ====================
+package "adapters\n(Implementasjoner)" #LightCoral {
+    together {
+        [Entur Adapter] as EnturAdapter
+        [Calendar Adapter] as CalendarAdapter
+        [Database Adapter] as DatabaseAdapter
+    }
+}
+
 cloud "Eksterne Systemer" {
-    [Entur API] as EnturAPI
-    [Google Calendar] as GoogleCal
+    together {
+        [Entur API] as EnturAPI
+        [Google Calendar] as GoogleCal
+        database "MySQL Database" as MySQL
+    }
 }
 
-' ==================== AVHENGIGHETER ====================
-App --> RouteSearch
-App --> Database
-App --> Calendar
+App -[hidden]down-> RouteSearch
+RouteSearch -[hidden]down-> EnturPort
+EnturPort -[hidden]down-> EnturAdapter
+EnturAdapter -[hidden]down-> EnturAPI
 
-RouteSearch --> EnturAdapter
-RouteSearch --> CalendarAdapter
-Database --> DatabaseAdapter
+Database -[hidden]down-> UserPort
+CalendarPort -[hidden]down-> CalendarAdapter
+CalendarAdapter -[hidden]down-> GoogleCal
 
-EnturAdapter --> EnturAPI : Read/Map
-CalendarAdapter --> GoogleCal : Read/Map
+' App til Core
+App --> RouteSearch : bruker
+App --> Database : bruker
+
+' Core til Ports
+RouteSearch ..> EnturPort : avhenger av
+RouteSearch ..> CalendarPort : avhenger av
+Database ..> UserPort : avhenger av
+
+' Adapters implementerer Ports
+EnturAdapter .up.|> EnturPort : implementerer
+CalendarAdapter .up.|> CalendarPort : implementerer
+DatabaseAdapter .up.|> UserPort : implementerer
+
+' Adapters til eksterne systemer
+EnturAdapter --> EnturAPI : Leser data fra
+CalendarAdapter --> GoogleCal : Leser data fra
+DatabaseAdapter --> MySQL : Leser/skriver til
+
+
+note right of DatabaseAdapter
+    **NB: DatabaseAdapter**
+
+    Ikke en fullstendig heksagonal
+    arkitektur-implementasjon, men
+    organisert slik for å illustrere
+    konseptet.
+
+    De heksagonale prinsippene er
+    korrekt implementert i:
+    • EnturAdapter
+    • CalendarAdapter
+end note
 
 @enduml
