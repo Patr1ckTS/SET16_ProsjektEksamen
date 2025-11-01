@@ -1,4 +1,6 @@
-package org.develop.domain;
+package org.develop.Domain;
+
+// Overført for undersøkelse av funksjonalitet
 
 public class User {
     private int id;
@@ -15,6 +17,9 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+    }
+
+    public User() {
     }
 
     public int getId(){

@@ -1,0 +1,8 @@
+org\develop\Main.class
+org\develop\Port\Interface\TicketRepository.class
+org\develop\Domain\Ticket.class
+org\develop\Adapter\TicketToDatabase.class
+org\develop\Domain\Payment$PaymentStatus.class
+org\develop\Port\Interface\PaymentRequirements.class
+org\develop\Service\TicketDetails.class
+org\develop\Domain\Payment.class
