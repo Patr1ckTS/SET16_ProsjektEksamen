@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import org.develop.Port.Interface.PaymentRequirements;
 
-
-
 /*
     Har tenkt på følgende logikk om vi inkluderer priser. Data
     knyttet til pris vil da i tilfelle hentes fra en pris tabell 
