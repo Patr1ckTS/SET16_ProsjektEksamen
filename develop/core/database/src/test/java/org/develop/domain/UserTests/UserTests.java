@@ -1,4 +1,4 @@
-package org.develop.domain;
+package org.develop.domain.UserTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
