@@ -1,6 +1,6 @@
 package org.develop.Database;
 
-import org.develop.Port.SQLDatabasePort;
+import org.develop.UserComponent.Port.SQLDatabasePort;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

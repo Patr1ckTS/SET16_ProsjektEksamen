@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.develop.domain.User;
-import org.develop.domain.CreateUser;
-import org.develop.Port.UserPort;
+import org.develop.UserComponent.domain.User;
+import org.develop.UserComponent.domain.CreateUser;
+import org.develop.UserComponent.Port.UserPort;
 
 public class DatabaseUserAdapter implements UserPort {
     private final SQLDatabaseConnection databaseConnection;
