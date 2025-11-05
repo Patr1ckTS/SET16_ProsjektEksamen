@@ -3,62 +3,62 @@ package org.develop.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.develop.TicketComponent.Domain.User;
 
 public class UserTests {
     @Test
     @DisplayName("Control of the User class constructor")
     public void user_checkThatUserAreCreatedWithAllValuesStored(){
-// Arrange
+        // Arrange
         String firstName = "Eugenie";
         String lastName = "Lalande";
         String email = "e.lalande@coldmail.mock";
         String phoneNumber = "+44 0118 999 881 999 119 725 3";
         String password = "passord123";
 
-// Act
+        // Act
+        User eLalande = new User(1, firstName, lastName, email, phoneNumber, password);
 
-        User eLalande = new User(firstName, lastName, email, phoneNumber, password);
-
-// Assert
+        // Assert
         Assertions.assertEquals(firstName, eLalande.getFirstName());
         Assertions.assertEquals(password, eLalande.getPassword());
         Assertions.assertEquals(phoneNumber, eLalande.getPhoneNumber());
-    } 
+    }
 
     @Test
     @DisplayName("Alteration of User property check")
     public void user_checkIfUserPropertiesCanBeChanged(){
-// Arrange
+        // Arrange
         User user = new User(
-            "Roderick", 
-            "Usher", 
-            "r.usher@coldmail.mock", 
-            "+32 93847563", 
+            2,
+            "Roderick",
+            "Usher",
+            "r.usher@coldmail.mock",
+            "+32 93847563",
             "oldPassword");
-
-// Act
+        // Act
         user.setPassword("newPassword");
 
-// Assert
+        // Assert
         Assertions.assertEquals("newPassword", user.getPassword());
     }
 
     @Test
     @DisplayName("Full name function check")
     public void user_checkIfFullNameIsCorrectlyGenerated(){
-// Arrange
+        // Arrange
         User aLee = new User(
-            "Annabel", 
+            3,
+            "Annabel",
             "Lee",
             "a.lee@coldmail.mock",
             "+12 34567890",
             "somePassword");
 
-// Act
+        // Act
         String fullName = aLee.getFullName();
 
-// Assert
+        // Assert
         Assertions.assertEquals("Annabel Lee", fullName);
     }
 }
-

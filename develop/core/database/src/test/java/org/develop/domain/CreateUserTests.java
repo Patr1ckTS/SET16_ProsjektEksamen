@@ -4,21 +4,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import org.develop.UserComponent.domain.CreateUser;
+
 public class CreateUserTests {
     @Test
     @DisplayName("Control of the User class constructor")
     public void createUser_checkThatUserAreCreatedWithAllValuesStored(){
-// Arrange
+        // Arrange
         String firstName = "Arthur";
         String lastName = "Pym";
         String email = "a.pym@coldmail.mock";
         String phoneNumber = "+1 234 567 8901";
         String password = "mysteriousPass";
 
-// Act
+        // Act
         CreateUser aPym = new CreateUser(firstName, lastName, email, phoneNumber, password);
         
-// Assert
+        // Assert
         Assertions.assertEquals(firstName, aPym.getFirstName());
         Assertions.assertEquals(lastName, aPym.getLastName());
         Assertions.assertEquals(email, aPym.getEmail());
@@ -30,7 +32,7 @@ public class CreateUserTests {
     @Test
     @DisplayName("Check if user type is correctly set")
     public void createUser_checkIfUserTypeIsCorrectlySet(){
-// Arrange
+        // Arrange
         CreateUser aSimpson = new CreateUser(
             "Adolphus",
             "Simpson",
@@ -38,7 +40,7 @@ public class CreateUserTests {
             "+98 765 432 1098",
             "defaultPass");
 
-// Act & Assert
+        // Act & Assert
         Assertions.assertEquals("user", aSimpson.getUserType());
     }
 }

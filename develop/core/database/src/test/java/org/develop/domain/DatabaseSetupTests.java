@@ -3,6 +3,7 @@ package org.develop.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.develop.UserComponent.domain.DatabaseSetup;
 
 public class DatabaseSetupTests {
     @Test
