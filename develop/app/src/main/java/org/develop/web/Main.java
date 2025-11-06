@@ -1,10 +1,14 @@
 package org.develop.web;
 
-import org.develop.domain.DatabaseSetup;
+import org.develop.UserComponent.domain.DatabaseSetup;
 import org.develop.web.service.Routes;
-import org.develop.service.UserService;
+import org.develop.UserComponent.service.UserService;
 import org.develop.Database.SQLDatabaseConnection;
 import org.develop.Database.DatabaseUserAdapter;
+import org.develop.Service.RouteApplicationService;
+import org.develop.Service.RouteLogic;
+import org.develop.Service.StopLogic;
+import org.develop.Entur.EnturAdapter;
 
 import io.javalin.Javalin;
 
@@ -34,14 +38,20 @@ public class Main {
         DatabaseUserAdapter userAdapter = new DatabaseUserAdapter(dbConnection);
         UserService userService = new UserService(userAdapter);
 
+        // Opprett RouteApplicationService med dependencies
+        StopLogic stopLogic = new StopLogic();
+        RouteLogic routeLogic = new RouteLogic(stopLogic);
+        EnturAdapter enturAdapter = new EnturAdapter();
+        RouteApplicationService routeAppService = new RouteApplicationService(routeLogic, stopLogic, enturAdapter);
+
         // Starter Javalin Web Server
         System.out.println("Starter web server på port 7000...");
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/static");
         }).start(7000);
 
-        // Konfigurer alle routes med UserService
-        Routes.configureRoutes(app, userService);
+        // Konfigurer alle routes med UserService og RouteApplicationService
+        Routes.configureRoutes(app, userService, routeAppService);
         
         System.out.println("Web server kjører på http://localhost:7000");
     }

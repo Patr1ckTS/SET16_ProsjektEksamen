@@ -2,10 +2,1048 @@
 @use 'mixins';
 @use 'wrappers';
 
-html, body {
+// ===============================================
+// MOBILE FIRST - MODERNE BASE STYLES
+// ===============================================
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; // Fjern horisontal scrolling
+}
+
+body {
     font-family: variables.$font-primary;
-    color: variables.$color-text;
+    color: variables.$color_text;
+    background: variables.$color_bg;
+    line-height: variables.$line_height_base;
+    padding-bottom: 70px; // Plass til bottom nav
+    font-size: variables.$font_size_base;
+    overflow-x: hidden; // Fjern horisontal scrolling
+    width: 100%;
+    max-width: 100vw;
+}
+
+// Padding top for content to not be hidden under fixed nav
+main {
+    padding-top: 60px; // Padding for å gi plass til fixed header
+    min-height: calc(100vh - 130px); // Full høyde minus nav
+
+    @media (min-width: variables.$breakpoint_md) {
+        padding-top: 70px; // Litt mer på desktop
+    }
+
+    // Remove padding for map container så det går kant i kant
+    .map-container {
+        margin-top: calc(-60px); // Offset main padding så kart går helt opp til nav
+        
+        @media (min-width: variables.$breakpoint_md) {
+            margin-top: calc(-70px);
+        }
+    }
+    
+    // Add padding to content below map
+    #main_wrapper {
+        .route-search-form,
+        .available-routes {
+            margin-top: variables.$spacing_sm; // Mindre avstand
+        }
+    }
+}
+
+// Moderne typografi
+h1, h2, h3, h4, h5, h6 {
+    line-height: variables.$line_height_heading;
+    font-weight: variables.$font_weight_semibold;
+    color: variables.$color_text;
+    margin-bottom: variables.$spacing_md;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+
+a {
+    color: variables.$color_accent;
+    text-decoration: none;
+    transition: color variables.$transition_base;
+
+    &:hover {
+        color: variables.$color_primary;
+    }
+}
+
+// ===============================================
+// TOP NAVIGATION - MODERNE FLAT DESIGN
+// ===============================================
+.top_nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: variables.$color_primary;
+    color: variables.$color_white;
+    box-shadow: variables.$shadow_md;
+    z-index: 1000;
+    border-bottom: 2px solid variables.$color_primary_dark;
+}
+
+.top_nav_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: variables.$spacing_md variables.$spacing_sm;
+    
+    @media (min-width: variables.$breakpoint_md) {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: variables.$spacing_md variables.$spacing_lg;
+    }
+}
+
+.logo {
+    h2 {
+        margin: 0;
+        color: variables.$color_white;
+        font-size: 1.3rem;
+        font-weight: variables.$font_weight_bold;
+        letter-spacing: -0.5px;
+
+        @media (min-width: variables.$breakpoint_md) {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.top_nav_auth {
+    display: none;
+
+    @media (min-width: variables.$breakpoint_md) {
+        display: flex;
+        gap: variables.$spacing_sm;
+        align-items: center;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: variables.$spacing_sm;
+    }
+
+    li {
+        margin: 0;
+    }
+
+    a {
+        color: variables.$color_white;
+        text-decoration: none;
+        padding: variables.$spacing_sm variables.$spacing_md;
+        border-radius: variables.$radius_md;
+        transition: all variables.$transition_base;
+        font-weight: variables.$font_weight_medium;
+        font-size: variables.$font_size_sm;
+
+        &:hover {
+            background: variables.$color_primary_light;
+            transform: translateY(-1px);
+        }
+    }
+
+    b {
+        color: variables.$color_white;
+        padding: variables.$spacing_sm variables.$spacing_md;
+        font-weight: variables.$font_weight_medium;
+    }
+}
+
+// ===============================================
+// BOTTOM NAVIGATION - MODERNE FLAT DESIGN
+// ===============================================
+.phone_bottom_nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: variables.$color_primary;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: variables.$spacing_sm 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    border-top: 2px solid variables.$color_primary_dark;
+
+    @media (min-width: variables.$breakpoint_md) {
+        display: none;
+    }
+
+    .nav_item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.8);
+        padding: variables.$spacing_sm;
+        transition: all variables.$transition_base;
+        flex: 1;
+        position: relative;
+
+        &:hover, &.active {
+            color: variables.$color_white;
+            background: variables.$color_primary_light;
+        }
+
+        &.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: variables.$color_accent;
+            border-radius: 0 0 3px 3px;
+        }
+
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+
+            img {
+                width: 22px;
+                height: 22px;
+                filter: brightness(0) invert(1);
+                opacity: 0.8;
+                transition: all variables.$transition_base;
+
+                @media (min-width: variables.$breakpoint_sm) {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+        &:hover .icon img,
+        &.active .icon img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .text {
+            font-size: variables.$font_size_xs;
+            text-align: center;
+            font-weight: variables.$font_weight_medium;
+
+            @media (min-width: variables.$breakpoint_sm) {
+                font-size: variables.$font_size_sm;
+            }
+        }
+    }
+}
+
+// ===============================================
+// RUTEOVERSIKT (Collapsible) - MODERNE DESIGN
+// ===============================================
+.available-routes {
+    background: variables.$color_bg_light;
+    border: 2px solid variables.$color_primary;
+    border-radius: variables.$radius_lg;
+    padding: variables.$spacing_md;
+    margin: variables.$spacing_lg 0;
+    box-shadow: variables.$shadow_sm;
+    transition: all variables.$transition_base;
+
+    &:hover {
+        box-shadow: variables.$shadow_md;
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        padding: variables.$spacing_lg;
+        margin: variables.$spacing_xl 0;
+    }
+
+    summary {
+        font-size: variables.$font_size_lg;
+        font-weight: variables.$font_weight_semibold;
+        color: variables.$color_primary;
+        cursor: pointer;
+        padding: variables.$spacing_md;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        gap: variables.$spacing_sm;
+        transition: color variables.$transition_base;
+
+        @media (min-width: variables.$breakpoint_md) {
+            font-size: variables.$font_size_xl;
+        }
+
+        &:hover {
+            color: variables.$color_accent;
+        }
+
+        &::marker {
+            color: variables.$color_accent;
+        }
+    }
+}
+
+.routes-container {
+    margin-top: variables.$spacing_md;
+    max-height: 450px;
+    overflow-y: auto;
+    padding: variables.$spacing_sm;
+    
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: variables.$color_bg;
+        border-radius: variables.$radius_full;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: variables.$color_border;
+        border-radius: variables.$radius_full;
+        
+        &:hover {
+            background: variables.$color_text_light;
+        }
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        max-height: 550px;
+        padding: variables.$spacing_md;
+    }
+}
+
+.route-card {
+    background: variables.$color_bg_light;
+    border: 1px solid variables.$color_border;
+    border-left: 4px solid variables.$color_accent;
+    border-radius: variables.$radius_md;
+    padding: variables.$spacing_md;
+    margin-bottom: variables.$spacing_md;
+    box-shadow: variables.$shadow_sm;
+    transition: all variables.$transition_base;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: variables.$shadow_md;
+        border-left-color: variables.$color_primary;
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        padding: variables.$spacing_lg;
+    }
+
+    h4 {
+        margin: 0 0 variables.$spacing_sm 0;
+        color: variables.$color_primary;
+        font-size: variables.$font_size_lg;
+        font-weight: variables.$font_weight_semibold;
+
+        @media (min-width: variables.$breakpoint_md) {
+            font-size: variables.$font_size_xl;
+        }
+    }
+}
+
+.route-meta {
+    color: variables.$color_text_light;
+    font-size: variables.$font_size_sm;
+    margin: variables.$spacing_sm 0;
+    display: flex;
+    gap: variables.$spacing_md;
+    flex-wrap: wrap;
+
+    @media (min-width: variables.$breakpoint_md) {
+        font-size: variables.$font_size_base;
+    }
+
+    span {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+}
+
+.stops-list {
+    list-style: none;
+    padding-left: 0;
+    margin: variables.$spacing_md 0;
+
+    li {
+        padding: variables.$spacing_sm 0 variables.$spacing_sm variables.$spacing_lg;
+        position: relative;
+        color: variables.$color_text;
+        font-size: variables.$font_size_sm;
+        line-height: 1.5;
+
+        @media (min-width: variables.$breakpoint_md) {
+            font-size: variables.$font_size_base;
+        }
+
+        &:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: variables.$color_accent;
+            font-weight: variables.$font_weight_bold;
+            font-size: 1.2em;
+        }
+
+        strong {
+            color: variables.$color_primary;
+            font-weight: variables.$font_weight_semibold;
+        }
+    }
+}
+
+.departure-times {
+    background: variables.$color_primary; // Flat farge uten gradient
+    color: variables.$color_white !important; // Force hvit tekst
+    padding: variables.$spacing_md;
+    border-radius: variables.$radius_md;
+    font-size: variables.$font_size_sm;
+    margin-top: variables.$spacing_md;
+    font-weight: variables.$font_weight_medium;
+    box-shadow: variables.$shadow_sm;
+
+    // Sørg for at all tekst inne i boksen er hvit
+    *, 
+    strong,
+    p {
+        color: variables.$color_white !important;
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        font-size: variables.$font_size_base;
+    }
+}
+
+// ===============================================
+// RUTESØK SKJEMA - MODERNE FLAT DESIGN
+// ===============================================
+.route-search-form {
+    background: variables.$color_bg_light;
+    padding: variables.$spacing_md;
+    border-radius: variables.$radius_lg;
+    margin: variables.$spacing_md 0;
+    box-shadow: variables.$shadow_md;
+    border: 1px solid variables.$color_border;
+
+    @media (min-width: variables.$breakpoint_md) {
+        padding: variables.$spacing_lg;
+    }
+
+    h3 {
+        font-size: variables.$font_size_base;
+        color: variables.$color_text_light;
+        margin-bottom: variables.$spacing_md;
+        font-weight: variables.$font_weight_medium;
+    }
+}
+
+.form-group {
+    margin-bottom: variables.$spacing_md;
+
+    label {
+        display: block;
+        margin-bottom: variables.$spacing_sm;
+        font-weight: variables.$font_weight_semibold;
+        color: variables.$color_text;
+        font-size: variables.$font_size_sm;
+
+        @media (min-width: variables.$breakpoint_md) {
+            font-size: variables.$font_size_base;
+        }
+    }
+
+    input {
+        width: 100%;
+        padding: variables.$spacing_sm variables.$spacing_md;
+        border: 2px solid variables.$color_border;
+        border-radius: variables.$radius_md;
+        font-size: variables.$font_size_sm;
+        font-family: variables.$font-primary;
+        color: variables.$color_text;
+        background: variables.$color_white;
+        transition: all variables.$transition_base;
+        box-sizing: border-box;
+
+        @media (min-width: variables.$breakpoint_md) {
+            max-width: 400px;
+            font-size: variables.$font_size_base;
+        }
+
+        &::placeholder {
+            color: variables.$color_text_light;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: variables.$color_accent;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        &:hover {
+            border-color: variables.$color_primary_light;
+        }
+    }
+}
+
+.search-button {
+    background: linear-gradient(135deg, variables.$color_primary 0%, variables.$color_primary_dark 100%);
+    color: variables.$color_white;
+    padding: variables.$spacing_sm variables.$spacing_lg;
+    border: none;
+    border-radius: variables.$radius_md;
+    font-size: variables.$font_size_sm;
+    font-weight: variables.$font_weight_semibold;
+    cursor: pointer;
+    transition: all variables.$transition_base;
+    width: 100%;
+    box-shadow: variables.$shadow_sm;
+    letter-spacing: 0.5px;
+
+    @media (min-width: variables.$breakpoint_md) {
+        width: auto;
+        padding: variables.$spacing_md variables.$spacing_xl;
+        font-size: variables.$font_size_base;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: variables.$shadow_lg;
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: variables.$shadow_sm;
+    }
+
+    &:focus {
+        outline: 3px solid rgba(52, 152, 219, 0.3);
+        outline-offset: 2px;
+    }
+}
+
+// ===============================================
+// RUTESØK RESULTATER - MODERNE DESIGN
+// ===============================================
+.route-result {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    border: 2px solid variables.$color_accent;
+    border-left: 5px solid variables.$color_accent;
+    padding: variables.$spacing_lg;
+    border-radius: variables.$radius_lg;
+    margin: variables.$spacing_lg 0;
+    font-size: variables.$font_size_sm;
+    box-shadow: variables.$shadow_md;
+    transition: all variables.$transition_base;
+
+    &:hover {
+        transform: translateX(4px);
+        box-shadow: variables.$shadow_lg;
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        font-size: variables.$font_size_base;
+        padding: variables.$spacing_xl;
+    }
+}
+
+.success-result {
+    background: linear-gradient(135deg, variables.$color_primary 0%, variables.$color_primary_dark 100%);
+    border: none;
+    color: variables.$color_white;
+    padding: variables.$spacing_xl;
+    border-radius: variables.$radius_lg;
+    margin: variables.$spacing_lg 0;
+    font-size: variables.$font_size_sm;
+    box-shadow: variables.$shadow_lg;
+    transition: all variables.$transition_base;
+
+    h3 {
+        color: variables.$color_white;
+        font-size: 1.5rem;
+        margin-bottom: variables.$spacing_md;
+        font-weight: variables.$font_weight_bold;
+        text-align: left;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        font-size: variables.$font_size_base;
+        padding: variables.$spacing_xxl;
+    }
+
+    .route-info {
+        color: variables.$color_white;
+        text-align: left !important;
+
+        p {
+            color: #eee !important;
+            text-align: left !important;
+            
+            strong {
+                color: variables.$color_white;
+                opacity: 0.9;
+            }
+        }
+    }
+
+    .buy-ticket-button {
+        background: variables.$color_white;
+        color: variables.$color_primary;
+        padding: variables.$spacing_md variables.$spacing_xl;
+        border: none;
+        border-radius: variables.$radius_md;
+        font-size: variables.$font_size_base;
+        font-weight: variables.$font_weight_semibold;
+        cursor: pointer;
+        transition: all variables.$transition_base;
+        margin-top: variables.$spacing_lg;
+        box-shadow: variables.$shadow_sm;
+        letter-spacing: 0.5px;
+        display: inline-block;
+        text-decoration: none;
+        width: 100%;
+        text-align: center;
+
+        @media (min-width: variables.$breakpoint_md) {
+            width: auto;
+        }
+
+        &:hover {
+            background: variables.$color_bg_light;
+            transform: translateY(-2px);
+            box-shadow: variables.$shadow_md;
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
+.error-result {
+    background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+    border: 2px solid variables.$color_danger;
+    border-left: 5px solid variables.$color_danger;
+    color: #C0392B; // Darkened version of #E74C3C
+    padding: variables.$spacing_lg;
+    border-radius: variables.$radius_lg;
+    margin: variables.$spacing_lg 0;
+    font-size: variables.$font_size_sm;
+    box-shadow: variables.$shadow_md;
+    transition: all variables.$transition_base;
+
+    &:hover {
+        transform: translateX(4px);
+        box-shadow: variables.$shadow_lg;
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        font-size: variables.$font_size_base;
+        padding: variables.$spacing_xl;
+    }
+}
+
+.route-info {
+    margin-top: variables.$spacing_md;
+
+    p {
+        margin: variables.$spacing_sm 0;
+        font-size: variables.$font_size_sm;
+        line-height: 1.6;
+        color: variables.$color_white; // Hvit tekst
+        text-align: left; // Venstrestilt
+
+        @media (min-width: variables.$breakpoint_md) {
+            font-size: variables.$font_size_base;
+        }
+
+        strong {
+            font-weight: variables.$font_weight_semibold;
+            color: variables.$color_white; // Hvit tekst på strong også
+        }
+    }
+}
+
+// ===============================================
+// HJELP-SEKSJON - MODERNE DESIGN
+// ===============================================
+.help-section {
+    background: variables.$color_bg_light;
+    border: 1px solid variables.$color_border;
+    border-left: 4px solid variables.$color_warning;
+    padding: variables.$spacing_lg;
+    border-radius: variables.$radius_lg;
+    margin-top: variables.$spacing_xl;
+    font-size: variables.$font_size_sm;
+    box-shadow: variables.$shadow_sm;
+
+    @media (min-width: variables.$breakpoint_md) {
+        padding: variables.$spacing_xl;
+        font-size: variables.$font_size_base;
+    }
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: variables.$spacing_md;
+        color: variables.$color_primary;
+        font-size: variables.$font_size_lg;
+        font-weight: variables.$font_weight_semibold;
+
+        @media (min-width: variables.$breakpoint_md) {
+            font-size: variables.$font_size_xl;
+        }
+    }
+
+    ul {
+        margin-bottom: 0;
+        padding-left: variables.$spacing_lg;
+        
+        @media (min-width: variables.$breakpoint_md) {
+            padding-left: variables.$spacing_xl;
+        }
+    }
+
+    li {
+        margin-bottom: variables.$spacing_sm;
+        line-height: 1.6;
+        color: variables.$color_text;
+        
+        &::marker {
+            color: variables.$color_accent;
+        }
+    }
+}
+
+// ===============================================
+// MAIN WRAPPER - MODERNE LAYOUT
+// ===============================================
+#main_wrapper {
+    padding: variables.$spacing_md;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; // Forhindre horisontal scroll
+
+    @media (min-width: variables.$breakpoint_sm) {
+        padding: variables.$spacing_lg;
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: variables.$spacing_xl;
+    }
+
+    @media (min-width: variables.$breakpoint_lg) {
+        max-width: 1100px;
+    }
+}
+
+// ===============================================
+// CARDS & CONTAINERS
+// ===============================================
+.card {
+    background: variables.$color_bg_light;
+    border: 1px solid variables.$color_border;
+    border-radius: variables.$radius_lg;
+    padding: variables.$spacing_lg;
+    margin-bottom: variables.$spacing_lg;
+    box-shadow: variables.$shadow_sm;
+    transition: all variables.$transition_base;
+
+    &:hover {
+        box-shadow: variables.$shadow_md;
+        transform: translateY(-2px);
+    }
+
+    @media (min-width: variables.$breakpoint_md) {
+        padding: variables.$spacing_xl;
+    }
+}
+
+// ===============================================
+// BUTTONS - UNIVERSELT DESIGN
+// ===============================================
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: variables.$spacing_sm;
+    padding: variables.$spacing_md variables.$spacing_lg;
+    border: none;
+    border-radius: variables.$radius_md;
+    font-family: variables.$font-primary;
+    font-size: variables.$font_size_base;
+    font-weight: variables.$font_weight_semibold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all variables.$transition_base;
+    box-shadow: variables.$shadow_sm;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: variables.$shadow_md;
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: variables.$shadow_xs;
+    }
+
+    &-primary {
+        background: linear-gradient(135deg, variables.$color_primary 0%, variables.$color_primary_dark 100%);
+        color: variables.$color_white;
+
+        &:hover {
+            background: variables.$color_primary_light;
+        }
+    }
+
+    &-secondary {
+        background: variables.$color_secondary;
+        color: variables.$color_white;
+
+        &:hover {
+            background: #CF6D17; // Darkened version of #E67E22
+        }
+    }
+
+    &-outline {
+        background: transparent;
+        border: 2px solid variables.$color_primary;
+        color: variables.$color_primary;
+
+        &:hover {
+            background: variables.$color_primary;
+            color: variables.$color_white;
+        }
+    }
+}
+
+// ===============================================
+// RESPONSIVE UTILITIES
+// ===============================================
+.mobile-only {
+    display: block;
+
+    @media (min-width: variables.$breakpoint_md) {
+        display: none;
+    }
+}
+
+.desktop-only {
+    display: none;
+
+    @media (min-width: variables.$breakpoint_md) {
+        display: block;
+    }
+}
+
+.responsive-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: variables.$spacing_md;
+
+    @media (min-width: variables.$breakpoint_sm) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: variables.$spacing_lg;
+    }
+
+    @media (min-width: variables.$breakpoint_lg) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: variables.$spacing_xl;
+    }
+}
+
+// ===============================================
+// LOADING & ANIMATIONS
+// ===============================================
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn variables.$transition_base forwards;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    animation: spin 1s linear infinite;
+}
+
+// ===============================================
+// MAPBOX MAP STYLES
+// ===============================================
+.map-container {
+    width: 100vw;
+    margin: 0;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+    left: 0;
+}
+
+#map {
+    width: 100%;
+    height: 450px; // Litt høyere
+
+    @media (max-width: variables.$breakpoint_md) {
+        height: 400px; // Litt høyere på mobil også
+    }
+}
+
+// ===============================================
+// LOGIN & REGISTER FORMS - MODERNE DESIGN
+// ===============================================
+#main_wrapper {
+    max-width: 500px;
+    margin: variables.$spacing_xxl auto;
+    padding: variables.$spacing_lg;
+
+    @media (min-width: variables.$breakpoint_md) {
+        padding: variables.$spacing_xl;
+    }
+
+    h1 {
+        text-align: center;
+        color: variables.$color_primary;
+        margin-bottom: variables.$spacing_xl;
+        font-size: 2rem;
+        font-weight: variables.$font_weight_bold;
+    }
+
+    form {
+        background: variables.$color_bg_light;
+        padding: variables.$spacing_xl;
+        border-radius: variables.$radius_lg;
+        box-shadow: variables.$shadow_lg;
+        border: 1px solid variables.$color_border;
+
+        label {
+            display: block;
+            margin-bottom: variables.$spacing_sm;
+            font-weight: variables.$font_weight_semibold;
+            color: variables.$color_text;
+            font-size: variables.$font_size_sm;
+
+            @media (min-width: variables.$breakpoint_md) {
+                font-size: variables.$font_size_base;
+            }
+        }
+
+        input {
+            width: 100%;
+            padding: variables.$spacing_md;
+            margin-bottom: variables.$spacing_lg;
+            border: 2px solid variables.$color_border;
+            border-radius: variables.$radius_md;
+            font-size: variables.$font_size_base;
+            font-family: variables.$font-primary;
+            color: variables.$color_text;
+            background: variables.$color_white;
+            transition: all variables.$transition_base;
+            box-sizing: border-box;
+
+            &::placeholder {
+                color: variables.$color_text_light;
+            }
+
+            &:focus {
+                outline: none;
+                border-color: variables.$color_accent;
+                box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            }
+
+            &:hover {
+                border-color: variables.$color_primary_light;
+            }
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background: linear-gradient(135deg, variables.$color_primary 0%, variables.$color_primary_dark 100%);
+            color: variables.$color_white;
+            padding: variables.$spacing_md variables.$spacing_xl;
+            border: none;
+            border-radius: variables.$radius_md;
+            font-size: variables.$font_size_base;
+            font-weight: variables.$font_weight_semibold;
+            cursor: pointer;
+            transition: all variables.$transition_base;
+            box-shadow: variables.$shadow_md;
+            letter-spacing: 0.5px;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: variables.$shadow_lg;
+            }
+
+            &:active {
+                transform: translateY(0);
+                box-shadow: variables.$shadow_sm;
+            }
+
+            &:focus {
+                outline: 3px solid rgba(52, 152, 219, 0.3);
+                outline-offset: 2px;
+            }
+        }
+    }
+
+    p {
+        text-align: center;
+        margin-top: variables.$spacing_lg;
+        color: variables.$color_text;
+        font-size: variables.$font_size_sm;
+
+        a {
+            color: variables.$color_accent;
+            font-weight: variables.$font_weight_semibold;
+            text-decoration: none;
+            transition: color variables.$transition_base;
+
+            &:hover {
+                color: variables.$color_primary;
+                text-decoration: underline;
+            }
+        }
+    }
 }
 

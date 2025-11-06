@@ -6,13 +6,15 @@ public class User {
     private String email;
     private String phoneNumber;
     private String password;
+    private int userType;
 
-    public User(String firstName, String lastName, String email, String phoneNumber, String password) {
+    public User(String firstName, String lastName, String email, String phoneNumber, String password, int userType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.userType = userType;
     }
 
     public String getFirstName() {
@@ -39,6 +41,19 @@ public class User {
         return firstName + " " + lastName;
     }
 
+    public int getUserType() {
+        return userType;
+    }
+
+    public String getUserTypeText() {
+        switch (userType) {
+            case 1: return "Standard bruker";
+            case 2: return "Admin bruker";
+            case 3: return "Utvikler bruker";
+            default: return "Ukjent brukertype";
+        }
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -57,5 +72,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
     }
 }

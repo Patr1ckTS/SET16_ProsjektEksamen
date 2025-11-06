@@ -1,7 +1,11 @@
 package org.develop.web.service;
 
 import io.javalin.Javalin;
-import org.develop.service.UserService;
+import org.develop.UserComponent.service.UserService;
+import org.develop.Service.RouteApplicationService;
+import org.develop.Service.RouteLogic;
+import org.develop.Service.StopLogic;
+import org.develop.Service.dto.ResultDTO;
 
 public class Routes {
 
@@ -10,37 +14,48 @@ public class Routes {
         String loggedInEmail = ctx.sessionAttribute("userEmail");
         String headerHTML = TemplateLoader.loadHeaderHTML();
         String headerAuth;
+        String userFirstName = "Profil"; // Default for logged-out users
         if (loggedInEmail != null) {
             String fullName = userService.getNameByEmail(loggedInEmail);
+            // Extract first name from full name
+            if (fullName != null && !fullName.isEmpty()) {
+                String[] nameParts = fullName.split(" ");
+                userFirstName = nameParts[0]; // Get first name
+            }
             headerAuth =
+                "<ul>" +
                 "<li><a href='/logout'>Logg ut</a></li>" +
                 "<li><a href='/favoritter'>Favoritter</a></li>" +
-                "<li><b>" + fullName + "</b></li>";
+                "<li><b>" + fullName + "</b></li>" +
+                "</ul>";
         } else {
             headerAuth =
+                "<ul>" +
                 "<li><a href='/login'>Logg inn</a></li>" +
-                "<li><a href='/registrer'>Registrer</a></li>";
+                "<li><a href='/registrer'>Registrer</a></li>" +
+                "</ul>";
         }
         headerHTML = headerHTML.replace("{{HEADER_AUTH}}", headerAuth);
+        headerHTML = headerHTML.replace("{{USER_FIRST_NAME}}", userFirstName);
         headerHTML = headerHTML.replace("{{PAGE_TITLE}}", pageTitle);
         return headerHTML;
     }
 
-    public static void configureRoutes(Javalin app, UserService userService) {
+    public static void configureRoutes(Javalin app, UserService userService, RouteApplicationService routeAppService) {
         
 
-        // Hovedsside (index.html)
+        // Hovedsside (index.html) - med rutesøk
         app.get("/", ctx -> {
             String template = TemplateLoader.loadTemplate("index.html");
             String customHeader = getHeaderHTML(ctx, "Ruter - Hjem", userService);
             String footerHTML = TemplateLoader.loadFooterHTML();
 
             String html = template
-                // Generiske templatesq
+                // Generiske templates
                 .replace("{{HEADER}}", customHeader)
-                .replace("{{FOOTER}}", footerHTML);
-
-                // Spesifikke templates
+                .replace("{{FOOTER}}", footerHTML)
+                // Tomt rutesøk-resultat ved første besøk
+                .replace("{{ROUTE_RESULTS}}", "");
                 
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
@@ -197,7 +212,146 @@ public class Routes {
             ctx.contentType("text/html; charset=utf-8").result(html);
         });
 
+        //      Kalender
+        app.get("/kalender", ctx -> {
+            String template = TemplateLoader.loadTemplate("calendar.html");
+            String customHeader = getHeaderHTML(ctx, "Ruter - Kalender", userService);
+            String footerHTML = TemplateLoader.loadFooterHTML();
 
+            String html = template
+                // Generiske templates
+                .replace("{{HEADER}}", customHeader)
+                .replace("{{FOOTER}}", footerHTML);
+                
+            ctx.contentType("text/html; charset=utf-8").result(html);
+        });
+
+        //      Profil
+        app.get("/profil", ctx -> {
+            // Sjekk om bruker er logget inn
+            String loggedInEmail = ctx.sessionAttribute("userEmail");
+            if (loggedInEmail == null) {
+                ctx.redirect("/login");
+                return;
+            }
+
+            String template = TemplateLoader.loadTemplate("profil.html");
+            String customHeader = getHeaderHTML(ctx, "Ruter - Min Profil", userService);
+            String footerHTML = TemplateLoader.loadFooterHTML();
+
+            // Hent brukerdata
+            String fullName = userService.getNameByEmail(loggedInEmail);
+            String phoneNumber = userService.getPhoneNumberByEmail(loggedInEmail);
+            String userType = userService.getUserTypeByEmail(loggedInEmail);
+
+            String html = template
+                .replace("{{HEADER}}", customHeader)
+                .replace("{{FOOTER}}", footerHTML)
+                .replace("{{USER_NAME}}", fullName != null ? fullName : "Ikke tilgjengelig")
+                .replace("{{USER_EMAIL}}", loggedInEmail)
+                .replace("{{USER_PHONE}}", phoneNumber != null ? phoneNumber : "Ikke tilgjengelig")
+                .replace("{{USER_TYPE}}", userType != null ? userType : "Ikke tilgjengelig");
+                
+            ctx.contentType("text/html; charset=utf-8").result(html);
+        });
+
+        // =============================================== //
+        //      Rutesøk
+        // =============================================== //
+        app.get("/rutesok", ctx -> {
+            String template = TemplateLoader.loadTemplate("rutesok.html");
+            String customHeader = getHeaderHTML(ctx, "Ruter - Rutesøk", userService);
+            String footerHTML = TemplateLoader.loadFooterHTML();
+
+            String html = template
+                .replace("{{HEADER}}", customHeader)
+                .replace("{{FOOTER}}", footerHTML)
+                .replace("{{ROUTE_RESULTS}}", ""); // Tomt ved første besøk
+                
+            ctx.contentType("text/html; charset=utf-8").result(html);
+        });
+
+        app.post("/rutesok", ctx -> {
+            try {
+                // Hent form-data
+                String startLocation = ctx.formParam("startLocation");
+                String endLocation = ctx.formParam("endLocation");
+                String departureTime = ctx.formParam("departureTime");
+                
+                // Valider input
+                if (startLocation == null || startLocation.trim().isEmpty() ||
+                    endLocation == null || endLocation.trim().isEmpty() ||
+                    departureTime == null || departureTime.trim().isEmpty()) {
+                    
+                    ctx.status(400).result("<p style='color:red;'>Alle felt må fylles ut</p>");
+                    return;
+                }
+                
+                // Bruk ekte rutesøk-logikk
+                ResultDTO result = routeAppService.searchRoute(
+                    startLocation.trim(),
+                    endLocation.trim(), 
+                    departureTime.trim()
+                );
+                
+                String resultHTML = createResultHTML(result);
+                
+                // Render index.html (ikke rutesok.html) med resultat
+                String template = TemplateLoader.loadTemplate("index.html");
+                String customHeader = getHeaderHTML(ctx, "Ruter - Hjem", userService);
+                String footerHTML = TemplateLoader.loadFooterHTML();
+
+                String html = template
+                    .replace("{{HEADER}}", customHeader)
+                    .replace("{{FOOTER}}", footerHTML)
+                    .replace("{{ROUTE_RESULTS}}", resultHTML);
+                    
+                ctx.contentType("text/html; charset=utf-8").result(html);
+                
+            } catch (Exception e) {
+                ctx.status(500).result("<p style='color:red;'>Feil ved rutesøk: " + e.getMessage() + "</p>");
+            }
+        });
+
+
+    }
+    
+    /**
+     * Lager HTML for rutesøk-resultat
+     */
+    private static String createResultHTML(ResultDTO result) {
+        if (!result.isSuccess()) {
+            return String.format(
+                "<div class='error-result'>" +
+                "<h3>Søket mislyktes</h3>" +
+                "<p>%s</p>" +
+                "</div>", 
+                result.getMessage()
+            );
+        }
+        
+        return String.format(
+            "<div class='success-result'>" +
+            "<h3>Rute funnet!</h3>" +
+            "<div class='route-info'>" +
+            "<p><strong>Transport:</strong> %s</p>" +
+            "<p><strong>Rute:</strong> %s</p>" +
+            "<p><strong>Fra:</strong> %s (Avgang: %s)</p>" +
+            "<p><strong>Til:</strong> %s (Ankomst: %s)</p>" +
+            "<p><strong>Reisetid:</strong> %d minutter</p>" +
+            "<p><strong>Avgangstid fra terminal:</strong> %s</p>" +
+            "</div>" +
+            "<button class='buy-ticket-button'>Kjøp billett</button>" +
+            "</div>",
+            result.getTransportType() != null ? result.getTransportType() : "Ukjent",
+            result.getRouteName() != null ? result.getRouteName() : "Ukjent rute",
+            result.getStartLocation() != null ? result.getStartLocation() : "Ukjent",
+            result.getArrivalAtStartStop() != null ? result.getArrivalAtStartStop() : "Ukjent",
+            result.getEndLocation() != null ? result.getEndLocation() : "Ukjent", 
+            result.getArrivalAtEndStop() != null ? result.getArrivalAtEndStop() : "Ukjent",
+            result.getTravelTime(),
+            result.getDepartureFromTerminal() != null ? result.getDepartureFromTerminal() : "Ukjent"
+        );
     }
     
 }

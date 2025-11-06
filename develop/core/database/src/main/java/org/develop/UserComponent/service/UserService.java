@@ -91,4 +91,32 @@ public class UserService {
         }
         return null;
     }
+
+    public String getPhoneNumberByEmail(String email) {
+        try {
+            ArrayList<User> users = userUseCases.arrayListOfRequestedUsers();
+            for (User user : users) {
+                if (user.getEmail().equals(email)) {
+                    return user.getPhoneNumber();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Feil ved henting av telefonnummer: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public String getUserTypeByEmail(String email) {
+        try {
+            ArrayList<User> users = userUseCases.arrayListOfRequestedUsers();
+            for (User user : users) {
+                if (user.getEmail().equals(email)) {
+                    return user.getUserTypeText();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Feil ved henting av brukertype: " + e.getMessage());
+        }
+        return null;
+    }
 }

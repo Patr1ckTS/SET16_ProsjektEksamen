@@ -1,0 +1,56 @@
+{{HEADER}}
+
+<main>
+    <div id="main_wrapper">
+        <h1>Rutesøk</h1>
+        <p>Søk etter ruter mellom stopp i kollektivtransport.</p>
+        
+        <form action="/rutesok" method="POST" class="route-search-form">
+            <div class="form-group">
+                <label for="startLocation">Fra:</label>
+                <input type="text" id="startLocation" name="startLocation" 
+                       placeholder="F.eks. Fredrikstad bussterminal" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="endLocation">Til:</label>
+                <input type="text" id="endLocation" name="endLocation" 
+                       placeholder="F.eks. Sarpsborg terminal" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="departureTime">Ønsket avgang:</label>
+                <input type="time" id="departureTime" name="departureTime" required>
+            </div>
+            
+            <button type="submit" class="search-button">Søk rute</button>
+        </form>
+        
+        <div id="route-results">
+            {{ROUTE_RESULTS}}
+        </div>
+        
+        <div class="help-section">
+            <h3>Tips for rutesøk:</h3>
+            <ul>
+                <li>Skriv inn nøyaktige stoppnavn som vist i rutedataene</li>
+                <li>Eksempler på stopp: "Fredrikstad bussterminal", "Cicignon skole", "Kråkerøy terminal"</li>
+                <li>Velg tidspunkt på 24-timers format</li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Scroll til resultater hvis de finnes
+    window.addEventListener('DOMContentLoaded', function() {
+        const resultsDiv = document.getElementById('route-results');
+        if (resultsDiv && resultsDiv.innerHTML.trim() !== '') {
+            setTimeout(() => {
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+    });
+</script>
+
+{{FOOTER}}

@@ -19,7 +19,7 @@ public class DatabaseUserAdapter implements UserPort {
 
     public ArrayList<User> findAllOrderedByCreatedAt() {
         ArrayList<User> users = new ArrayList<>();
-        String query = "SELECT firstname, lastname, email, phonenumber, password, created_at FROM users ORDER BY created_at DESC";
+        String query = "SELECT firstname, lastname, email, phonenumber, password, user_type, created_at FROM users ORDER BY created_at DESC";
 
         try (Connection conn = databaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -31,8 +31,9 @@ public class DatabaseUserAdapter implements UserPort {
                 String email = rs.getString("email");
                 String phoneNumber = rs.getString("phonenumber");
                 String password = rs.getString("password");
+                int userType = rs.getInt("user_type");
 
-                User user = new User(firstname, lastname, email, phoneNumber, password);
+                User user = new User(firstname, lastname, email, phoneNumber, password, userType);
                 users.add(user);
             }
         } catch (SQLException e) {
