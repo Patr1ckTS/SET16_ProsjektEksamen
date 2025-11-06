@@ -1,8 +1,11 @@
-package org.develop.TravelEnteties;
+package org.develop.Entities.dto;
 
 import java.util.ArrayList;
 
-public class Route {
+import org.develop.Entities.Stop;
+import org.develop.Entities.Transport;
+
+public class RouteDTO {
     private String routeId;
     private String routeName;
     private Transport transport;
@@ -10,9 +13,9 @@ public class Route {
     private ArrayList<Stop> stops;
 
     //Json konstruktør for Jackson
-    public Route() {}
+    public RouteDTO() {}
 
-    public Route(String routeId, String routeName, Transport transport, double price, ArrayList<Stop> stops) {
+    public RouteDTO(String routeId, String routeName, Transport transport, double price, ArrayList<Stop> stops) {
         this.routeId = routeId;
         this.routeName = routeName;
         this.transport = transport;

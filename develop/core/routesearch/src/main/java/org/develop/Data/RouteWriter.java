@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import java.io.File;
 import java.io.IOException;
 
-import org.develop.TravelEnteties.dto.RouteDTO;;
+import org.develop.Entities.dto.RouteDTO;
 
 public class RouteWriter {
 

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 
-import org.develop.TravelEnteties.Route;
+import org.develop.Entities.Route;
 
 public class RouteReader {
 

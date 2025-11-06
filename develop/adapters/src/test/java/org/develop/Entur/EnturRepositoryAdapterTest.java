@@ -2,9 +2,8 @@ package org.develop.Entur;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-
+import org.develop.Entities.Route;
 import org.develop.Port.EnturPort;
-import org.develop.TravelEnteties.Route;
 
 import java.util.ArrayList;
 

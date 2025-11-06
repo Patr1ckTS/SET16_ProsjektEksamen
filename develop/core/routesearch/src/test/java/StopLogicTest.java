@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.develop.TravelEnteties.Stop;
+import org.develop.Entities.Stop;
 import org.develop.Service.StopLogic;
 
 

@@ -11,12 +11,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-
-import org.develop.TravelEnteties.Stop;
-import org.develop.TravelEnteties.Transport;
 import org.develop.Data.RouteWriter;
-import org.develop.TravelEnteties.dto.RouteDTO;
+import org.develop.Entities.Stop;
+import org.develop.Entities.Transport;
+import org.develop.Entities.dto.RouteDTO;
 
 public class RouteWriterTest {
 

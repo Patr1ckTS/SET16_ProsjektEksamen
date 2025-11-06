@@ -1,8 +1,9 @@
 
 package org.develop.Interface;
 
-import org.develop.TravelEnteties.Route;
 import java.util.ArrayList;
+
+import org.develop.Entities.Route;
 
 public interface RouteService {
     Route calculateRoute(ArrayList<Route> availableRoutes, String startLocation, String endLocation);

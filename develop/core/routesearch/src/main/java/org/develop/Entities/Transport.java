@@ -1,4 +1,4 @@
-package org.develop.TravelEnteties;
+package org.develop.Entities;
 
 // Denne kan gjøres abstrakt om vi skal ha flere transportmidler og da definere egne klasser for de
     // F.eks. Buss, Tog, T-bane, Trikk, Ferge osv.

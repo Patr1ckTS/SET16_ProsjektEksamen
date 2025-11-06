@@ -2,12 +2,12 @@ package org.develop;
 
 import java.util.ArrayList;
 
+import org.develop.Entities.Route;
+import org.develop.Entities.Stop;
 import org.develop.Entur.EnturAdapter;
 import org.develop.Port.EnturPort;
 import org.develop.Service.RouteLogic;
 import org.develop.Service.StopLogic;
-import org.develop.TravelEnteties.Route;
-import org.develop.TravelEnteties.Stop;
 
 public class Main {
 

@@ -2,7 +2,7 @@ package org.develop.Port;
 
 import java.util.ArrayList;
 
-import org.develop.TravelEnteties.Route;
+import org.develop.Entities.Route;
 
 public interface EnturPort {
 

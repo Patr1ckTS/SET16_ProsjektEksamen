@@ -7,8 +7,9 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.develop.Service.RouteLogic;
+import org.develop.Entities.Stop;
 import org.develop.Interface.StopService;
-import org.develop.TravelEnteties.Stop;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

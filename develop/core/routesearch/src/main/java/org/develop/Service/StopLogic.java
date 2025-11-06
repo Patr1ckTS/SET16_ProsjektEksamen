@@ -5,8 +5,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 
+import org.develop.Entities.Stop;
 import org.develop.Interface.StopService;
-import org.develop.TravelEnteties.Stop;
 
 // Utility- og serviceklasse for stoppestedsrelatert logikk
 // Egner seg ikke for Dependency Injection, da den ikke har noen avhengigheter

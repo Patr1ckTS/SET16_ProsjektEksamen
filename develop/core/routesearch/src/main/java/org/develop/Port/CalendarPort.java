@@ -1,6 +1,6 @@
 package org.develop.Port;
 
-import org.develop.Calendar.Calendar;
+import org.develop.Entities.Calendar.Calendar;
 
 // Calendar Repository Port - definerer kontrakten for data-aksess til kalenderdata
 public interface CalendarPort {

@@ -1,10 +1,11 @@
 package org.develop.Entur.Mapper;
 
+import org.develop.Entities.Route;
+import org.develop.Entities.Stop;
+import org.develop.Entities.Transport;
 import org.develop.Entur.DTO.EnturRouteDTO;
 import org.develop.Entur.DTO.EnturRouteDTO.StopData;
-import org.develop.TravelEnteties.Route;
-import org.develop.TravelEnteties.Transport;
-import org.develop.TravelEnteties.Stop;
+
 import java.util.ArrayList;
 
 public class EnturRouteMapper {

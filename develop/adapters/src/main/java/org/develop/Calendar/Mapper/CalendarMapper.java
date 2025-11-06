@@ -1,9 +1,10 @@
 package org.develop.Calendar.Mapper;
 
 import org.develop.Calendar.DTO.EventDTO;
+import org.develop.Entities.Calendar.Calendar;
+import org.develop.Entities.Calendar.Event;
 import org.develop.Calendar.DTO.CalendarDTO;
-import org.develop.Calendar.Event;
-import org.develop.Calendar.Calendar;
+
 import java.util.ArrayList;
 
 public class CalendarMapper {

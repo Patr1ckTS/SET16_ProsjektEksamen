@@ -3,17 +3,24 @@ package org.develop.Entur;
 import org.develop.Port.EnturPort;
 import org.develop.Entur.Reader.EnturRouteReader;
 import org.develop.Entur.Mapper.EnturRouteMapper;
+import org.develop.Entities.Route;
 import org.develop.Entur.DTO.EnturRouteDTO;
-import org.develop.TravelEnteties.Route;
+
 import java.util.ArrayList;
 
 public class EnturAdapter implements EnturPort {
     private final EnturRouteReader routeReader;
     private final EnturRouteMapper routeMapper;
 
+    // Konstruktør injection for testing
+    public EnturAdapter(EnturRouteReader routeReader, EnturRouteMapper routeMapper) {
+        this.routeReader = routeReader;
+        this.routeMapper = routeMapper;
+    }
+
+    // Normal konstruktør for MVP
     public EnturAdapter() {
-        this.routeReader = new EnturRouteReader();
-        this.routeMapper = new EnturRouteMapper();
+        this(new EnturRouteReader(), new EnturRouteMapper());
     }
 
     private Route mapRoute(EnturRouteDTO dto) {

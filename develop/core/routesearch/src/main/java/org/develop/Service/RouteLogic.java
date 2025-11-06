@@ -2,10 +2,11 @@
 package org.develop.Service;
 
 import java.util.ArrayList;
+
+import org.develop.Entities.Route;
+import org.develop.Entities.Stop;
 import org.develop.Interface.RouteService;
 import org.develop.Interface.StopService;
-import org.develop.TravelEnteties.Route;
-import org.develop.TravelEnteties.Stop;
 
 // Utility- og serviceklasse for avanserte ruteberegninger og logikk
 // Avhengig av Dependency Injection for StopService

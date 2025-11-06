@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.develop.TravelEnteties.Stop;
+import org.develop.Entities.Stop;
 
 public class StopListReader {
 

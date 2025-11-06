@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.develop.Data.RouteReader;
-import org.develop.TravelEnteties.Route;
-import org.develop.TravelEnteties.Stop;
-import org.develop.TravelEnteties.Transport;
-import org.develop.TravelEnteties.dto.RouteDTO;
+import org.develop.Entities.Route;
+import org.develop.Entities.Stop;
+import org.develop.Entities.Transport;
+import org.develop.Entities.dto.RouteDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 

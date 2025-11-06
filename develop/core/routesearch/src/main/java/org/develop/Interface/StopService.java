@@ -1,8 +1,9 @@
 
 package org.develop.Interface;
 
-import org.develop.TravelEnteties.Stop;
 import java.util.List;
+
+import org.develop.Entities.Stop;
 
 public interface StopService {
     String calculateTransportAtStop(Stop stop, String departureTimeFromTerminal);
