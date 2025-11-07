@@ -1,20 +1,25 @@
 package org.develop.UserComponent.domain;
 
 public class User {
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
     private String password;
-    private int userType;
+//    private int userType;
 
-    public User(String firstName, String lastName, String email, String phoneNumber, String password, int userType) {
+    public User(String firstName, String lastName, String email, String phoneNumber, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.userType = userType;
+//        this.userType = userType;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -40,7 +45,7 @@ public class User {
     public String getFullName() {
         return firstName + " " + lastName;
     }
-
+/* 
     public int getUserType() {
         return userType;
     }
@@ -53,7 +58,7 @@ public class User {
             default: return "Ukjent brukertype";
         }
     }
-
+*/
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -73,8 +78,9 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
+/*
     public void setUserType(int userType) {
         this.userType = userType;
     }
+*/        
 }

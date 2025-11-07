@@ -1,14 +1,15 @@
 package org.develop.web;
 
-import org.develop.UserComponent.domain.DatabaseSetup;
-import org.develop.web.service.Routes;
-import org.develop.UserComponent.service.UserService;
-import org.develop.Database.SQLDatabaseConnection;
 import org.develop.Database.DatabaseUserAdapter;
+import org.develop.Database.SQLDatabaseConnection;
+import org.develop.Entur.EnturAdapter;
 import org.develop.Service.RouteApplicationService;
 import org.develop.Service.RouteLogic;
 import org.develop.Service.StopLogic;
-import org.develop.Entur.EnturAdapter;
+import org.develop.UserComponent.domain.DatabaseSetup;
+import org.develop.UserComponent.service.RoleService;
+import org.develop.UserComponent.service.UserService;
+import org.develop.web.service.Routes;
 
 import io.javalin.Javalin;
 
@@ -36,7 +37,16 @@ public class Main {
 
         // Opprett UserService instans med adapter
         DatabaseUserAdapter userAdapter = new DatabaseUserAdapter(dbConnection);
-        UserService userService = new UserService(userAdapter);
+        UserService userService = null;
+
+        try {
+            RoleService roleService = new RoleService(dbConnection.getConnection());
+            userService = new UserService(userAdapter, roleService);
+        } catch (java.sql.SQLException e) {
+            System.err.println("Kunne ikke opprette RoleService eller UserService: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
 
         // Opprett RouteApplicationService med dependencies
         StopLogic stopLogic = new StopLogic();

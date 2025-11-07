@@ -1,4 +1,4 @@
-package org.develop.UserComponent.Port;
+package org.develop.DatabaseFunctionalityComponent.Port;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

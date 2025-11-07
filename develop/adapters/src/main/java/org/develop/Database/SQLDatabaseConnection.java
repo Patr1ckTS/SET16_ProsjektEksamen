@@ -1,11 +1,12 @@
 package org.develop.Database;
 
-import org.develop.UserComponent.Port.SQLDatabasePort;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.develop.DatabaseFunctionalityComponent.Port.SQLDatabasePort;
 
 public class SQLDatabaseConnection implements SQLDatabasePort {
     private final String DB_URL;

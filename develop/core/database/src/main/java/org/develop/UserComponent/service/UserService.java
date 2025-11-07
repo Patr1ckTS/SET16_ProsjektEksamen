@@ -17,12 +17,14 @@ public class UserService {
     private final UserUseCases userUseCases;
     private final NewUserUseCases newUserUseCases;
     private final UserListFormatter formatter;
+    private final RoleService roleService;
 
     // Constructor Injection - følger Dependency Injection pattern
-    public UserService(UserPort userRepository) {
+    public UserService(UserPort userRepository, RoleService roleService) {
         this.userUseCases = new UserUseCases(userRepository);
         this.newUserUseCases = new NewUserUseCases(userRepository);
         this.formatter = new UserListFormatter();
+        this.roleService = roleService;
     }
 
     public String getUserFullname() {
@@ -57,7 +59,14 @@ public class UserService {
         try {
             CreateUser newUser = new CreateUser(firstName, lastName, email, phonenumber, password);
             boolean success = newUserUseCases.newUserValueCheck(newUser);
-            return success ? null : "Feil ved opprettelse av bruker";
+            
+            if (success) {
+                roleService.setDefaultRole(newUser.getEmail(), "`se25_G16`");
+                return null;
+            }
+            else {
+                return "Feil ved opprettelse av bruker";
+            }
         } catch (Exception e) {
             return "Feil ved registrering: " + e.getMessage();
         }
@@ -111,7 +120,8 @@ public class UserService {
             ArrayList<User> users = userUseCases.arrayListOfRequestedUsers();
             for (User user : users) {
                 if (user.getEmail().equals(email)) {
-                    return user.getUserTypeText();
+//                    return user.getUserTypeText();
+                    return null;
                 }
             }
         } catch (Exception e) {

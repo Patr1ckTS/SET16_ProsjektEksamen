@@ -1,18 +1,18 @@
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Calendar\Calendar.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Calendar\Event.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Data\RouteReader.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Data\RouteWriter.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Data\StopListReader.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Data\StopListWriter.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Interface\RouteService.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Interface\StopService.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Port\CalendarPort.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Port\EnturPort.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Service\dto\ResultDTO.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Service\RouteApplicationService.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Service\RouteLogic.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Service\StopLogic.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\TravelEnteties\dto\RouteDTO.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\TravelEnteties\Route.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\TravelEnteties\Stop.java
-C:\Users\bergi\Documents\GitHub\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\TravelEnteties\Transport.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Calendar\Calendar.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Calendar\Event.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Data\RouteReader.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Data\RouteWriter.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Data\StopListReader.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Data\StopListWriter.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Interface\RouteService.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Interface\StopService.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Port\CalendarPort.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Port\EnturPort.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Service\dto\ResultDTO.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Service\RouteApplicationService.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Service\RouteLogic.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\Service\StopLogic.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\TravelEnteties\dto\RouteDTO.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\TravelEnteties\Route.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\TravelEnteties\Stop.java
+C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\core\routesearch\src\main\java\org\develop\TravelEnteties\Transport.java
