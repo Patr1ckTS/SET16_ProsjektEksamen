@@ -4,27 +4,6 @@ import java.time.LocalDateTime;
 
 import org.develop.TicketComponent.Port.Interface.PaymentRequirements;
 
-
-
-/*
-    Har tenkt på følgende logikk om vi inkluderer priser. Data
-    knyttet til pris vil da i tilfelle hentes fra en pris tabell 
-    i databasen:
-    switch (regionChoice && durationChoice) {
-        case 1, 1 -> amount = 30.0;
-        case 1, 1 -> amount = 30.0;
-        case 1, 1 -> amount = 30.0;
-        case 2, 1 -> amount = 40.0;
-        case 2, 2 -> amount = 40.0;
-        case 2, 3 -> amount = 40.0;
-        default -> amount = 0.0;
-    }
-        Går vi til dette steget tenker jeg at man har prosentvis
-        reduksjon basert på forhold som pensjonist- og 
-        studentrabatt
-    */
-
-
 public class Payment implements PaymentRequirements {
     private String paymentId;
     private String userId;

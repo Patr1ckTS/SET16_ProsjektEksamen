@@ -7,7 +7,6 @@ import org.develop.Service.RouteApplicationService;
 import org.develop.Service.RouteLogic;
 import org.develop.Service.StopLogic;
 import org.develop.UserComponent.domain.DatabaseSetup;
-import org.develop.UserComponent.service.RoleService;
 import org.develop.UserComponent.service.UserService;
 import org.develop.web.service.Routes;
 
@@ -40,10 +39,9 @@ public class Main {
         UserService userService = null;
 
         try {
-            RoleService roleService = new RoleService(dbConnection.getConnection());
-            userService = new UserService(userAdapter, roleService);
+            userService = new UserService(userAdapter, dbConnection.getConnection());
         } catch (java.sql.SQLException e) {
-            System.err.println("Kunne ikke opprette RoleService eller UserService: " + e.getMessage());
+            System.err.println("Kunne ikke opprette UserService: " + e.getMessage());
             e.printStackTrace();
             return;
         }

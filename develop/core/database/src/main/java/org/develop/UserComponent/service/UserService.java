@@ -1,5 +1,9 @@
 package org.develop.UserComponent.service;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.develop.UserComponent.Port.UserPort;
@@ -17,14 +21,14 @@ public class UserService {
     private final UserUseCases userUseCases;
     private final NewUserUseCases newUserUseCases;
     private final UserListFormatter formatter;
-    private final RoleService roleService;
+    private final Connection dbConnection;
 
     // Constructor Injection - følger Dependency Injection pattern
-    public UserService(UserPort userRepository, RoleService roleService) {
+    public UserService(UserPort userRepository, Connection dbConnection) {
         this.userUseCases = new UserUseCases(userRepository);
         this.newUserUseCases = new NewUserUseCases(userRepository);
         this.formatter = new UserListFormatter();
-        this.roleService = roleService;
+        this.dbConnection = dbConnection;
     }
 
     public String getUserFullname() {
@@ -57,11 +61,14 @@ public class UserService {
         }
 
         try {
-            CreateUser newUser = new CreateUser(firstName, lastName, email, phonenumber, password);
+// Denne funksjonen hasher passordet før det lages           et User objekt:
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+            
+            CreateUser newUser = new CreateUser(firstName, lastName, email, phonenumber, hashedPassword);
             boolean success = newUserUseCases.newUserValueCheck(newUser);
             
             if (success) {
-                roleService.setDefaultRole(newUser.getEmail(), "`se25_G16`");
+                databasePermissionGrant(newUser.getEmail(), "itstud.hiof.no");
                 return null;
             }
             else {
@@ -70,6 +77,43 @@ public class UserService {
         } catch (Exception e) {
             return "Feil ved registrering: " + e.getMessage();
         }
+    }
+
+    // Funksjon for rolle-tildeling i databasen. Denne er ikke funksjonell på grunn av delt database-miljø    
+    private void databasePermissionGrant(String email, String host) {
+        try (Statement stmt = dbConnection.createStatement()) {
+            
+            String createUser = "CREATE USER IF NOT EXISTS '" + email + "'@'" + host + "'";
+            
+            String grantPermissions = "GRANT SELECT, INSERT, UPDATE ON se25_G16.* TO '" + email + "'@'" + host + "'";
+            
+            stmt.execute(createUser);
+            stmt.execute(grantPermissions);
+            stmt.execute("FLUSH PRIVILEGES");
+            
+            System.out.println("Database permissions granted for user: " + email);
+            
+        } catch (SQLException e) {
+            System.err.println("Error granting database permissions: " + e.getMessage());
+        }
+    }
+
+// Metode for uthenting av brukerolle fra database (Ikke enda benyttet i systemet)    
+        public String getRole(String email, String host) throws SQLException {
+        String sqlRoleQuery = "SHOW GRANTS FOR" + email + "@" + host;
+
+        try (Statement stmt =  dbConnection.createStatement();
+             ResultSet rs = stmt.executeQuery(sqlRoleQuery)) {
+
+            while (rs.next()) {
+                String grant = rs.getString(1);
+
+                if (grant.contains("GRANT `")) {
+                    return grant.split("`")[1];
+                }
+            }
+        }
+        return null;
     }
 
     private boolean emailExists(String email) {
