@@ -1,13 +1,19 @@
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.develop.Entities.Stop;
 import org.develop.Service.StopLogic;
 
-
-
 public class StopLogicTest {
+
+    private StopLogic stopLogic;
+
+    //oppretter en ny instanse av stoplogoc før hver enhetstest.
+    @BeforeEach
+    void setUp() {
+        stopLogic = new StopLogic();
+    }
+
     @Test
     void calculateTravelTime_DisplayCorrectTravelTime() {
         // Arrange
@@ -15,7 +21,7 @@ public class StopLogicTest {
         Stop end = new Stop("S2", "Area", "End", 30);
 
         // Act
-        int travelTime = end.getMinutesAfterDeparture() - start.getMinutesAfterDeparture();
+        int travelTime = stopLogic.calculateTravelTime(start, "10:00", end);
 
         // Assert
         assertEquals(30, travelTime);
@@ -26,7 +32,6 @@ public class StopLogicTest {
         // Arrange
         Stop stop = new Stop("S1", "Area", "Stop1", 15);
         String departureTime = "10:00";
-        StopLogic stopLogic = new StopLogic();
 
         // Act
         String result = stopLogic.calculateTransportAtStop(stop, departureTime);
@@ -34,5 +39,4 @@ public class StopLogicTest {
         // Assert
         assertEquals("10:15", result);
     }
-
 }
