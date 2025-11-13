@@ -1,10 +1,11 @@
 package org.develop.domain.TicketTests;
 
+import java.time.LocalDateTime;
+
+import org.develop.TicketComponent.Domain.NewTicket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.develop.TicketComponent.Domain.NewTicket;
-import java.time.LocalDateTime;
 
 public class NewTicketTests {
 

@@ -1,10 +1,14 @@
 package org.develop.web;
 
-import org.develop.domain.DatabaseSetup;
-import org.develop.web.service.Routes;
-import org.develop.service.UserService;
-import org.develop.Database.SQLDatabaseConnection;
 import org.develop.Database.DatabaseUserAdapter;
+import org.develop.Database.SQLDatabaseConnection;
+import org.develop.Entur.EnturAdapter;
+import org.develop.Service.RouteApplicationService;
+import org.develop.Service.RouteLogic;
+import org.develop.Service.StopLogic;
+import org.develop.UserComponent.domain.DatabaseSetup;
+import org.develop.UserComponent.service.UserService;
+import org.develop.web.service.Routes;
 
 import io.javalin.Javalin;
 
@@ -32,7 +36,21 @@ public class Main {
 
         // Opprett UserService instans med adapter
         DatabaseUserAdapter userAdapter = new DatabaseUserAdapter(dbConnection);
-        UserService userService = new UserService(userAdapter);
+        UserService userService = null;
+
+        try {
+            userService = new UserService(userAdapter, dbConnection.getConnection());
+        } catch (java.sql.SQLException e) {
+            System.err.println("Kunne ikke opprette UserService: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+
+        // Opprett RouteApplicationService med dependencies
+        StopLogic stopLogic = new StopLogic();
+        RouteLogic routeLogic = new RouteLogic(stopLogic);
+        EnturAdapter enturAdapter = new EnturAdapter();
+        RouteApplicationService routeAppService = new RouteApplicationService(routeLogic, stopLogic, enturAdapter);
 
         // Starter Javalin Web Server
         System.out.println("Starter web server på port 7000...");
@@ -40,8 +58,8 @@ public class Main {
             config.staticFiles.add("/static");
         }).start(7000);
 
-        // Konfigurer alle routes med UserService
-        Routes.configureRoutes(app, userService);
+        // Konfigurer alle routes med UserService og RouteApplicationService
+        Routes.configureRoutes(app, userService, routeAppService);
         
         System.out.println("Web server kjører på http://localhost:7000");
     }

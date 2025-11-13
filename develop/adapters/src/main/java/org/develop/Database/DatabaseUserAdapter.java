@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.develop.UserComponent.domain.User;
-import org.develop.UserComponent.domain.CreateUser;
 import org.develop.UserComponent.Port.UserPort;
+import org.develop.UserComponent.domain.CreateUser;
+import org.develop.UserComponent.domain.User;
 
 public class DatabaseUserAdapter implements UserPort {
     private final SQLDatabaseConnection databaseConnection;
@@ -31,19 +31,20 @@ public class DatabaseUserAdapter implements UserPort {
                 String email = rs.getString("email");
                 String phoneNumber = rs.getString("phonenumber");
                 String password = rs.getString("password");
+//                int userType = rs.getInt("user_type");
 
                 User user = new User(firstname, lastname, email, phoneNumber, password);
                 users.add(user);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error fetching users: " + e.getMessage());
         }
 
         return users;
     }
 
     public boolean save(CreateUser newUser) {
-        String insertSQL = "INSERT INTO users (firstname, lastname, email, phonenumber, password, user_type, created_at) VALUES (?, ?, ?, ?, ?, 1, NOW())";
+        String insertSQL = "INSERT INTO users (firstname, lastname, email, phonenumber, password, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
 
         try (Connection conn = databaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
@@ -57,7 +58,7 @@ public class DatabaseUserAdapter implements UserPort {
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error saving user: " + e.getMessage());
             return false;
         }
     }

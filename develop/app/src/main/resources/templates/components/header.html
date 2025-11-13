@@ -9,25 +9,38 @@
 </head>
 <body>
 
+    <!-- Top Navigation med Logo -->
+    <nav class="top_nav">
+        <div class="top_nav_wrapper">
+            <div class="logo">
+                <h2>Ruteplanlegger</h2>
+            </div>
+            <div class="top_nav_auth">
+                {{HEADER_AUTH}}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bottom Navigation (Mobile) -->
     <nav class="phone_bottom_nav">
         <a href="/" class="nav_item">
-            <span class="icon"><img src="images/icons/home_white.png" alt="icon"></span>
+            <span class="icon"><img src="/images/icons/home_white.png" alt="icon"></span>
             <span class="text">Hjem</span>
         </a>
-        <a href="/" class="nav_item">
-            <span class="icon"><img src="images/icons/clock_white.png" alt="icon"></span>
-            <span class="text">Avganger</span>
+        <a href="/rutesok" class="nav_item">
+            <span class="icon"><img src="/images/icons/clock_white.png" alt="icon"></span>
+            <span class="text">Rutesøk</span>
         </a>
-        <a href="/" class="nav_item">
-            <span class="icon"><img src="images/icons/calendar_white.png" alt="icon"></span>
+        <a href="/kalender" class="nav_item">
+            <span class="icon"><img src="/images/icons/calendar_white.png" alt="icon"></span>
             <span class="text">Kalender</span>
         </a>
-        <a href="/" class="nav_item">
-            <span class="icon"><img src="images/icons/favorites_white.png" alt="icon"></span>
+        <a href="/favoritter" class="nav_item">
+            <span class="icon"><img src="/images/icons/star_white.png" alt="icon"></span>
             <span class="text">Favoritter</span>
         </a>
-        <a href="/" class="nav_item">
-            <span class="icon"><img src="images/icons/settings_white.png" alt="icon"></span>
-            <span class="text">Innstillinger</span>
+        <a href="/profil" class="nav_item">
+            <span class="icon"><img src="/images/icons/account_white.png" alt="icon"></span>
+            <span class="text">{{USER_FIRST_NAME}}</span>
         </a>
     </nav>

@@ -8,7 +8,6 @@ import java.util.Scanner;
 import org.develop.TicketComponent.Adapter.SaveTicketToDatabase;
 import org.develop.TicketComponent.Domain.NewTicket;
 import org.develop.TicketComponent.Domain.Payment;
-import org.develop.TicketComponent.Domain.User;
 import org.develop.TicketComponent.Service.TicketInputHandler;
 import org.develop.TicketComponent.Service.TicketService;
 
@@ -33,7 +32,6 @@ public class Main {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             SaveTicketToDatabase ticketDatabase = new SaveTicketToDatabase(connection);
             int userId = 1;
-            User existingUser = ticketDatabase.findUserById(connection, userId);
 
             System.out.println("Connected to database successfully!\n");
 
@@ -41,27 +39,25 @@ public class Main {
             payment.completePayment();
 
             if (payment.getStatus() == true) {
-                if (existingUser != null) {
-                    try (Scanner scanner = new Scanner(System.in)) {
+                try (Scanner scanner = new Scanner(System.in)) {
 
-                        TicketService ticketService = new TicketService();
+                    TicketService ticketService = new TicketService();
 
-                        int durationChoice = TicketInputHandler.ticketDurationChoice(scanner);
-                        int regionChoice = TicketInputHandler.ticketRegionChoice(scanner);
+                    int durationChoice = TicketInputHandler.ticketDurationChoice(scanner);
+                    int regionChoice = TicketInputHandler.ticketRegionChoice(scanner);
 
-                        newTicket = new NewTicket(
-                            ticketService.ticketDuration(durationChoice),
-                            regionChoice,
-                            existingUser.getId()
-                        );
+                    newTicket = new NewTicket(
+                        ticketService.ticketDuration(durationChoice),
+                        regionChoice,
+                        userId
+                    );
 
-                        ticketDatabase.saveTicket(newTicket);
+                    ticketDatabase.saveTicket(newTicket);
 
-                        newTicket.getTicketInformation();
-                        
-                        System.out.print(newTicket.timeRemaining());
-                    }
-                } 
+                    newTicket.getTicketInformation();
+                    
+                    System.out.print(newTicket.timeRemaining());
+                }
             } 
             else {
                 System.out.println("Payment failed!\n");

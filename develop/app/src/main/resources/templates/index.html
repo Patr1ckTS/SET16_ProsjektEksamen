@@ -1,11 +1,164 @@
+﻿{{HEADER}}
 
-    {{HEADER}}
+<link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js'></script>
 
-    <main>
-        <div id="main_wrapper">
-            <h1>Velkommen til Ruteplanlegger</h1>
-            <p>Dette er en enkel ruteplanlegger applikasjon.</p>
+<main>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+    
+    <div id="main_wrapper">
+        <form action="/rutesok" method="POST" class="route-search-form">
+            <div class="form-group">
+                <label for="startLocation">Fra:</label>
+                <input type="text" id="startLocation" name="startLocation" placeholder="F.eks. Fredrikstad bussterminal" required>
+            </div>
+            <div class="form-group">
+                <label for="endLocation">Til:</label>
+                <input type="text" id="endLocation" name="endLocation" placeholder="F.eks. Sarpsborg terminal" required>
+            </div>
+            <div class="form-group">
+                <label for="departureTime">Ønsket avgang:</label>
+                <input type="time" id="departureTime" name="departureTime" required>
+            </div>
+            <button type="submit" class="search-button">Søk rute</button>
+        </form>
+
+        <div class="help-section">
+            <h3>Tips for rutesøk:</h3>
+            <ul>
+                <li>Skriv inn nøyaktige stoppnavn som vist i rutedataene</li>
+                <li>Eksempler på stopp: "Fredrikstad bussterminal", "Cicignon skole", "Kråkerøy terminal"</li>
+                <li>Velg tidspunkt på 24-timers format</li>
+            </ul>
         </div>
-    </main>
 
-    {{FOOTER}}
+        <details class="available-routes">
+            <summary>Vis alle tilgjengelige ruter og stopp</summary>
+            <div class="routes-container">
+                
+                <div class="route-card">
+                    <h4>Rute 101: Fredrikstad-Sarpsborg</h4>
+                    <p class="route-meta">Buss | Pris: 65 kr | Reisetid: ~30 min</p>
+                    <ul class="stops-list">
+                        <li><strong>Fredrikstad bussterminal</strong> (Fredrikstad sentrum)</li>
+                        <li>Cicignon skole (Fredrikstad øst) - 3 min</li>
+                        <li>Kråkerøy terminal (Fredrikstad øst) - 7 min</li>
+                        <li>Borgehavn (Borg kommune) - 12 min</li>
+                        <li>Tune stasjon (Borg kommune) - 18 min</li>
+                        <li>Grålum (Sarpsborg vest) - 25 min</li>
+                        <li><strong>Sarpsborg bussterminal</strong> (Sarpsborg sentrum) - 30 min</li>
+                    </ul>
+                    <p class="departure-times"><strong>Avganger:</strong> 08:00, 09:00, 10:00, 11:00, 12:00, 13:00, 14:00, 15:00, 16:00, 17:00</p>
+                </div>
+
+                <div class="route-card">
+                    <h4>Rute 103: Halden-Fredrikstad</h4>
+                    <p class="route-meta">Buss | Pris: 95 kr | Reisetid: ~45 min</p>
+                    <ul class="stops-list">
+                        <li><strong>Halden bussterminal</strong> (Halden sentrum)</li>
+                        <li>Berg stasjon (Halden nord) - 6 min</li>
+                        <li>Sarpsborg bussterminal (Sarpsborg kommune) - 25 min</li>
+                        <li>Grålum (Fredrikstad øst) - 33 min</li>
+                        <li><strong>Fredrikstad bussterminal</strong> (Fredrikstad sentrum) - 45 min</li>
+                    </ul>
+                    <p class="departure-times"><strong>Avganger:</strong> 07:00, 08:00, 09:00, 10:00, 11:00, 12:00, 13:00, 14:00, 15:00, 16:00, 17:00</p>
+                </div>
+
+                <div class="route-card">
+                    <h4>Rute 201: Sarpsborg-Fredrikstad</h4>
+                    <p class="route-meta">Buss | Pris: 65 kr | Reisetid: ~30 min</p>
+                    <ul class="stops-list">
+                        <li><strong>Sarpsborg bussterminal</strong> (Sarpsborg sentrum)</li>
+                        <li>Grålum (Sarpsborg vest) - 5 min</li>
+                        <li>Tune stasjon (Borg kommune) - 12 min</li>
+                        <li>Borgehavn (Borg kommune) - 18 min</li>
+                        <li>Kråkerøy terminal (Fredrikstad øst) - 23 min</li>
+                        <li>Cicignon skole (Fredrikstad øst) - 27 min</li>
+                        <li><strong>Fredrikstad bussterminal</strong> (Fredrikstad sentrum) - 30 min</li>
+                    </ul>
+                    <p class="departure-times"><strong>Avganger:</strong> 08:00, 09:00, 10:00, 11:00, 12:00, 13:00, 14:00, 15:00, 16:00, 17:00</p>
+                </div>
+
+                <div class="route-card">
+                    <h4>Rute 203: Fredrikstad-Halden</h4>
+                    <p class="route-meta">Buss | Pris: 95 kr | Reisetid: ~45 min</p>
+                    <ul class="stops-list">
+                        <li><strong>Fredrikstad bussterminal</strong> (Fredrikstad sentrum)</li>
+                        <li>Grålum (Fredrikstad øst) - 12 min</li>
+                        <li>Sarpsborg bussterminal (Sarpsborg kommune) - 20 min</li>
+                        <li>Berg stasjon (Halden nord) - 39 min</li>
+                        <li><strong>Halden bussterminal</strong> (Halden sentrum) - 45 min</li>
+                    </ul>
+                    <p class="departure-times"><strong>Avganger:</strong> 07:00, 08:00, 09:00, 10:00, 11:00, 12:00, 13:00, 14:00, 15:00, 16:00, 17:00</p>
+                </div>
+
+                <div class="route-card">
+                    <h4>Rute R20: Moss-Halden</h4>
+                    <p class="route-meta">Tog | Pris: 180 kr | Reisetid: ~50 min</p>
+                    <ul class="stops-list">
+                        <li><strong>Moss stasjon</strong> (Moss)</li>
+                        <li>Råde stasjon (Råde kommune) - 9 min</li>
+                        <li>Fredrikstad stasjon (Fredrikstad kommune) - 25 min</li>
+                        <li>Sarpsborg stasjon (Sarpsborg kommune) - 33 min</li>
+                        <li><strong>Halden stasjon</strong> (Halden kommune) - 50 min</li>
+                    </ul>
+                    <p class="departure-times"><strong>Avganger:</strong> 06:30, 07:30, 08:30, 09:30, 10:30, 11:30, 12:30, 13:30, 14:30, 15:30, 16:30</p>
+                </div>
+
+                <div class="route-card">
+                    <h4>Rute R40: Halden-Moss</h4>
+                    <p class="route-meta">Tog | Pris: 180 kr | Reisetid: ~50 min</p>
+                    <ul class="stops-list">
+                        <li><strong>Halden stasjon</strong> (Halden kommune)</li>
+                        <li>Sarpsborg stasjon (Sarpsborg kommune) - 17 min</li>
+                        <li>Fredrikstad stasjon (Fredrikstad kommune) - 25 min</li>
+                        <li>Råde stasjon (Råde kommune) - 41 min</li>
+                        <li><strong>Moss stasjon</strong> (Moss) - 50 min</li>
+                    </ul>
+                    <p class="departure-times"><strong>Avganger:</strong> 06:30, 07:30, 08:30, 09:30, 10:30, 11:30, 12:30, 13:30, 14:30, 15:30, 16:30</p>
+                </div>
+
+            </div>
+        </details>
+        
+        <div id="route-results">{{ROUTE_RESULTS}}</div>
+    </div>
+</main>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiaGVucmlrYmVyZzk5IiwiYSI6ImNtMmF1ZHV6eTBnd3QyanNmOHo1bGNxZzQifQ.6ZcM2DZ5xIlZ4eBd5lBa3Q';
+
+const map = new mapboxgl.Map({
+    container: 'map', 
+    style: 'mapbox://styles/mapbox/streets-v12', 
+    center: [11.3875, 59.2208], 
+    zoom: 12
+});
+
+const geolocate = new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true,
+    showUserHeading: true
+});
+
+map.addControl(geolocate);
+
+map.on('load', () => {
+    geolocate.trigger();
+});
+
+geolocate.on('geolocate', (e) => {
+    const userLocation = [e.coords.longitude, e.coords.latitude];
+    map.flyTo({
+        center: userLocation,
+        zoom: 15,
+        essential: true
+    });
+});
+</script>
+
+{{FOOTER}}

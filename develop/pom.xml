@@ -10,8 +10,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
-        <module>core/routesearch</module>
-        <module>core/database</module>
         <module>adapters</module>
         <module>app</module>
     </modules>

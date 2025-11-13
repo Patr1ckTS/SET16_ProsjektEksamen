@@ -1,0 +1,13 @@
+org\develop\Database\SQLDatabaseConnection.class
+org\develop\Calendar\DTO\CalendarDTO.class
+org\develop\Entur\DTO\EnturRouteDTO$TransportData.class
+org\develop\Entur\DTO\EnturRouteDTO$StopData.class
+org\develop\Calendar\GoogleCalendarAdapter.class
+org\develop\Entur\Reader\EnturRouteReader.class
+org\develop\Calendar\Mapper\CalendarMapper.class
+org\develop\Database\DatabaseUserAdapter.class
+org\develop\Calendar\Reader\CalendarReader.class
+org\develop\Entur\EnturAdapter.class
+org\develop\Calendar\DTO\EventDTO.class
+org\develop\Entur\DTO\EnturRouteDTO.class
+org\develop\Entur\Mapper\EnturRouteMapper.class

@@ -33,8 +33,6 @@ public class TicketService {
         switch (regionChoice) {
             case 1 -> region = "By";
             case 2 -> region = "Fylke";
-            case 3 -> region = "Landsdel";
-            case 4 -> region = "Nasjonalt";
             default -> throw new IllegalArgumentException("Ugyldig region valgt.");
         }
         return region;
