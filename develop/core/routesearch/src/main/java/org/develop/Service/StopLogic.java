@@ -8,11 +8,20 @@ import java.util.Optional;
 import org.develop.Entities.Stop;
 import org.develop.Interface.StopService;
 
-// Utility- og serviceklasse for stoppestedsrelatert logikk
-// Egner seg ikke for Dependency Injection, da den ikke har noen avhengigheter
+/**
+ * Domenelogikk for stoppberegninger og avgangshåndtering.
+ * 
+ * Implementerer StopService-interfacet for å separere logikk fra datatilgang.
+ * 
+ * Hele systemet er bygget rundt metodene calculateTransportAtStop og findNextDepartureTime.
+ * Dette var et bevisst designvalg for å få en fungerende prototype raskt, uten å bruke
+ * for mye tid på avanserte algoritmer. Logikken kan senere utvides med mer sofistikerte 
+ * rute- og tidsberegninger etter behov.
+ */
 public class StopLogic implements StopService {
     @Override
     public String calculateTransportAtStop(Stop stop, String departureTimeFromTerminal) {
+        // Beregn når transport ankommer stoppet ved å legge til forsinkelse fra terminal
         try {
             LocalTime terminal = LocalTime.parse(departureTimeFromTerminal);
             LocalTime transportAtStop = terminal.plusMinutes(stop.getMinutesAfterDeparture());
@@ -32,23 +41,22 @@ public class StopLogic implements StopService {
         return null;
     }
 
-    // Bruk av Java Streams for å finne neste avgangstid
-    // Første itterasjon var veldig nøstet og vanskelig å lese
     @Override
     public String findNextDepartureTime(Stop stop, String desiredDepartureTime) {
+        // Finn første avgang som er på eller etter ønsket tid
         List<String> departureTimes = stop.getDepartureTimes();
 
         if (departureTimes == null || departureTimes.isEmpty()) {
-            return null; // Returner tidlig slik at resten av koden ikke kjøres
+            return null;
         }
 
         LocalTime desiredTime = LocalTime.parse(desiredDepartureTime);
 
-        // Stream for å sortere og samle logikken i én flyt
-        Optional<LocalTime> nextDeparture = departureTimes.stream()    
-                .map(LocalTime::parse)                                 
-                .sorted()                                              
-                .filter(departure -> !departure.isBefore(desiredTime)) 
+        // Parse alle tider, sorter, og finn første som er >= ønsket tid
+        Optional<LocalTime> nextDeparture = departureTimes.stream()
+                .map(LocalTime::parse)
+                .sorted()
+                .filter(departure -> !departure.isBefore(desiredTime))
                 .findFirst();                                          
 
         return nextDeparture.map(LocalTime::toString).orElse(null);
@@ -56,6 +64,7 @@ public class StopLogic implements StopService {
 
     @Override
     public int calculateTravelTime(Stop startStop, String departureTime, Stop endStop) {
+        // Beregn reisetid mellom to stopp basert på deres forsinkelse fra terminal
         try {
             LocalTime travelStart = LocalTime.parse(calculateTransportAtStop(startStop, departureTime));
             LocalTime travelEnd = LocalTime.parse(calculateTransportAtStop(endStop, departureTime));

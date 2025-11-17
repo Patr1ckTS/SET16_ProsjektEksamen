@@ -8,19 +8,26 @@ import org.develop.Entities.Stop;
 import org.develop.Interface.RouteService;
 import org.develop.Interface.StopService;
 
-// Utility- og serviceklasse for avanserte ruteberegninger og logikk
-// Avhengig av Dependency Injection for StopService
+/**
+ * Domenelogikk for ruteberegninger og rutesøk.
+ * 
+ * Denne klassen håndterer forretningslogikken for ruter, og er designet med 
+ * Dependency Injection av StopService fordi all rutelogikk er stopp-sentrert.
+ * 
+ * Implementerer RouteService-interfacet for å definere kontrakten for rute-relaterte operasjoner,
+ * noe som gjør klassen testbar og utskiftbar i henhold til Dependency Inversion Principle.
+ */
 public class RouteLogic implements RouteService {
     private final StopService stopService;
 
-    // Injisering av Dependency Injection
+    // Dependency Injection: StopService injiseres fordi rutelogikk er avhengig av stoppberegninger
     public RouteLogic(StopService stopService) {
         this.stopService = stopService;
     }
 
     @Override
     public Route calculateRoute(ArrayList<Route> availableRoutes, String startLocation, String endLocation) {
-        // Eksempel på enkel logikk: returner første rute som har start og slutt
+        // Itererer gjennom alle ruter og returnerer første som har begge stoppesteder
         for (Route route : availableRoutes) {
             boolean hasStart = false, hasEnd = false;
             for (Stop stop : route.getStops()) {
@@ -55,6 +62,7 @@ public class RouteLogic implements RouteService {
     }
 
     public Result searchRouteByName(String departureTime, String startLocation, String endLocation, Route route) {
+        // Finn stoppesteder basert på navn, deretter søk etter transport mellom dem
         Stop startStop = stopService.findStopByName(route.getStops(), startLocation);
         Stop endStop = stopService.findStopByName(route.getStops(), endLocation);
 
@@ -103,11 +111,11 @@ public class RouteLogic implements RouteService {
     }
 
     
-    // Hjelpemetoder for å finne neste transport og beregne tider
+    // Kjernelogikk: finn terminal, finn avgang, beregn ankomster (se StopLogic for detaljer)
     private Result findNextTransport(String desiredDepartureTime, Stop startStop, Stop endStop,
             ArrayList<Stop> allStops, Route route) {
 
-        // Finn terminal
+        // Finn terminal (stoppested som har avgangstider)
         Stop terminal = null;
         for (Stop stop : allStops) {
             if (stop.getDepartureTimes() != null && !stop.getDepartureTimes().isEmpty()) {
@@ -121,14 +129,14 @@ public class RouteLogic implements RouteService {
                     null, null, null, null, null, 0);
         }
 
-        // Finn neste avgang basert på ønsket avgangstid
+        // Finn første avgang fra terminal som er på eller etter ønsket tid (StopLogic.findNextDepartureTime)
         String nextDeparture = stopService.findNextDepartureTime(terminal, desiredDepartureTime);
         if (nextDeparture == null) {
             return new Result(false, null, null, "Ingen passende transport funnet",
                     null, null, null, null, null, 0);
         }
 
-        // Beregn ankomster og reisetid
+        // Beregn når transport ankommer start- og sluttstoppested (StopLogic.calculateTransportAtStop)
         String arrivalAtStart = stopService.calculateTransportAtStop(startStop, nextDeparture);
         String arrivalAtEnd = stopService.calculateTransportAtStop(endStop, nextDeparture);
         int travelTime = stopService.calculateTravelTime(startStop, nextDeparture, endStop);

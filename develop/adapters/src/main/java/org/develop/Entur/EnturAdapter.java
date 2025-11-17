@@ -8,6 +8,15 @@ import org.develop.Entur.DTO.EnturRouteDTO;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter for Entur-systemet (ruteinformasjon).
+ * Modulær oppdeling av Reader/Mapper og DTO
+ *
+ * Denne adapteren orkestrerer kommunikasjonen med Entur-datakilden:
+ * 1. EnturRouteReader henter rute-data (fra JSON/fil)
+ * 2. EnturRouteMapper konverterer DTOer til domeneobjekter
+ * 3. Adapteren presenterer et rent interface for rutesøk-systemet
+ */
 public class EnturAdapter implements EnturPort {
     private final EnturRouteReader routeReader;
     private final EnturRouteMapper routeMapper;
@@ -18,15 +27,17 @@ public class EnturAdapter implements EnturPort {
         this.routeMapper = routeMapper;
     }
 
-    // Normal konstruktør for MVP
+    // Default-konstruktør: Brukes av Main-klasser og integrasjonstester for å instansiere med ekte avhengigheter
     public EnturAdapter() {
         this(new EnturRouteReader(), new EnturRouteMapper());
     }
 
+    // Hjelpemetode: konverter DTO til domeneobjekt
     private Route mapRoute(EnturRouteDTO dto) {
         return dto != null ? routeMapper.mapToRoute(dto) : null;
     }
 
+    // Hent spesifikk rute etter navn (Reader og Mapper gjør det faktiske arbeidet)
     public Route getRoute(String routeName) {
         EnturRouteDTO dto = switch(routeName) {
             case "R101" -> routeReader.getRute101();
@@ -40,6 +51,7 @@ public class EnturAdapter implements EnturPort {
         return mapRoute(dto);
     }
 
+    // Hent alle ruter: Reader henter fra data, Mapper konverterer til domeneobjekter
     @Override
     public ArrayList<Route> getAllRoutes() {
         ArrayList<Route> routes = new ArrayList<>();

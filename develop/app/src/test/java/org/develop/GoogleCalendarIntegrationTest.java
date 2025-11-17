@@ -25,8 +25,14 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
-@DisplayName("Kalender Integrasjonstest - Dataflyt JSON -> Domain -> App")
-class CalendarIntegrationTest {
+/**
+ * Integrasjonstest for Google Calendar-adapter i semi-heksagonal arkitektur.
+ * Tester at kalenderdata kan brukes som input til rutesøk (end-to-end
+ * dataflyt).
+ * Inkluderer både positive og negative testscenarioer.
+ */
+@DisplayName("Google Calendar Integrasjonstest - Dataflyt JSON -> Domain -> App")
+class GoogleCalendarIntegrationTest {
 
     private CalendarPort calendarAdapter;
     private EnturPort enturAdapter;
@@ -46,6 +52,7 @@ class CalendarIntegrationTest {
         routeLogic = new RouteLogic(stopLogic);
     }
 
+    // Stub som returnerer kontrollerte kalenderdata
     private static class StubCalendarReader extends CalendarReader {
         @Override
         public ArrayList<CalendarDTO> getIda() {
@@ -70,6 +77,7 @@ class CalendarIntegrationTest {
         }
     }
 
+    // Stub som returnerer kontrollerte rutedata
     private static class StubEnturRouteReader extends EnturRouteReader {
         @Override
         public EnturRouteDTO getRute203() {
@@ -110,45 +118,49 @@ class CalendarIntegrationTest {
         }
     }
 
+    // En såkalt "No match" test for å sikre at rutesøk feiler med ugyldig lokasjon
     @Test
-    @DisplayName("Kalender JSON transformeres korrekt til domain-objekter")
-    void testCalendarDataTransformation() {
-        // Arrange & Act
+    @DisplayName("Rutesøk feiler når kalender-event har ugyldig lokasjon")
+    void testNoMatchWhenInvalidLocation() {
+        // Arrange
         Calendar calendar = calendarAdapter.getCalendar("Ida");
         Event event = calendar.getEvents().get(0);
+        Route route = enturAdapter.getRoute("R203");
+
+        // Act - Søk med ugyldig destinasjon som ikke finnes i ruten
+        RouteLogic.Result result = routeLogic.searchRouteByName(
+                event.getDesiredDepartureTime(),
+                event.getStartLocation(),
+                "Ugyldig lokasjon",
+                route);
+
+        // Assert
+        assertFalse(result.isSuccess(), "Rutesøk skal feile når destinasjon ikke finnes");
+    }
+
+    // Denne testen er selve integrasjonstesten som sjekker hele flyten fra kalender
+    // til rutesøk og resultat
+    @Test
+    @DisplayName("Kalender-event data brukes gjennom hele reisen: JSON -> Domain -> Rutesøk -> Resultat")
+    void testFullIntegrationFromCalendarToRouteSearch() {
+        // Arrange - Hent kalenderdata (JSON -> DTO -> Domain)
+        Calendar calendar = calendarAdapter.getCalendar("Ida");
+        Event event = calendar.getEvents().get(0);
+        Route route = enturAdapter.getRoute("R203");
+
+        // Act - Bruk event-data som input til rutesøk (hele dataflyten)
+        RouteLogic.Result result = routeLogic.searchRouteByName(
+                event.getDesiredDepartureTime(),
+                event.getStartLocation(),
+                event.getEndLocation(),
+                route);
 
         // Assert
         assertAll(
-            () -> assertEquals("Ida", calendar.getName()),
-            () -> assertFalse(calendar.getEvents().isEmpty()),
-            () -> assertEquals("Møte i Halden", event.getEventName()),
-            () -> assertEquals("14:00", event.getDesiredDepartureTime()),
-            () -> assertEquals("Fredrikstad bussterminal", event.getStartLocation()),
-            () -> assertEquals("Sarpsborg bussterminal", event.getEndLocation())
-        );
-    }
-
-    @Test
-    @DisplayName("Frontend bruker kalender-event parametere til rutesøk")
-    void testCalendarEventParametersForRouteFinding() {
-        // Arrange 
-        Calendar calendar = calendarAdapter.getCalendar("Ida");
-        Event event = calendar.getEvents().get(0);
-
-        Route route = enturAdapter.getRoute("R203");
-
-        // Act
-        RouteLogic.Result result = routeLogic.searchRouteByName(
-            event.getDesiredDepartureTime(),
-            event.getStartLocation(),
-            event.getEndLocation(),
-            route
-        );
-
-        // Assert
-        assertTrue(result.isSuccess());
-        assertEquals(20, result.getTravelTime());
-        assertEquals("14:00", result.getDepartureFromTerminal());
+                () -> assertTrue(result.isSuccess(), "Rutesøk skal lykkes med gyldige kalenderdata"),
+                () -> assertEquals(20, result.getTravelTime(), "Reisetid skal beregnes korrekt"),
+                () -> assertEquals("14:00", result.getDepartureFromTerminal(),
+                        "Avgang skal matche ønsket tid fra event"));
     }
 
 }
