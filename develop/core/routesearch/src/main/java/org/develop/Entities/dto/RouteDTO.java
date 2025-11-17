@@ -1,0 +1,68 @@
+package org.develop.Entities.dto;
+
+import java.util.ArrayList;
+
+import org.develop.Entities.Stop;
+import org.develop.Entities.Transport;
+
+public class RouteDTO {
+    private String routeId;
+    private String routeName;
+    private Transport transport;
+    private double price;
+    private ArrayList<Stop> stops;
+
+    //Json konstruktør for Jackson
+    public RouteDTO() {}
+
+    public RouteDTO(String routeId, String routeName, Transport transport, double price, ArrayList<Stop> stops) {
+        this.routeId = routeId;
+        this.routeName = routeName;
+        this.transport = transport;
+        this.price = price;
+        this.stops = stops;
+    }
+    
+
+    // Getters and Setters
+    public String getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(String routeId) {
+        this.routeId = routeId;
+    }
+
+    public String getRouteName() {
+        return routeName;
+    }
+
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
+    }
+
+    public Transport getTransport() {
+        return transport;
+    }
+
+    public void setTransport(Transport transport) {
+        this.transport = transport;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public ArrayList<Stop> getStops() {
+        return stops;
+    }
+
+    public void setStops(ArrayList<Stop> stops) {
+        this.stops = stops;
+    }
+
+}

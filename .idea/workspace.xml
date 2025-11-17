@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="be7ad234-93ca-4cae-88a6-788771f03324" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/adapters/DatabaseUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/domain/DatabaseSetup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/domain/model/CreateUserCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/domain/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/domain/ports/DatabasePort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/domain/ports/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/service/DatabaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/service/DatabaseUserConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/service/DatabaseUserOperations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/useCases/NewUserUseCases.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/src/main/java/org/database/useCases/UserUseCases.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/org/web/Routes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/org/web/TemplateLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/org/web/UserListFormatter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/org/web/WeatherController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/org/web/interfaces/WebUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/org/web/service/DatabaseWebUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/brukere.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/components/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/components/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/favoritter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/registrer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/src/main/java/com/database/domain/model/CreateUserCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/src/main/java/com/database/domain/model/CreateUserCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/src/main/java/com/database/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/src/main/java/com/database/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/src/main/java/com/web/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/src/main/java/com/web/Routes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/src/main/java/com/web/TemplateLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/src/main/java/com/web/TemplateLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/target/classes/com/database/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/target/classes/com/database/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/target/classes/com/web/Routes.class" beforeDir="false" afterPath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/target/classes/com/web/Routes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/target/classes/com/web/TemplateLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/Ruteplanlegger/ruteplanlegger/target/classes/com/web/TemplateLoader.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Patr1ckTS"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Patr1ckTS/SET16_ProsjektEksamen.git",
+    "accountId": "d7773a32-6323-4a3e-a8a7-43a629b33b1c"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="33Bqrl5IG9HBqNv73Ab2x7LP4PX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Frontend",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/pa-te/Documents/Studierelatert2025_2026/ITF20319_Software E. & Testing/ProsjektEksamen/SET16_ProsjektEksamen/database/src/main/java/org/database",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\database\src\main\java\org\database" />
+      <recent name="C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\web\src\main\resources" />
+      <recent name="C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. &amp; Testing\ProsjektEksamen\SET16_ProsjektEksamen\web\src\main\java\org\web" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be7ad234-93ca-4cae-88a6-788771f03324" name="Changes" comment="" />
+      <created>1758801014228</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758801014228</updated>
+      <workItem from="1761046474181" duration="528000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

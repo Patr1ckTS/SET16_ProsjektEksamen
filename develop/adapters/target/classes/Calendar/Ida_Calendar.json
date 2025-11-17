@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Ida",
+    "id": 1,
+    "events": [
+      {
+        "eventId": 1,
+        "eventName": "Klappe Katten",
+        "startLocation": "Fredrikstad stasjon",
+        "endLocation": "Halden stasjon",
+        "eventDate": "2025-10-31",
+        "desiredDepartureTime": "14:00",
+        "eventStartTime": "14:30"
+      },
+      {
+        "eventId": 2,
+        "eventName": "Plukke Epler",
+        "startLocation": "Sarpsborg bussterminal",
+        "endLocation": "Kråkerøy terminal",
+        "eventDate": "2025-11-05",
+        "desiredDepartureTime": "14:00",
+        "eventStartTime": "14:30"
+      },
+      {
+        "eventId": 3,
+        "eventName": "Kjøpe Strømper",
+        "startLocation": "Sarpsborg kommune",
+        "endLocation": "Moss stasjon",
+        "eventDate": "2025-11-03",
+        "desiredDepartureTime": "12:00",
+        "eventStartTime": "12:30"
+      }
+    ]
+  }
+]

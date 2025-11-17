@@ -1,0 +1,87 @@
+@startuml Kode-Komponentdiagram
+skinparam componentStyle rectangle
+top to bottom direction
+skinparam nodesep 80
+skinparam ranksep 80
+
+title Reiseplanleggeren - Heksagonal Arkitektur
+
+package "app\n(Presentasjonslag)" #LightBlue {
+    [Web Application] as App
+}
+
+package "core\n(Domenelogikk)" #LightGreen {
+    together {
+        [RouteSearch] as RouteSearch
+        [UserService] as UserService
+    }
+}
+
+package "PORTS\n(Grensesnitt)" #LightYellow {
+    together {
+        [EnturPort] as EnturPort
+        [CalendarPort] as CalendarPort
+        [UserPort] as UserPort
+    }
+}
+
+package "ADAPTERS\n(Implementasjoner)" #LightCoral {
+    together {
+        [EnturAdapter] as EnturAdapter
+        [GoogleCalendar\nAdapter] as CalendarAdapter
+        [DatabaseUser\nAdapter] as DatabaseAdapter
+    }
+}
+
+cloud "Eksterne Systemer" {
+    together {
+        [Entur API] as EnturAPI
+        [Google Calendar] as GoogleCal
+        database "MySQL Database" as MySQL
+    }
+}
+
+App -[hidden]down-> RouteSearch
+RouteSearch -[hidden]down-> EnturPort
+EnturPort -[hidden]down-> EnturAdapter
+EnturAdapter -[hidden]down-> EnturAPI
+
+UserService -[hidden]down-> UserPort
+CalendarPort -[hidden]down-> CalendarAdapter
+CalendarAdapter -[hidden]down-> GoogleCal
+
+' App til Core
+App --> RouteSearch : bruker
+App --> UserService : bruker
+
+' Core til Ports
+RouteSearch ..> EnturPort : avhenger av
+RouteSearch ..> CalendarPort : avhenger av
+UserService ..> UserPort : avhenger av
+
+' Adapters implementerer Ports
+EnturAdapter .up.|> EnturPort : implementerer
+CalendarAdapter .up.|> CalendarPort : implementerer
+DatabaseAdapter .up.|> UserPort : implementerer
+
+' Adapters til eksterne systemer
+EnturAdapter --> EnturAPI : Leser data fra
+CalendarAdapter --> GoogleCal : Leser data fra
+DatabaseAdapter --> MySQL : Leser/skriver til
+
+
+note right of DatabaseAdapter
+    **NB: DatabaseUserAdapter**
+
+    Ikke en fullstendig heksagonal
+    arkitektur-implementasjon, men
+    organisert slik for å illustrere
+    konseptet.
+
+    De heksagonale prinsippene er
+    korrekt implementert i:
+    • EnturAdapter
+    • GoogleCalendarAdapter
+end note
+
+@enduml

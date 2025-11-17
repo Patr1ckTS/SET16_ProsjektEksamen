@@ -1,0 +1,160 @@
+@startuml Hexagonal Architecture - Ports and Adapters
+
+skinparam packageStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam classBackgroundColor #E8F4F8
+skinparam interfaceBackgroundColor #FFF8DC
+skinparam arrowColor #2C5F77
+skinparam classBorderColor #2C5F77
+skinparam interfaceBorderColor #8B7355
+skinparam shadowing false
+skinparam linetype ortho
+
+title Hexagonal Architecture - Ports and Adapters\nKobling mellom Core-moduler og Adapters
+
+package "core/database\n(Domain Core)" #LIGHTYELLOW {
+
+    interface UserRepository <<Port>> {
+        + findAllUsers()
+        + saveUser()
+    }
+
+    interface SQLDatabasePort <<Port>> {
+        + getConnection()
+        + testConnection()
+        + closeResources()
+    }
+}
+
+package "core/routesearch\n(Domain Core)" #LIGHTCYAN {
+
+    interface EnturRepository <<Port>> {
+        + getAllStops()
+        + getRoute()
+        + findRouteByLocations()
+        + findDepartureTimesForStop()
+    }
+
+    interface CalendarRepository <<Port>> {
+        + getAllEvents()
+        + getEventsForDate()
+        + addEvent()
+        + removeEvent()
+    }
+
+    interface WebRouteRepository <<Port>> {
+        + getRoute()
+        + searchRoutes()
+        + getAllRoutes()
+        + getAllStops()
+    }
+}
+
+package "adapters\n(Infrastructure Layer)" #LIGHTGREEN {
+
+    class DatabaseUserRepository {
+        - databaseConnection
+        --
+        + findAllUsers()
+        + saveUser()
+    }
+
+    class SQLDatabaseConnection {
+        - DB_URL
+        - DB_USERNAME
+        - DB_PASSWORD
+        --
+        + getConnection()
+        + testConnection()
+        + closeResources()
+    }
+
+    class EnturRepositoryAdapter {
+        - reader
+        - mapper
+        --
+        + getAllStops()
+        + getRoute()
+        + findRouteByLocations()
+        + findDepartureTimesForStop()
+    }
+
+    class CalendarRepositoryAdapter {
+        - reader
+        - mapper
+        --
+        + getAllEvents()
+        + getEventsForDate()
+        + addEvent()
+        + removeEvent()
+    }
+
+    class WebRouteAdapter {
+        - routeLogic
+        - stopLogic
+        - enturRepository
+        --
+        + getRoute()
+        + searchRoutes()
+        + getAllRoutes()
+        + getAllStops()
+    }
+}
+
+DatabaseUserRepository .up.|> UserRepository : <<implements>>
+SQLDatabaseConnection .up.|> SQLDatabasePort : <<implements>>
+EnturRepositoryAdapter .up.|> EnturRepository : <<implements>>
+CalendarRepositoryAdapter .up.|> CalendarRepository : <<implements>>
+WebRouteAdapter .up.|> WebRouteRepository : <<implements>>
+
+DatabaseUserRepository --> SQLDatabaseConnection : uses
+WebRouteAdapter ..> EnturRepository : depends on
+
+
+note top of UserRepository
+  <b>Database Ports</b>
+  Definerer kontrakter for
+  brukerdata og DB-tilkobling
+end note
+
+note top of EnturRepository
+  <b>RouteSearch Ports</b>
+  Definerer kontrakter for
+  ruter, kalender og web-routes
+end note
+
+' note bottom of DatabaseUserRepository
+'   <b>Database Adapters</b>
+'   Implementerer database-porter
+'   Håndterer SQL-kommunikasjon
+' end note
+
+' note bottom of EnturRepositoryAdapter
+'   <b>External Service Adapters</b>
+'   Implementerer rute/kalender-porter
+'   Kommuniserer med eksterne APIer
+' end note
+
+' note bottom of WebRouteAdapter
+'   <b>Composite Adapter</b>
+'   Orkestrerer flere porter
+'   og forretningslogikk
+' end note
+
+legend right
+  |<#FFF8DC> Port Interface | Definert i core-moduler (Domain) |
+  |<#E8F4F8> Adapter Class | Implementert i adapters-modulen |
+
+  <b>Hexagonal Architecture Prinsipp:</b>
+  Ports (interfaces) defineres i core/domain
+  Adapters (implementasjoner) lever i infrastructure
+
+  <b>5 Port-Adapter Par:</b>
+  1. UserRepository ← DatabaseUserRepository
+  2. SQLDatabasePort ← SQLDatabaseConnection
+  3. EnturRepository ← EnturRepositoryAdapter
+  4. CalendarRepository ← CalendarRepositoryAdapter
+  5. WebRouteRepository ← WebRouteAdapter
+endlegend
+
+@enduml

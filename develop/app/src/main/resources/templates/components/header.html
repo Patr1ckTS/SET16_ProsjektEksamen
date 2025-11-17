@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3e3dec8e85.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <title>{{PAGE_TITLE}}</title>
+</head>
+<body>
+
+    <!-- Top Navigation med Logo -->
+    <nav class="top_nav">
+        <div class="top_nav_wrapper">
+            <div class="logo">
+                <h2>Ruteplanlegger</h2>
+            </div>
+            <div class="top_nav_auth">
+                {{HEADER_AUTH}}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="phone_bottom_nav">
+        <a href="/" class="nav_item">
+            <span class="icon"><img src="/images/icons/home_white.png" alt="icon"></span>
+            <span class="text">Hjem</span>
+        </a>
+        <a href="/rutesok" class="nav_item">
+            <span class="icon"><img src="/images/icons/clock_white.png" alt="icon"></span>
+            <span class="text">Rutesøk</span>
+        </a>
+        <a href="/kalender" class="nav_item">
+            <span class="icon"><img src="/images/icons/calendar_white.png" alt="icon"></span>
+            <span class="text">Kalender</span>
+        </a>
+        <a href="/favoritter" class="nav_item">
+            <span class="icon"><img src="/images/icons/star_white.png" alt="icon"></span>
+            <span class="text">Favoritter</span>
+        </a>
+        <a href="/profil" class="nav_item">
+            <span class="icon"><img src="/images/icons/account_white.png" alt="icon"></span>
+            <span class="text">{{USER_FIRST_NAME}}</span>
+        </a>
+    </nav>

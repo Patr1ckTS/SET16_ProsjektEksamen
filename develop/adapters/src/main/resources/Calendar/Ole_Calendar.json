@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Ole",
+    "id": 2,
+    "events": [
+      {
+        "eventId": 1,
+        "eventName": "Spille Roblox",
+        "startLocation": "Halden nord",
+        "endLocation": "Fredrikstad øst",
+        "eventDate": "2025-11-04",
+        "desiredDepartureTime": "14:00",
+        "eventStartTime": "14:30"
+      },
+      {
+        "eventId": 2,
+        "eventName": "Monster med venner",
+        "startLocation": "Halden bussterminal",
+        "endLocation": "Fredrikstad bussterminal",
+        "eventDate": "2025-10-30",
+        "desiredDepartureTime": "12:30",
+        "eventStartTime": "13:00"
+      },
+      {
+        "eventId": 3,
+        "eventName": "Avatar: Fire and Ash på kino",
+        "startLocation": "Halden bussterminal",
+        "endLocation": "Fredrikstad bussterminal",
+        "eventDate": "2025-11-06",
+        "desiredDepartureTime": "17:00",
+        "eventStartTime": "17:30"
+      }
+    ]
+  }
+]

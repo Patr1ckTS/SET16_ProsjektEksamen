@@ -1,0 +1,126 @@
+@startuml KlassediagramRouteSearch
+
+title Klassediagram - RouteSearch MVP
+' Eller med linjeskift:
+title 
+  Klassediagram
+  routesearch-submodule
+end title
+
+
+!define PORTCOLOR #E8B4B8
+!define LOGCOLOR #E8D4B0
+!define ENTCOLOR #D4E8D4
+
+skinparam packageBackgroundColor<<Ports>> PORTCOLOR
+skinparam packageBackgroundColor<<Logic>> LOGCOLOR
+skinparam packageBackgroundColor<<Entities>> ENTCOLOR
+
+skinparam classBackgroundColor<<Interface>> PORTCOLOR
+
+skinparam ArrowColor #333333
+skinparam classArrowColor #333333
+
+top to bottom direction
+
+'' ========== PORTS LAYER (External Data Sources) ==========
+package "Adapter Ports" <<Ports>> {
+    interface CalendarPort <<Interface>> {
+        + getCalendar(String personName): Calendar
+    }
+
+    interface EnturPort <<Interface>> {
+        + getRoute(String routeName): Route
+        + getAllRoutes(): ArrayList<Route>
+    }
+}
+
+
+'' ========== ENTITIES LAYER (Domain Models) ==========
+package "Domain Entities" <<Entities>> {
+    class Stop {
+        - stopId: String
+        - location: String
+        - name: String
+        - minutesAfterDeparture: int
+        - departureTimes: ArrayList<String>
+    }
+
+    class Route {
+        - routeId: String
+        - routeName: String
+        - price: double
+        - stops: ArrayList<Stop>
+    }
+
+    class Calendar {
+        - name: String
+        - id: int
+        - events: ArrayList<Event>
+    }
+
+    class Event {
+        - eventName: String
+        - startLocation: String
+        - endLocation: String
+        - eventDate: Date
+    }
+
+    Route o-- Stop : contains
+    Calendar o-- Event : contains
+}
+
+'' ========== LOGIC LAYER (Core Business Logic) ==========
+package "Core Services" <<Logic>> {
+
+    interface StopService <<Interface>> {
+        + calculateTransportAtStop(Stop, String): String
+        + findStopByName(List<Stop>, String): Stop
+        + findNextDepartureTime(Stop, String): String
+        + calculateTravelTime(Stop, String, Stop): int
+    }
+
+    class StopLogic {
+        + calculateTransportAtStop(Stop, String)
+        + findStopByName(List<Stop>, String)
+        + findNextDepartureTime(Stop, String)
+        + calculateTravelTime(Stop, String, Stop)
+    }
+
+    class RouteLogic {
+        - stopService: StopService
+        __
+        + RouteLogic(StopService)
+        __
+        + findBestTransport(String, Stop, Stop, Route)
+        + searchRouteByName(String, String, String, Route)
+        + calculateTravelTime(ArrayList<Stop>, String, String, String)
+        + validateRoute(ArrayList<Stop>)
+    }
+
+    class Result {
+        + success: boolean
+        + departureFromTerminal: String
+        + arrivalAtStartStop: String
+        + arrivalAtEndStop: String
+        + travelTime: int
+    }
+
+    StopLogic ..|> StopService : implements
+    RouteLogic +-- Result : contains
+    RouteLogic --> StopService : depends on
+}
+
+note top of RouteLogic
+  StopService constructor injection (Dependency Inversion)
+end note
+
+'' ========== SIMPLIFIED DEPENDENCIES ==========
+
+' Ports provide data to entities (implicit via package)
+"Adapter Ports" ..> "Domain Entities" : provides data
+
+' Core logic uses entities
+"Core Services" ..> "Domain Entities" : processes
+
+@enduml
