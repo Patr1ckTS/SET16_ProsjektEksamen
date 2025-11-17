@@ -2,7 +2,6 @@ org\develop\TicketComponent\Adapter\SaveTicketToDatabase.class
 org\develop\TicketComponent\Domain\Ticket.class
 org\develop\TicketComponent\Service\TicketInputHandler.class
 org\develop\TicketComponent\Domain\NewTicket.class
-DatabaseKlassediagram.puml
 org\develop\TicketComponent\Service\TicketService.class
 org\develop\UserComponent\Port\UserPort.class
 org\develop\UserComponent\domain\DatabaseSetup.class

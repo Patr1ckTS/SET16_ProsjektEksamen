@@ -6,7 +6,7 @@ public class CreateUser {
     private final String email;
     private final String phoneNumber;
     private final String password;
-    private final String userType = "user";
+    private final String userType = "1"; // Default til standard bruker (1 = Standard bruker)
 
     public CreateUser(String firstName, String lastName, String email, String phoneNumber, String password) {
         this.firstName = firstName;

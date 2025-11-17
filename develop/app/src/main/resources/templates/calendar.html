@@ -10,6 +10,9 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         .calendar-header {
@@ -69,6 +72,9 @@
             padding: 1rem;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .calendar-day-header {
@@ -88,6 +94,9 @@
             background: white;
             transition: all 0.25s ease;
             cursor: pointer;
+            overflow: hidden;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .calendar-day:hover {
@@ -175,11 +184,13 @@
             .calendar-grid {
                 gap: 0.25rem;
                 padding: 0.5rem;
+                overflow: visible;
             }
 
             .calendar-day {
                 min-height: 80px;
                 padding: 0.25rem;
+                font-size: 0.8rem;
             }
 
             .day-number {
@@ -417,7 +428,7 @@
             const prevLastDay = new Date(year, month, 0);
             
             let startDay = firstDay.getDay();
-            startDay = startDay === 0 ? 6 : startDay - 1; // Adjust for Monday start
+            startDay = startDay === 0 ? 6 : startDay - 1; // Adjust for Monday start (0=Mon, 6=Sun)
             
             const calendarGrid = document.getElementById('calendarGrid');
             calendarGrid.innerHTML = '';
@@ -430,9 +441,9 @@
                 calendarGrid.appendChild(header);
             });
             
-            // Previous month days
-            for (let i = startDay - 1; i >= 0; i--) {
-                const day = prevLastDay.getDate() - i;
+            // Previous month days (fill days before the first day of current month)
+            for (let i = 0; i < startDay; i++) {
+                const day = prevLastDay.getDate() - startDay + i + 1;
                 const dayElement = createDayElement(day, month - 1, year, true);
                 calendarGrid.appendChild(dayElement);
             }
@@ -521,7 +532,75 @@
         }
 
         function viewEvent(event) {
-            alert(`${event.title}\n\nDato: ${event.date}\nType: ${event.type}\n${event.description ? '\n' + event.description : ''}`);
+            // Vis event i modal istedenfor alert
+            const modal = document.createElement('div');
+            modal.className = 'event-view-modal active';
+            
+            // Beregn hvor mange minutter til eventet
+            const eventDateTime = new Date(event.description.match(/Avgang: (\d{2}:\d{2})/)?.[1] ? 
+                `${event.date}T${event.description.match(/Avgang: (\d{2}:\d{2})/)[1]}` : event.date);
+            const now = new Date();
+            const minutesToEvent = Math.floor((eventDateTime - now) / 60000);
+            
+            let travelReminder = '';
+            if (minutesToEvent > 10) {
+                travelReminder = `<div class="travel-reminder">
+                    <strong>⏰ Husk:</strong> Du bør gå hjemmefra <strong>10 minutter før</strong> avgang for å rekke bussen/toget!
+                </div>`;
+            }
+            
+            modal.innerHTML = `
+                <div class="event-view-content">
+                    <div class="event-view-header">
+                        <h2>${event.title}</h2>
+                        <button class="close-btn" onclick="this.closest('.event-view-modal').remove()">×</button>
+                    </div>
+                    <div class="event-view-body">
+                        <div class="event-detail-box">
+                            <div class="detail-label">📅 Dato</div>
+                            <div class="detail-content">${formatDate(event.date)}</div>
+                        </div>
+                        <div class="event-detail-box">
+                            <div class="detail-label">🏷️ Type</div>
+                            <div class="detail-content">${getTypeText(event.type)}</div>
+                        </div>
+                        ${event.description ? `
+                        <div class="event-detail-box full-width">
+                            <div class="detail-label">📝 Detaljer</div>
+                            <div class="detail-content">${event.description.replace(/\\n/g, '<br>')}</div>
+                        </div>
+                        ` : ''}
+                        ${travelReminder}
+                    </div>
+                    <div class="event-view-footer">
+                        <button class="btn-primary" onclick="this.closest('.event-view-modal').remove()">Lukk</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Lukk modal ved klikk utenfor
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('no-NO', options);
+        }
+        
+        function getTypeText(type) {
+            const types = {
+                'default': '📌 Standard',
+                'route': '🚌 Rutereise',
+                'meeting': '👥 Møte'
+            };
+            return types[type] || '📌 Standard';
         }
 
         document.getElementById('eventForm').addEventListener('submit', (e) => {

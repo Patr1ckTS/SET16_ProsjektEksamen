@@ -1,11 +1,11 @@
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\DTO\CalendarDTO.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\DTO\EventDTO.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\GoogleCalendarAdapter.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\Mapper\CalendarMapper.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\Reader\CalendarReader.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Database\DatabaseUserAdapter.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Database\SQLDatabaseConnection.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Entur\DTO\EnturRouteDTO.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Entur\EnturAdapter.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Entur\Mapper\EnturRouteMapper.java
-C:\Users\pa-te\Documents\Studierelatert2025_2026\ITF20319_Software E. & Testing\ProsjektEksamen\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Entur\Reader\EnturRouteReader.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\DTO\CalendarDTO.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\DTO\EventDTO.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\GoogleCalendarAdapter.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\Mapper\CalendarMapper.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Calendar\Reader\CalendarReader.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Database\DatabaseUserAdapter.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Database\SQLDatabaseConnection.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Entur\DTO\EnturRouteDTO.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Entur\EnturAdapter.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Entur\Mapper\EnturRouteMapper.java
+C:\Users\bergi\Desktop\Kraken\SET16_ProsjektEksamen\develop\adapters\src\main\java\org\develop\Entur\Reader\EnturRouteReader.java

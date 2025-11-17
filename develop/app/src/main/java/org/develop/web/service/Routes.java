@@ -190,14 +190,11 @@ public class Routes {
         //      Favoritter
         app.get("/favoritter", ctx -> {
             
-// Utkommentert på grunn a kjøre problemer
-/*
             String loggedInEmail = ctx.sessionAttribute("userEmail");
             if (loggedInEmail == null) {
                 ctx.redirect("/login");
                 return;
             }
-*/
 
             String template = TemplateLoader.loadTemplate("favoritter.html");
             String customHeader = getHeaderHTML(ctx, "Ruter - favoritter", userService);

@@ -7,7 +7,7 @@ public class User {
     private String email;
     private String phoneNumber;
     private String password;
-//    private int userType;
+    private String userType;
 
     public User(String firstName, String lastName, String email, String phoneNumber, String password) {
         this.firstName = firstName;
@@ -15,7 +15,16 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-//        this.userType = userType;
+        this.userType = "1"; // Default til standard bruker
+    }
+
+    public User(String firstName, String lastName, String email, String phoneNumber, String password, String userType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.userType = userType;
     }
 
     public int getId() {
@@ -45,20 +54,30 @@ public class User {
     public String getFullName() {
         return firstName + " " + lastName;
     }
-/* 
-    public int getUserType() {
+ 
+    public String getUserType() {
         return userType;
     }
 
     public String getUserTypeText() {
-        switch (userType) {
-            case 1: return "Standard bruker";
-            case 2: return "Admin bruker";
-            case 3: return "Utvikler bruker";
-            default: return "Ukjent brukertype";
+        if (userType == null || userType.trim().isEmpty()) return "Standard bruker";
+        
+        // Sjekk om det er et tall (1, 2, 3) eller tekst (user, admin, developer)
+        switch (userType.trim()) {
+            case "1":
+            case "user":
+                return "Standard bruker";
+            case "2":
+            case "admin":
+                return "Admin bruker";
+            case "3":
+            case "developer":
+                return "Utvikler bruker";
+            default:
+                return "Standard bruker";
         }
     }
-*/
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -78,9 +97,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-/*
-    public void setUserType(int userType) {
+
+    public void setUserType(String userType) {
         this.userType = userType;
-    }
-*/        
+    }       
 }

@@ -164,8 +164,7 @@ public class UserService {
             ArrayList<User> users = userUseCases.arrayListOfRequestedUsers();
             for (User user : users) {
                 if (user.getEmail().equals(email)) {
-//                    return user.getUserTypeText();
-                    return null;
+                    return user.getUserTypeText();
                 }
             }
         } catch (Exception e) {

@@ -1047,3 +1047,333 @@ a {
     }
 }
 
+// ===============================================
+// FAVORITTER PAGE STYLES
+// ===============================================
+.favorites-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: variables.$spacing_lg;
+    margin-top: variables.$spacing_xl;
+
+    @media (min-width: variables.$breakpoint_md) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: variables.$spacing_xl;
+    }
+}
+
+.favorite-card {
+    background: variables.$color_bg_light;
+    border: 2px solid variables.$color_border;
+    border-radius: variables.$radius_lg;
+    padding: variables.$spacing_lg;
+    box-shadow: variables.$shadow_md;
+    transition: all variables.$transition_base;
+    overflow: hidden;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: variables.$shadow_lg;
+        border-color: variables.$color_accent;
+    }
+}
+
+.favorite-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: variables.$spacing_md;
+    padding-bottom: variables.$spacing_md;
+    border-bottom: 2px solid variables.$color_bg;
+}
+
+.favorite-title {
+    h3 {
+        margin: 0 0 variables.$spacing_sm 0;
+        color: variables.$color_text;
+        font-size: 1.3rem;
+        font-weight: variables.$font_weight_semibold;
+    }
+}
+
+.route-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, variables.$color_accent 0%, variables.$color_primary 100%);
+    color: variables.$color_white;
+    padding: 0.3rem 0.8rem;
+    border-radius: variables.$radius_xl;
+    font-size: 0.85rem;
+    font-weight: variables.$font_weight_semibold;
+    letter-spacing: 0.5px;
+
+    &.train {
+        background: linear-gradient(135deg, variables.$color_success 0%, #229954 100%);
+    }
+}
+
+.favorite-actions {
+    display: flex;
+    gap: variables.$spacing_sm;
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0.3rem;
+    transition: all variables.$transition_base;
+    opacity: 0.6;
+
+    &:hover {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.favorite-details {
+    margin: variables.$spacing_md 0;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid variables.$color_bg;
+    font-size: 0.95rem;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.detail-label {
+    font-weight: variables.$font_weight_semibold;
+    color: variables.$color_text;
+    min-width: 100px;
+}
+
+.detail-value {
+    color: variables.$color_text_light;
+    text-align: right;
+    flex: 1;
+}
+
+.favorite-footer {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: variables.$spacing_lg;
+    padding-top: variables.$spacing_md;
+    border-top: 2px solid variables.$color_bg;
+}
+
+.btn-search, 
+.btn-ticket {
+    flex: 1;
+    padding: 0.8rem variables.$spacing_md;
+    border: none;
+    border-radius: variables.$radius_md;
+    font-weight: variables.$font_weight_semibold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all variables.$transition_base;
+    box-shadow: variables.$shadow_sm;
+}
+
+.btn-search {
+    background: linear-gradient(135deg, variables.$color_primary 0%, variables.$color_primary_dark 100%);
+    color: variables.$color_white;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: variables.$shadow_md;
+    }
+}
+
+.btn-ticket {
+    background: linear-gradient(135deg, variables.$color_success 0%, #229954 100%);
+    color: variables.$color_white;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+    }
+}
+
+.subtitle {
+    text-align: center;
+    color: variables.$color_text_light;
+    font-size: 1.1rem;
+    margin-bottom: variables.$spacing_md;
+}
+
+// ===============================================
+// CALENDAR EVENT VIEW MODAL STYLES
+// ===============================================
+.event-view-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: variables.$spacing_md;
+    animation: fadeIn 0.2s ease;
+
+    &.active {
+        display: flex;
+    }
+}
+
+.event-view-content {
+    background: variables.$color_white;
+    border-radius: variables.$radius_lg;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.event-view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: variables.$spacing_lg variables.$spacing_xl;
+    border-bottom: 2px solid variables.$color_bg;
+    background: linear-gradient(135deg, variables.$color_primary 0%, variables.$color_primary_light 100%);
+    border-radius: variables.$radius_lg variables.$radius_lg 0 0;
+
+    h2 {
+        margin: 0;
+        color: variables.$color_white;
+        font-size: 1.5rem;
+        font-weight: variables.$font_weight_semibold;
+    }
+}
+
+.close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: variables.$color_white;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: variables.$radius_full;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all variables.$transition_base;
+    line-height: 1;
+    padding: 0;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+    }
+}
+
+.event-view-body {
+    padding: variables.$spacing_xl;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: variables.$spacing_md;
+
+    @media (min-width: variables.$breakpoint_sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detail-label {
+        font-size: 0.85rem;
+        font-weight: variables.$font_weight_semibold;
+        color: variables.$color_text_light;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: variables.$spacing_sm;
+    }
+
+    .detail-content {
+        color: variables.$color_text;
+        font-size: variables.$font_size_base;
+        font-weight: variables.$font_weight_medium;
+        line-height: 1.6;
+    }
+}
+
+.event-detail-box {
+    background: #F8F9FA;
+    border: 2px solid #E9ECEF;
+    border-radius: variables.$radius_md;
+    padding: variables.$spacing_md;
+    transition: all variables.$transition_base;
+
+    &:hover {
+        border-color: variables.$color_accent;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.15);
+    }
+
+    &.full-width {
+        grid-column: 1 / -1;
+    }
+}
+
+.travel-reminder {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #FFF3CD 0%, #FFE69C 100%);
+    border: 2px solid #FFC107;
+    border-left: 5px solid #FF9800;
+    padding: 1.2rem;
+    border-radius: variables.$radius_md;
+    margin-top: variables.$spacing_md;
+    color: #856404;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+
+    strong {
+        color: #FF6F00;
+        font-weight: variables.$font_weight_bold;
+    }
+}
+
+.event-view-footer {
+    padding: variables.$spacing_lg variables.$spacing_xl;
+    border-top: 2px solid variables.$color_bg;
+    display: flex;
+    justify-content: flex-end;
+    gap: variables.$spacing_md;
+
+    .btn-primary {
+        background: linear-gradient(135deg, variables.$color_primary 0%, variables.$color_primary_dark 100%);
+        color: variables.$color_white;
+        padding: 0.8rem variables.$spacing_xl;
+        border: none;
+        border-radius: variables.$radius_md;
+        font-weight: variables.$font_weight_semibold;
+        cursor: pointer;
+        transition: all variables.$transition_base;
+        box-shadow: variables.$shadow_sm;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: variables.$shadow_md;
+        }
+    }
+}
