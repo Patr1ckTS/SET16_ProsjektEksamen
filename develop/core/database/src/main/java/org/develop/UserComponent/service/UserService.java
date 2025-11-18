@@ -68,7 +68,7 @@ public class UserService {
             boolean success = newUserUseCases.newUserValueCheck(newUser);
             
             if (success) {
-                databasePermissionGrant(newUser.getEmail(), "itstud.hiof.no");
+                databaseRoleUtilization(newUser.getEmail(), "itstud.hiof.no");
                 return null;
             }
             else {
@@ -79,19 +79,22 @@ public class UserService {
         }
     }
 
-    // Funksjon for rolle-tildeling i databasen. Denne er ikke funksjonell på grunn av delt database-miljø    
-    private void databasePermissionGrant(String email, String host) {
+/**    
+    Funksjon for rolle-tildeling i databasen. Denne er ikke funksjonell på grunn av gruppens
+    rettighetsnivå i det delte database-miljøet    
+*/
+    private void databaseRoleUtilization(String email, String host) {
         try (Statement stmt = dbConnection.createStatement()) {
             
             String createUser = "CREATE USER IF NOT EXISTS '" + email + "'@'" + host + "'";
             
-            String grantPermissions = "GRANT SELECT, INSERT, UPDATE ON se25_G16.* TO '" + email + "'@'" + host + "'";
+            String grantPermissions = "GRANT 'user' TO '" + email + "'@'" + host + "'";
             
             stmt.execute(createUser);
             stmt.execute(grantPermissions);
             stmt.execute("FLUSH PRIVILEGES");
             
-            System.out.println("Database permissions granted for user: " + email);
+            System.out.println("Database role granted for user: " + email);
             
         } catch (SQLException e) {
             System.err.println("Error granting database permissions: " + e.getMessage());
