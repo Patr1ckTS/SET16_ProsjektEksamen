@@ -56,6 +56,26 @@ Applikasjonen startes ved å kjøre Main-klassen i `develop/app/src/main/java/or
 
 **URL:** http://localhost:7000
 
+### Mobilvisning 
+
+Grensesnittet er utviklet etter **"Mobile First"-prinsippet** og er optimalisert for mobilskjerm. For best brukeropplevelse anbefales det å bruke nettleserens mobilvisning.
+
+#### Aktivere mobilvisning i nettleseren:
+
+1. **Åpne utviklerverktøy:** Trykk `F12` (eller høyreklikk → "Inspiser")
+2. **Aktiver enhetsemulering:** Trykk `Ctrl + Shift + M` (Windows/Linux) eller `Cmd + Shift + M` (Mac)
+3. **Velg enhet:** I verktøylinjen øverst kan du velge mellom forhåndsdefinerte enheter som:
+   - iPhone SE / iPhone 12 Pro / iPhone 14 Pro Max
+   - Samsung Galaxy S20 
+   - iPad Mini / iPad Pro
+   - Eller sett egendefinert oppløsning 
+
+**Alternativ metode:**
+- **Chrome/Edge:** F12 → Klikk på "Toggle device toolbar"-ikonet øverst til høyre
+- **Firefox:** F12 → Klikk på "Responsive Design Mode"-ikonet 
+
+> **Merk:** Applikasjonen kan vises i desktop-modus, men layout og funksjonalitet er ikke optimalisert for dette og kan gi en dårligere brukeropplevelse.
+
 ---
 
 ## Feilsøking
